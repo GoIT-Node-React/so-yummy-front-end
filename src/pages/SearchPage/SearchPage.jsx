@@ -1,1 +1,17 @@
-export default function SearchPage() {}
+import React from 'react';
+
+import { MainPageTitle } from '../../components/MainPageTitle/MainPageTitle';
+import { SearchBar } from '../../components/SerchBar/SerchBar';
+import { SearchedRecipesList } from '../../components/SearchedRecipesList/SearchedRecipesList';
+
+import { Container } from '../../components/common/Container.styled';
+
+export default function SearchPage() {
+  return (
+    <Container>
+      <MainPageTitle />
+      <SearchBar />
+      <SearchedRecipesList />
+    </Container>
+  );
+}
