@@ -1,6 +1,6 @@
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import { FigureButton } from './../FigureButton.styled';
+import { FigureButton } from '../FigureButton.styled';
 import {
   BinWrapper,
   Container,
@@ -24,7 +24,8 @@ export default function RecipeCard({
   to,
 }) {
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
-  //   const navigate = useNavigate();
+  const isTablet = useMediaQuery({ query: '(max-width: 1439px)' });
+  const navigate = useNavigate();
 
   return (
     <Container myRecipes={myRecipes}>
@@ -63,9 +64,9 @@ export default function RecipeCard({
                   fs="10px"
                   w="87px"
                   h="27px"
-                  p="30px 14px"
-                  m="0 -20px -14px 0"
-                  //   onClick={navigate(to)}
+                  p="28px 14px"
+                  m="0 0 -14px 0"
+                  onClick={() => navigate(to)}
                 >
                   See recipe
                 </FigureButton>
@@ -78,29 +79,61 @@ export default function RecipeCard({
           ) : (
             <>
               {myRecipes ? (
-                <FigureButton
-                  variant="green"
-                  fs="14px"
-                  w="138px"
-                  h="45px"
-                  p="40px 32px"
-                  m="0 -48px -18px 0"
-                  //   onClick={navigate(to)}
-                >
-                  See recipe
-                </FigureButton>
+                <>
+                  {isTablet ? (
+                    <FigureButton
+                      variant="green"
+                      fs="14px"
+                      w="138px"
+                      h="45px"
+                      p="40px 32px"
+                      m="0 0 -18px 0"
+                      onClick={() => navigate(to)}
+                    >
+                      See recipe
+                    </FigureButton>
+                  ) : (
+                    <FigureButton
+                      variant="green"
+                      fs="16px"
+                      w="160px"
+                      h="54px"
+                      p="50px 38px"
+                      m="0 0 -22px 0"
+                      onClick={() => navigate(to)}
+                    >
+                      See recipe
+                    </FigureButton>
+                  )}
+                </>
               ) : (
-                <FigureButton
-                  variant="dark"
-                  fs="14px"
-                  w="138px"
-                  h="45px"
-                  p="40px 32px"
-                  m="0 -104px -18px 0"
-                  //   onClick={navigate(to)}
-                >
-                  See recipe
-                </FigureButton>
+                <>
+                  {isTablet ? (
+                    <FigureButton
+                      variant="dark"
+                      fs="14px"
+                      w="138px"
+                      h="45px"
+                      p="40px 32px"
+                      m="0 0 -18px 0"
+                      onClick={() => navigate(to)}
+                    >
+                      See recipe
+                    </FigureButton>
+                  ) : (
+                    <FigureButton
+                      variant="dark"
+                      fs="16px"
+                      w="160px"
+                      h="54px"
+                      p="50px 38px"
+                      m="0 0 -22px 0"
+                      onClick={() => navigate(to)}
+                    >
+                      See recipe
+                    </FigureButton>
+                  )}
+                </>
               )}
             </>
           )}

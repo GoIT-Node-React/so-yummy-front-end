@@ -6,7 +6,7 @@ export const CardContainer = styled.div`
   width: 343px;
   height: 323px;
   border-radius: ${({ theme }) => theme.radii.lg};
-
+  cursor: pointer;
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[1]} - 1px)) {
     width: 336px;
@@ -15,6 +15,9 @@ export const CardContainer = styled.div`
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[2]} - 1px)) {
     width: 300px;
+  }
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 `;
 

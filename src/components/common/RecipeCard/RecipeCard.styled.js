@@ -3,7 +3,6 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 
 export const Container = styled.div`
   position: relative;
-  border: 1px solid red;
   background-color: ${({ theme }) => theme.colors.white[100]};
   display: flex;
   width: 343px;
@@ -48,7 +47,10 @@ export const Image = styled.img`
   }
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const TitleContainer = styled.div`
   height: 24px;
@@ -115,6 +117,7 @@ export const BinWrapper = styled.div`
   border-radius: ${({ theme }) => theme.radii.sm};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.create(['background-color'])};
+
   &:hover {
     background-color: ${props =>
       props.myRecipes
@@ -142,11 +145,11 @@ export const BinWrapper = styled.div`
 
 export const Text = styled.p`
   margin-top: ${props => (props.myRecipes ? '10px' : '14px')};
-  max-height: ${props => (props.myRecipes ? '51px' : '57px')};
-  width: ${props => (props.myRecipes ? '163px' : '173px')};
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 15px;
   font-size: 8px;
   line-height: 1.25;
   letter-spacing: -2%;
@@ -155,17 +158,13 @@ export const Text = styled.p`
       theme.breakpoints[1]} - 1px)) {
     font-size: ${({ theme }) => theme.fontSizes[2]};
     line-height: 1.3;
-    max-height: ${props => (props.myRecipes ? '107px' : '73px')};
-    width: ${props => (props.myRecipes ? '353px' : '298px')};
     margin-top: 22px;
   }
 
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[2]} - 1px)) {
-    width: ${props => (props.myRecipes ? '806px' : '679px')};
-    max-height: ${props => (props.myRecipes ? '134px' : '158px')};
+    -webkit-line-clamp: 5;
     font-size: ${({ theme }) => theme.fontSizes[4]};
-    margin-top: ${props => (props.myRecipes ? '20px' : '30px')};
   }
 `;
 
@@ -174,10 +173,16 @@ export const FlexContainer = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   height: 27px;
+  margin-top: auto;
 
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[1]} - 1px)) {
     height: 45px;
+  }
+
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[2]} - 1px)) {
+    height: 54px;
   }
 `;
 
