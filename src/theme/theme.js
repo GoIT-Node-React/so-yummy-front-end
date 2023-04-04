@@ -65,6 +65,7 @@ export const theme = {
       300: '#333333', //close button
       400: '#001833', //category text color, page title color
       500: '#3E4462', //card-title color,page subtitle color, ingredient title color, arrow
+      600: '#E0E0E0', //text input
     },
   },
 

@@ -1,3 +1,4 @@
+import AddRecipeForm from 'components/AddRecipeForm/AddRecipeForm';
 export default function MainPage() {
-  return <h1>Main page</h1>;
+  return <AddRecipeForm />;
 }
