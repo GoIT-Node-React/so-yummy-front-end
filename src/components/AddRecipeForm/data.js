@@ -14,7 +14,7 @@ export const categories = [
   { value: 'Vegan', label: 'Vegan' },
   { value: 'Vegetarian', label: 'Vegetarian' },
 ];
-export const time = [
+export const cookingTime = [
   { value: '5 min', label: '5 min' },
   { value: '10 min', label: '10 min' },
   { value: '15 min', label: '15 min' },
