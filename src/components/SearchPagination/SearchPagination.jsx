@@ -1,34 +1,44 @@
 import {
-  SrarchPaginationListWrapper,
-  SrarchPaginationList,
-  SrarchPaginationListItem,
-  SrarchPaginationListButton,
+  SearchPaginationListWrapper,
+  SearchPaginationList,
+  SearchPaginationListItem,
+  SearchPaginationListButton,
+  SearchPaginationListArrowLeftButton,
+  SearchPaginationListArrowRightButton,
   PaginationArrowLeft,
   PaginationArrowRight,
 } from './SearchPagination.styled';
 
 export function SearchPagination() {
   return (
-    <SrarchPaginationListWrapper>
-      <SrarchPaginationList>
-        <PaginationArrowLeft size={36} />
-        <SrarchPaginationListItem>
-          <SrarchPaginationListButton>1</SrarchPaginationListButton>
-        </SrarchPaginationListItem>
-        <SrarchPaginationListItem>
-          <SrarchPaginationListButton>2</SrarchPaginationListButton>
-        </SrarchPaginationListItem>
-        <SrarchPaginationListItem>
-          <SrarchPaginationListButton>3</SrarchPaginationListButton>
-        </SrarchPaginationListItem>
-        <SrarchPaginationListItem>
-          <SrarchPaginationListButton>4</SrarchPaginationListButton>
-        </SrarchPaginationListItem>
-        <SrarchPaginationListItem>
-          <SrarchPaginationListButton>5</SrarchPaginationListButton>
-        </SrarchPaginationListItem>
-        <PaginationArrowRight size={36} />
-      </SrarchPaginationList>
-    </SrarchPaginationListWrapper>
+    <SearchPaginationListWrapper>
+      <SearchPaginationList>
+        <SearchPaginationListItem>
+          <SearchPaginationListArrowLeftButton>
+            <PaginationArrowLeft size={24} />
+          </SearchPaginationListArrowLeftButton>
+        </SearchPaginationListItem>
+        <SearchPaginationListItem>
+          <SearchPaginationListButton>1</SearchPaginationListButton>
+        </SearchPaginationListItem>
+        <SearchPaginationListItem>
+          <SearchPaginationListButton>2</SearchPaginationListButton>
+        </SearchPaginationListItem>
+        <SearchPaginationListItem>
+          <SearchPaginationListButton>3</SearchPaginationListButton>
+        </SearchPaginationListItem>
+        <SearchPaginationListItem>
+          <SearchPaginationListButton>4</SearchPaginationListButton>
+        </SearchPaginationListItem>
+        <SearchPaginationListItem>
+          <SearchPaginationListButton>5</SearchPaginationListButton>
+        </SearchPaginationListItem>
+        <SearchPaginationListItem>
+          <SearchPaginationListArrowRightButton>
+            <PaginationArrowRight size={24} />
+          </SearchPaginationListArrowRightButton>
+        </SearchPaginationListItem>
+      </SearchPaginationList>
+    </SearchPaginationListWrapper>
   );
 }

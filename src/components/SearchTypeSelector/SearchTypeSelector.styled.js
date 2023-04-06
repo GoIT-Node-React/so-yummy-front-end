@@ -1,14 +1,19 @@
 import styled from '@emotion/styled';
 
 export const SearchTypeSelectorWrapper = styled.div`
+  display: flex;
+  align-items: baseline;
+
   @media (max-width: 767.98px) {
-    display: flex;
-    align-items: baseline;
+    margin-bottom: 42px;
   }
 
   @media (min-width: 768px) and (max-width: 1439.98px) {
-    display: flex;
-    align-items: baseline;
+    margin-bottom: 40px;
+  }
+
+  @media (min-width: 1440px) {
+    margin-bottom: 90px;
   }
 `;
 
@@ -31,22 +36,8 @@ export const SearchTypeSelectorText = styled.p`
   @media (min-width: 768px) and (max-width: 1439.98px) {
     font-size: 14px;
   }
-`;
 
-export const SearchTypeSelectorList = styled.select`
-  @media (max-width: 767.98px) {
-    margin-bottom: 64px;
-  }
-
-  @media (min-width: 768px) and (max-width: 1439.98px) {
-    margin-bottom: 64px;
-  }
-`;
-
-export const SearchTypeSelectorItem = styled.option`
-  @media (max-width: 767.98px) {
-  }
-
-  @media (min-width: 768px) and (max-width: 1439.98px) {
+  @media (min-width: 1440px) {
+    font-size: 18px;
   }
 `;

@@ -2,12 +2,36 @@ import styled from '@emotion/styled';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri';
 
-export const SrarchPaginationListWrapper = styled.div`
+export const SearchPaginationListWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+
+  margin-bottom: 100px;
+
+  @media (min-width: 767.98px) and (max-width: 1439.98px) {
+    margin-bottom: 200px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1439.98px) {
+    margin-bottom: 200px;
+  }
+
+  @media (min-width: 1440px) {
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    margin: -1px;
+  }
 `;
 
-export const SrarchPaginationList = styled.ul`
+export const SearchPaginationList = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,9 +40,8 @@ export const SrarchPaginationList = styled.ul`
   background: #fafafa;
   box-shadow: 0px 4px 4px rgba(135, 135, 135, 0.2);
   border-radius: 26px;
-  margin-bottom: 100px;
 
-  padding: 12px 24px;
+  padding: 12px 25px;
 
   @media (max-width: 767.98px) {
     width: 275px;
@@ -26,30 +49,20 @@ export const SrarchPaginationList = styled.ul`
   }
 
   @media (min-width: 767.98px) and (max-width: 1439.98px) {
-    margin-bottom: 200px;
     width: 324px;
     height: 55px;
   }
-
-  @media (min-width: 768px) and (max-width: 1439.98px) {
-  }
 `;
 
-export const SrarchPaginationListItem = styled.li`
+export const SearchPaginationListItem = styled.li`
   &:not(:last-child) {
-    margin-right: 15px;
-  }
-
-  @media (max-width: 767.98px) {
-  }
-
-  @media (min-width: 768px) and (max-width: 1439.98px) {
+    margin-right: 10px;
   }
 `;
 
-export const SrarchPaginationListButton = styled.button`
+export const SearchPaginationListButton = styled.button`
   background: #fafafa;
-  background-color: aqua;
+  background-color: transparent;
   border-radius: 50%;
   font-family: 'Poppins';
   font-style: normal;
@@ -57,40 +70,35 @@ export const SrarchPaginationListButton = styled.button`
   font-size: 12px;
   line-height: 18px;
 
-  color: #22252a;
+  color: #656565;
 
   width: 27px;
   height: 27px;
 
-  @media (max-width: 767.98px) {
+  &:focus,
+  &:hover {
+    background-color: #ebf3d4;
   }
+`;
 
-  @media (min-width: 768px) and (max-width: 1439.98px) {
-  }
+export const SearchPaginationListArrowLeftButton = styled.button`
+  padding: 0;
+  background-color: transparent;
+`;
+
+export const SearchPaginationListArrowRightButton = styled.button`
+  padding: 0;
+  background-color: transparent;
 `;
 
 export const PaginationArrowLeft = styled(RiArrowLeftSLine)`
+  padding: 0;
   fill: rgba(169, 169, 169, 0.73);
   cursor: pointer;
-
-  @media (max-width: 767.98px) {
-    margin-right: 20px;
-  }
-
-  @media (min-width: 768px) and (max-width: 1439.98px) {
-    margin-right: 30px;
-  }
 `;
 
 export const PaginationArrowRight = styled(RiArrowRightSLine)`
+  padding: 0;
   fill: rgba(169, 169, 169, 0.73);
   cursor: pointer;
-
-  @media (max-width: 767.98px) {
-    margin-left: 20px;
-  }
-
-  @media (min-width: 768px) and (max-width: 1439.98px) {
-    margin-left: 30px;
-  }
 `;

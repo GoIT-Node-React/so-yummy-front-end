@@ -28,15 +28,6 @@ export function SearchTypeSelector() {
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
-            paddingLeft: '0',
-            paddingRight: '0',
-            paddingTop: '0',
-            paddingBottom: '0',
-            margin: '0',
-            marginLeft: '0',
-            marginRight: '0',
-            marginTop: '0',
-            marginBottom: '0',
             backgroundColor: 'red',
           }),
           dropdownIndicator: () => ({
@@ -56,7 +47,6 @@ export function SearchTypeSelector() {
               height: '34px',
               paddingLeft: '6px',
               paddingRight: '6px',
-              marginBottom: '50px',
               borderColor: 'black',
               backgroundColor: 'rgba(250, 250, 250, 1)',
               fontFamily: 'Poppins',
