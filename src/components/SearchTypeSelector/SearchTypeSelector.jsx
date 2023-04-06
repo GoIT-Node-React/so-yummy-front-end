@@ -5,20 +5,25 @@ import {
   SearchTypeSelectorText,
 } from './SearchTypeSelector.styled';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Select from 'react-select';
+
+import { RecipesContext } from '../../contexts/searchedRecipes/Provider';
+import { useContext } from 'react';
 
 const options = [
   { value: 'title', label: 'Title' },
-  { value: 'ingredients', label: 'Ingredients' },
+  { value: 'ingredient', label: 'Ingredients' },
 ];
 
 export function SearchTypeSelector() {
+  const { searchType, updatesearchType } = useContext(RecipesContext);
+
   const isMobile = useMediaQuery({ query: '(max-width: 767.98px)' });
   const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
   const isDesctop = useMediaQuery({ query: '(min-width: 1439px)' });
 
-  const [selectedOption, setSelectedOption] = useState(null);
+  console.log('searchType', searchType);
 
   return (
     <SearchTypeSelectorWrapper>
@@ -36,8 +41,8 @@ export function SearchTypeSelector() {
         }}
       >
         <Select
-          defaultValue={selectedOption}
-          onChange={setSelectedOption}
+          defaultValue={searchType}
+          onChange={updatesearchType}
           options={options}
           placeholder="Title"
           styles={{

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import { privateApi } from 'services/api';
 import {
   FormWrapper,
@@ -8,11 +7,17 @@ import {
   SearchFormButton,
 } from './SearchForm.styled';
 
-export function SearchForm() {
-  const [searchValue, setSearchValue] = useState('');
-  const [searchType, setSearchType] = useState('');
+import { RecipesContext } from '../../contexts/searchedRecipes/Provider';
+import { useContext } from 'react';
 
-  console.log('searchValue', searchValue);
+export function SearchForm() {
+  const {
+    searchedResipes,
+    searchValue,
+    searchType,
+    updateRecipes,
+    updatesearchValue,
+  } = useContext(RecipesContext);
 
   const FetchREcipes = async () => {
     console.log(searchValue);
@@ -20,9 +25,14 @@ export function SearchForm() {
     try {
       const {
         data: { data },
-      } = await privateApi.get(`/search?type=title&value=${searchValue}`);
+      } = await privateApi.get(
+        `/search?type=${searchType}&value=${searchValue}`
+      );
+
+      updateRecipes(data.recipes);
 
       console.log('data', data);
+      console.log('searchedResipes', searchedResipes);
     } catch (error) {
       console.log(error);
     }
@@ -30,14 +40,14 @@ export function SearchForm() {
 
   const handleChange = event => {
     const { value } = event.target;
-    setSearchValue(value);
+    updatesearchValue(value);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
 
     FetchREcipes();
-    setSearchValue('');
+    updatesearchValue('');
   };
 
   return (
