@@ -1,44 +1,106 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { routes } from 'constants/routes';
-import WelcomePage from 'pages/WelcomePage/WelcomePage';
-import RegisterPage from 'pages/RegisterPage/RegisterPage';
-import SigninPage from 'pages/SigninPage/SigninPage';
+import { lazy, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { currentThunk, loginThunk, logoutThunk } from 'redux/auth/auth.thunk';
+import { selectAccessToken } from 'redux/auth/auth.selectors';
+import AppToastContainer from './AppToastContainer/AppToastContainer';
 import SharedLayout from './SharedLayout/SharedLayout';
-import MainPage from 'pages/MainPage/MainPage';
-import CategoriesPage from 'pages/CategoriesPage/CategoriesPage';
-import FavoritePage from 'pages/FavoritePage/FavoritePage';
-import OwnRecipesPage from 'pages/OwnRecipesPage/OwnRecipesPage';
-import AddRecipePage from 'pages/AddRecipePage/AddRecipePage';
-import RecipePage from 'pages/RecipePage/RecipePage';
-import SearchPage from 'pages/SearchPage/SearchPage';
-import ShoppingListPage from 'pages/ShoppingListPage/ShoppingListPage';
-import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
+import { routes } from 'constants/routes';
+import { PrivatePage, RestrictedPage } from 'pages/access';
+
+const WelcomePage = lazy(() => import('pages/WelcomePage'));
+const RegisterPage = lazy(() => import('pages/Auth/RegisterPage'));
+const SigninPage = lazy(() => import('pages/Auth/SigninPage'));
+const MainPage = lazy(() => import('pages/MainPage'));
+const CategoriesPage = lazy(() => import('pages/CategoriesPage'));
+const FavoritePage = lazy(() => import('pages/FavoritePage'));
+const OwnRecipesPage = lazy(() => import('pages/OwnRecipesPage'));
+const AddRecipePage = lazy(() => import('pages/AddRecipePage'));
+const RecipePage = lazy(() => import('pages/RecipePage'));
+const SearchPage = lazy(() => import('pages/SearchPage'));
+const ShoppingListPage = lazy(() => import('pages/ShoppingListPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 export const App = () => {
-  return (
-    <BrowserRouter>
-      <div>
-        <Routes>
-          <Route path={routes.WELCOME_PAGE} element={<WelcomePage />} />
-          <Route path={routes.REGISTER_PAGE} element={<RegisterPage />} />
-          <Route path={routes.SIGNIN_PAGE} element={<SigninPage />} />
+  const dispatch = useDispatch();
+  const accessToken = useSelector(selectAccessToken);
 
-          <Route path={routes.MAIN_PAGE} element={<SharedLayout />}>
-            <Route index element={<MainPage />} />
-            <Route path={routes.CATEGORIES_PAGE} element={<CategoriesPage />} />
-            <Route path={routes.FAVORITE_PAGE} element={<FavoritePage />} />
-            <Route path={routes.MY_RECIPES_PAGE} element={<OwnRecipesPage />} />
-            <Route path={routes.ADD_RECIPE_PAGE} element={<AddRecipePage />} />
-            <Route path={routes.RECIPE_PAGE} element={<RecipePage />} />
-            <Route path={routes.SEARCH_PAGE} element={<SearchPage />} />
-            <Route
-              path={routes.SHOPPING_LIST_PAGE}
-              element={<ShoppingListPage />}
-            />
-            <Route path="*" element={<NotFoundPage />} />
-          </Route>
-        </Routes>
-      </div>
-    </BrowserRouter>
+  const loginHandler = () => {
+    dispatch(
+      loginThunk({
+        email: 'test4@gmail.com',
+        password: '1234567890',
+      })
+    );
+  };
+  const logoutHandler = () => {
+    dispatch(logoutThunk());
+  };
+  const googleHandler = () => {
+    window.location.href = 'http://localhost:8001/api/auth/google';
+  };
+
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(currentThunk());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch /*, navigate, googleAuth*/]);
+
+  return (
+    <>
+      <button onClick={loginHandler}>Login</button>
+      <button onClick={logoutHandler}>Logout</button>
+      <button onClick={googleHandler}>Google</button>
+
+      <Routes>
+        <Route
+          path={routes.WELCOME_PAGE}
+          element={<RestrictedPage component={<WelcomePage />} />}
+        />
+        <Route
+          path={routes.REGISTER_PAGE}
+          element={<RestrictedPage component={<RegisterPage />} />}
+        />
+        <Route
+          path={routes.SIGNIN_PAGE}
+          element={<RestrictedPage component={<SigninPage />} />}
+        />
+
+        <Route path={routes.MAIN_PAGE} element={<SharedLayout />}>
+          <Route index element={<PrivatePage component={<MainPage />} />} />
+          <Route
+            path={routes.CATEGORIES_PAGE}
+            element={<PrivatePage component={<CategoriesPage />} />}
+          />
+          <Route
+            path={routes.FAVORITE_PAGE}
+            element={<PrivatePage component={<FavoritePage />} />}
+          />
+          <Route
+            path={routes.MY_RECIPES_PAGE}
+            element={<PrivatePage component={<OwnRecipesPage />} />}
+          />
+          <Route
+            path={routes.ADD_RECIPE_PAGE}
+            element={<PrivatePage component={<AddRecipePage />} />}
+          />
+          <Route
+            path={routes.RECIPE_PAGE}
+            element={<PrivatePage component={<RecipePage />} />}
+          />
+          <Route
+            path={routes.SEARCH_PAGE}
+            element={<PrivatePage component={<SearchPage />} />}
+          />
+          <Route
+            path={routes.SHOPPING_LIST_PAGE}
+            element={<PrivatePage component={<ShoppingListPage />} />}
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+      <AppToastContainer />
+    </>
   );
 };
