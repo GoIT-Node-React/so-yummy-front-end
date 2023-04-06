@@ -11,6 +11,10 @@ export const StyledLabel = styled.label`
   margin: 0 auto 32px auto;
   border-radius: ${({ theme }) => theme.radii.lg};
   cursor: pointer;
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    margin: 0 32px 0 0;
+  }
 `;
 export const Image = styled.img`
   width: 100%;
@@ -39,6 +43,11 @@ export const TextLabel = styled.label`
   line-height: 1.5;
   letter-spacing: -0.02em;
   color: rgba(0, 0, 0, 0.5);
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    width: 393px;
+    font-size: ${({ theme }) => theme.fontSizes[3]};
+  }
 `;
 export const SelectContainer = styled.div`
   position: absolute;
@@ -55,12 +64,22 @@ export const TextInput = styled.input`
   outline: none;
   caret-color: ${({ theme }) => theme.colors.gray[600]};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[600]};
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    width: 393px;
+    margin-bottom: 32px;
+  }
 `;
 export const Border = styled.p`
   margin-bottom: 24px;
   width: 343px;
   height: 18px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[600]};
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    width: 393px;
+    margin-bottom: 32px;
+  }
 `;
 export const CameraContainer = styled.div`
   position: absolute;
@@ -87,6 +106,17 @@ export const FlexContainer = styled.div`
   justify-content: space-between;
 
   margin-bottom: 18px;
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    width: 704px;
+    margin-bottom: 24px;
+  }
+`;
+export const MediaContainer = styled.div`
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    display: flex;
+  }
 `;
 export const TitleContainer = styled.div`
   width: 343px;
@@ -94,6 +124,12 @@ export const TitleContainer = styled.div`
   justify-content: space-between;
   margin-top: 66px;
   margin-bottom: 28px;
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    margin-top: 68px;
+    margin-bottom: 32px;
+    width: 704px;
+  }
 `;
 export const CounterContainer = styled.div`
   padding: 4px 16px;
@@ -104,6 +140,12 @@ export const CounterContainer = styled.div`
   height: 28px;
   border-radius: 18px;
   border: 1px solid rgba(51, 51, 51, 0.3);
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    width: 110px;
+    height: 32px;
+    padding: 6px 17px;
+  }
 `;
 export const Plus = styled(HiPlus)`
   width: 14px;
@@ -136,7 +178,12 @@ export const CounterButton = styled.button`
 `;
 export const UtilContainer = styled.div`
   margin-top: 44px;
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    margin-top: 100px;
+  }
 `;
+
 export const Subtitle = styled.h3`
   color: ${({ theme }) => theme.colors.gray[500]};
   font-weight: ${({ theme }) => theme.fontWeights.semibold};
@@ -144,23 +191,31 @@ export const Subtitle = styled.h3`
   line-height: 1;
   letter-spacing: -2%;
 `;
+
 export const Close = styled(GrClose)`
   margin: auto 0;
   width: 18px;
   height: 18px;
   color: ${({ theme }) => theme.colors.gray[300]};
   cursor: pointer;
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    width: 20px;
+    height: 20px;
+    margin-left: 127px;
+  }
 `;
 export const StyledTextarea = styled.textarea`
   width: 343px;
   height: 154px;
   border: none;
   padding: 10px 16px;
-  margin-bottom: 18px;
+
   margin-top: 24px;
   background-color: ${({ theme }) => theme.colors.white[400]};
   border-radius: ${({ theme }) => theme.radii.md};
   caret-color: ${({ theme }) => theme.colors.gray[600]};
+  resize: none;
   &::placeholder {
     font-size: ${({ theme }) => theme.fontSizes[2]};
     line-height: 1.5;
@@ -169,5 +224,16 @@ export const StyledTextarea = styled.textarea`
   }
   &:focus {
     outline: none;
+  }
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    margin-top: 32px;
+    margin-bottom: 2px;
+    width: 505px;
+    height: 224px;
+    padding: 16px 22px;
+    &::placeholder {
+      font-size: ${({ theme }) => theme.fontSizes[4]};
+    }
   }
 `;
