@@ -1,5 +1,12 @@
 import { Title } from './MainPageTitle.styled';
 
+import Card from 'components/common/Card/Card';
+
 export function MainPageTitle() {
-  return <Title>Search</Title>;
+  return (
+    <>
+      <Card />
+      <Title>Search</Title>
+    </>
+  );
 }
