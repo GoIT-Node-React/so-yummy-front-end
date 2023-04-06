@@ -1,10 +1,19 @@
-import { Form, SearchFormField, SearchFormButton } from './SearchForm.styled';
+import {
+  FormWrapper,
+  Form,
+  SearchFormField,
+  SearchFormButton,
+} from './SearchForm.styled';
+
+// import { FigureButton } from '../../components/common/FigureButton.styled';
 
 export function SearchForm() {
   return (
-    <Form>
-      <SearchFormField></SearchFormField>
-      <SearchFormButton>Search</SearchFormButton>
-    </Form>
+    <FormWrapper>
+      <Form>
+        <SearchFormField></SearchFormField>
+        <SearchFormButton>Search</SearchFormButton>
+      </Form>
+    </FormWrapper>
   );
 }

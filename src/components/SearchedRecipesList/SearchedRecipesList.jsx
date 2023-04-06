@@ -5,6 +5,8 @@ import {
   SearchedRecipesItemTitle,
 } from './SearchedRecipesList.styled';
 
+import { SearchPagination } from '../../components/SearchPagination/SearchPagination';
+
 const recipes = {
   recipes: [
     {
@@ -91,15 +93,18 @@ const recipes = {
 
 export function SearchedRecipesList() {
   return (
-    <SearchedRecipes>
-      {recipes.recipes.map(({ _id, title, description, thumb }) => {
-        return (
-          <SearchedRecipesListItem key={_id}>
-            <SearchedRecipesItemImage src={thumb}></SearchedRecipesItemImage>
-            <SearchedRecipesItemTitle>{title}</SearchedRecipesItemTitle>
-          </SearchedRecipesListItem>
-        );
-      })}
-    </SearchedRecipes>
+    <>
+      <SearchedRecipes>
+        {recipes.recipes.map(({ _id, title, description, thumb }) => {
+          return (
+            <SearchedRecipesListItem key={_id}>
+              <SearchedRecipesItemImage src={thumb}></SearchedRecipesItemImage>
+              <SearchedRecipesItemTitle>{title}</SearchedRecipesItemTitle>
+            </SearchedRecipesListItem>
+          );
+        })}
+      </SearchedRecipes>
+      <SearchPagination />
+    </>
   );
 }

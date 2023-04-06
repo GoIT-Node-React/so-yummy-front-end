@@ -8,7 +8,7 @@ import { Container } from '../../components/common/Container.styled';
 
 export default function SearchPage() {
   return (
-    <Container>
+    <Container style={{ backgroundColor: '##ECECEC' }}>
       <MainPageTitle />
       <SearchBar />
       <SearchedRecipesList />
