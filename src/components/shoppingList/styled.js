@@ -114,7 +114,11 @@ export const NumberAndDelWrap = styled.div`
   display: flex;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-    gap: 79px;
+    gap: 78px;
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    gap:142px;
   }
 `;
 export const Number = styled.p`
@@ -136,6 +140,12 @@ export const Number = styled.p`
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     font-size: 18px;
     width: 68px;
+    height: 35px;
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    
+    width: 75px;
     height: 35px;
   }
 `;
