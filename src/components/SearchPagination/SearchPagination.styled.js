@@ -9,10 +9,6 @@ export const SearchPaginationListWrapper = styled.div`
 
   margin-bottom: 100px;
 
-  @media (min-width: 767.98px) and (max-width: 1439.98px) {
-    margin-bottom: 200px;
-  }
-
   @media (min-width: 768px) and (max-width: 1439.98px) {
     margin-bottom: 200px;
   }
@@ -61,19 +57,19 @@ export const SearchPaginationListItem = styled.li`
 `;
 
 export const SearchPaginationListButton = styled.button`
-  background: #fafafa;
+  width: 27px;
+  height: 27px;
+
   background-color: transparent;
   border-radius: 50%;
+
   font-family: 'Poppins';
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
-
   color: #656565;
 
-  width: 27px;
-  height: 27px;
+  cursor: pointer;
 
   &:focus,
   &:hover {
@@ -81,14 +77,11 @@ export const SearchPaginationListButton = styled.button`
   }
 `;
 
-export const SearchPaginationListArrowLeftButton = styled.button`
+export const SearchPaginationListArrowButton = styled.button`
   padding: 0;
   background-color: transparent;
-`;
 
-export const SearchPaginationListArrowRightButton = styled.button`
-  padding: 0;
-  background-color: transparent;
+  cursor: pointer;
 `;
 
 export const PaginationArrowLeft = styled(RiArrowLeftSLine)`

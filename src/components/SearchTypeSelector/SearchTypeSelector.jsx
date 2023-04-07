@@ -3,10 +3,10 @@ import { useMediaQuery } from 'react-responsive';
 import {
   SearchTypeSelectorWrapper,
   SearchTypeSelectorText,
+  SelectControl,
 } from './SearchTypeSelector.styled';
 
 import React from 'react';
-import Select from 'react-select';
 
 import { RecipesContext } from '../../contexts/searchedRecipes/Provider';
 import { useContext } from 'react';
@@ -16,12 +16,12 @@ const options = [
   { value: 'ingredient', label: 'Ingredients' },
 ];
 
-export function SearchTypeSelector() {
+export default function SearchTypeSelector() {
   const { searchType, updatesearchType } = useContext(RecipesContext);
 
   const isMobile = useMediaQuery({ query: '(max-width: 767.98px)' });
-  const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
-  const isDesctop = useMediaQuery({ query: '(min-width: 1439px)' });
+  // const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
+  // const isDesctop = useMediaQuery({ query: '(min-width: 1439px)' });
 
   console.log('searchType', searchType);
 
@@ -40,7 +40,7 @@ export function SearchTypeSelector() {
           }),
         }}
       >
-        <Select
+        <SelectControl
           defaultValue={searchType}
           onChange={updatesearchType}
           options={options}
@@ -49,9 +49,9 @@ export function SearchTypeSelector() {
             control: (baseStyles, state) => ({
               ...baseStyles,
               width: '146px',
-              height: '34px',
-              paddingLeft: '6px',
-              paddingRight: '6px',
+              height: '38px',
+              paddingLeft: '8px',
+              paddingRight: '8px',
               borderColor: 'black',
               backgroundColor: 'rgba(250, 250, 250, 1)',
               fontFamily: 'Poppins',
@@ -64,6 +64,7 @@ export function SearchTypeSelector() {
               borderRadius: '6px 6px 6px 6px ',
               border: 'none',
               boxShadow: 'none',
+              cursor: 'pointer',
             }),
             singleValue: (baseStyles, state) => ({
               ...baseStyles,
@@ -76,17 +77,28 @@ export function SearchTypeSelector() {
             menu: (baseStyles, state) => ({
               ...baseStyles,
               marginTop: '0',
+              marginBottom: '0',
+              height: '76px',
               borderRadius: '6px 6px  6px 6px',
               borderColor: 'transparent',
               backgroundColor: 'rgba(250, 250, 250, 1)',
-              paddingLeft: '6px',
-              paddingRight: '6px',
+              paddingLeft: '8px',
+              paddingRight: '8px',
+              paddingTop: '4px',
+              paddingBottom: '4px',
               boxShadow: 'none',
             }),
             option: (baseStyles, state) => ({
               ...baseStyles,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '6px',
               borderColor: 'transparent',
-              backgroundColor: 'rgba(250, 250, 250, 1)',
+              backgroundColor:
+                state.isFocused || state.isSelected
+                  ? 'rgba(245, 245, 245, 1)'
+                  : 'rgba(250, 250, 250, 1)',
+              // webkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
               fontFamily: 'Poppins',
               fontStyle: 'normal',
               fontWeight: '400',
@@ -95,6 +107,9 @@ export function SearchTypeSelector() {
               letterSpacing: '0.02em',
               color: 'grey',
               height: '28px',
+              cursor: 'pointer',
+
+              borderRadius: '6px 6px 6px 6px ',
             }),
             dropdownIndicator: () => ({
               color: '#8BAA36',

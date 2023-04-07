@@ -1,9 +1,9 @@
-import { SearchForm } from '../SearchForm/SearchForm';
-import { SearchTypeSelector } from '../SearchTypeSelector/SearchTypeSelector';
+import SearchForm from '../SearchForm';
+import SearchTypeSelector from '../SearchTypeSelector';
 
 import { SearchBarWrapper } from './SerchBar.styled';
 
-export function SearchBar() {
+export default function SearchBar() {
   return (
     <SearchBarWrapper>
       <SearchForm />

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { MainPageTitle } from '../../components/MainPageTitle/MainPageTitle';
-import { SearchBar } from '../../components/SerchBar/SerchBar';
-import { SearchedRecipesList } from '../../components/SearchedRecipesList/SearchedRecipesList';
+import MainPageTitle from '../../components/MainPageTitle';
+import SearchBar from '../../components/SerchBar';
+import SearchedRecipesList from '../../components/SearchedRecipesList';
 
 import { Container } from '../../components/common/Container.styled';
 

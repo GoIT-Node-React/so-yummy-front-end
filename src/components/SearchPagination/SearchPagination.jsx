@@ -3,20 +3,19 @@ import {
   SearchPaginationList,
   SearchPaginationListItem,
   SearchPaginationListButton,
-  SearchPaginationListArrowLeftButton,
-  SearchPaginationListArrowRightButton,
+  SearchPaginationListArrowButton,
   PaginationArrowLeft,
   PaginationArrowRight,
 } from './SearchPagination.styled';
 
-export function SearchPagination() {
+export default function SearchPagination() {
   return (
     <SearchPaginationListWrapper>
       <SearchPaginationList>
         <SearchPaginationListItem>
-          <SearchPaginationListArrowLeftButton>
+          <SearchPaginationListArrowButton>
             <PaginationArrowLeft size={24} />
-          </SearchPaginationListArrowLeftButton>
+          </SearchPaginationListArrowButton>
         </SearchPaginationListItem>
         <SearchPaginationListItem>
           <SearchPaginationListButton>1</SearchPaginationListButton>
@@ -34,9 +33,9 @@ export function SearchPagination() {
           <SearchPaginationListButton>5</SearchPaginationListButton>
         </SearchPaginationListItem>
         <SearchPaginationListItem>
-          <SearchPaginationListArrowRightButton>
+          <SearchPaginationListArrowButton>
             <PaginationArrowRight size={24} />
-          </SearchPaginationListArrowRightButton>
+          </SearchPaginationListArrowButton>
         </SearchPaginationListItem>
       </SearchPaginationList>
     </SearchPaginationListWrapper>

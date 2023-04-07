@@ -5,12 +5,12 @@ import {
   SearchedRecipesItemTitle,
 } from './SearchedRecipesList.styled';
 
-import { SearchPagination } from '../../components/SearchPagination/SearchPagination';
+import SearchPagination from '../../components/SearchPagination';
 
 import { RecipesContext } from '../../contexts/searchedRecipes/Provider';
 import { useContext } from 'react';
 
-export function SearchedRecipesList() {
+export default function SearchedRecipesList() {
   const { searchedResipes } = useContext(RecipesContext);
 
   return (

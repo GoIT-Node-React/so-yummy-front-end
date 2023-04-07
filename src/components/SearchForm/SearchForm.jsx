@@ -10,7 +10,7 @@ import {
 import { RecipesContext } from '../../contexts/searchedRecipes/Provider';
 import { useContext } from 'react';
 
-export function SearchForm() {
+export default function SearchForm() {
   const {
     searchedResipes,
     searchValue,
