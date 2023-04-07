@@ -4,8 +4,9 @@ export const SearchedRecipes = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
   list-style: none;
+
+  padding: 0;
 
   @media (max-width: 767.98px) {
     flex-direction: column;
@@ -89,17 +90,17 @@ export const SearchedRecipesItemTitle = styled.p`
   left: 18px;
   bottom: 18px;
 
-  background-color: #ffffff;
-  border-radius: 8px;
   padding: 16px;
 
-  font-family: 'Poppins';
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 0.8px;
+  background-color: ${({ theme }) => theme.colors.white[100]};
+  border-radius: 8px;
 
+  font-family: ${({ theme }) => theme.fonts.Poppins};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-size: ${({ theme }) => theme.fontSizes[3]};
+  line-height: 0.8px;
   letter-spacing: -0.24px;
-  color: #3e4462;
+  color: ${({ theme }) => theme.colors.gray[500]};
 
   @media (max-width: 767.98px) {
     width: 307px;

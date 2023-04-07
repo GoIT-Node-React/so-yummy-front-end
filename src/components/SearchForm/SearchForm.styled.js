@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { theme } from '../../theme/theme';
 
 export const FormWrapper = styled.div`
   background-color: #f0f0f0;
@@ -32,11 +31,11 @@ export const Form = styled.form`
 
   display: flex;
   align-items: center;
-  background-color: #fff;
   overflow: hidden;
 
   padding: 16px 32px;
 
+  background-color: ${({ theme }) => theme.colors.white[100]};
   clip-path: inset(2px 1px 1px 2px round 20px 50px 20px 50px);
 
   @media (min-width: 375px) and (max-width: 767.98px) {
@@ -72,48 +71,45 @@ export const SearchFormField = styled.input`
   width: 117px;
   height: 21px;
 
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fontSizes[2]};
   border: none;
   outline: none;
   cursor: pointer;
 
   &::placeholder {
-    font-family: 'Poppins';
-    font-weight: 400;
-    font-size: 12px;
+    font-family: ${({ theme }) => theme.fonts.Poppins};
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
+    font-size: ${({ theme }) => theme.fontSizes[1]};
+    color: ${({ theme }) => theme.colors.gray[500]};
     line-height: 1.5;
 
-    color: #3e4462;
-
     @media (min-width: 768px) and (max-width: 1439.98px) {
-      font-size: 14px;
+      font-size: ${({ theme }) => theme.fontSizes[2]};
     }
 
     @media (min-width: 1440px) {
-      font-size: 16px;
+      font-size: ${({ theme }) => theme.fontSizes[3]};
     }
   }
 
   &[value] {
-    -webkit-tap-highlight-color: red;
-    font-family: 'Poppins';
-    font-weight: 400;
-    font-size: 12px;
+    font-family: ${({ theme }) => theme.fonts.Poppins};
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
+    font-size: ${({ theme }) => theme.fontSizes[1]};
+    color: ${({ theme }) => theme.colors.gray[500]};
     line-height: 1.5;
 
-    color: #3e4462;
-
     @media (min-width: 768px) and (max-width: 1439.98px) {
-      font-size: 14px;
+      font-size: ${({ theme }) => theme.fontSizes[2]};
     }
 
     @media (min-width: 1440px) {
-      font-size: 16px;
+      font-size: ${({ theme }) => theme.fontSizes[3]};
     }
   }
 
   @media (min-width: 1440px) {
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.fontSizes[3]};
   }
 `;
 
@@ -121,28 +117,30 @@ export const SearchFormButton = styled.button`
   position: absolute;
   right: 0;
 
-  width: 113px;
-  height: 53px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding: 50px 42px;
+  margin: ${props => props.m};
+
+  width: 113px;
+  height: 53px;
+
   font-size: ${props => props.fs};
   line-height: 1.5;
 
   clip-path: inset(26px 0px 24px 0px round 15px 35px 15px 35px);
-  padding: 50px 42px;
-
-  margin: ${props => props.m};
 
   background-color: #8baa36;
-  color: #fafafa;
+  color: ${({ theme }) => theme.colors.white[200]};
 
   transition: ${({ theme }) =>
     theme.transitions.create(['color', 'background-color'])};
 
   &:hover {
-    background-color: #22252a;
-    color: #fafafa;
+    background-color: ${({ theme }) => theme.colors.white[400]};
+    color: ${({ theme }) => theme.colors.white[200]};
   }
 
   @media (min-width: 768px) and (max-width: 1439.98px) {

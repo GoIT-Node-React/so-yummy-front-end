@@ -28,18 +28,18 @@ export const NotFoundRecipesImage = styled.img`
 `;
 
 export const NotFoundRecipesText = styled.p`
-  font-family: 'Poppins';
-  font-weight: 500;
-  font-size: 14px;
+  font-family: ${({ theme }) => theme.fonts.Poppins};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-size: ${({ theme }) => theme.fontSizes[2]};
   line-height: 1;
 
   letter-spacing: -0.02em;
   font-feature-settings: 'liga' off;
 
-  color: #000000;
+  color: ${({ theme }) => theme.colors.black[100]};
   opacity: 0.5;
 
   @media (min-width: 768px) {
-    font-size: 24px;
+    font-size: ${({ theme }) => theme.fontSizes[5]};
   }
 `;

@@ -21,20 +21,19 @@ export const SearchTypeSelectorWrapper = styled.div`
 export const SearchTypeSelectorText = styled.p`
   margin-right: 15px;
 
-  font-family: 'Poppins';
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
+  font-family: ${({ theme }) => theme.fonts.Poppins};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-size: ${({ theme }) => theme.fontSizes[1]};
   line-height: 1.3;
   letter-spacing: -0.24px;
-  color: #001833;
+  color: ${({ theme }) => theme.colors.gray[400]};
 
   @media (min-width: 768px) and (max-width: 1439.98px) {
-    font-size: 14px;
+    font-size: ${({ theme }) => theme.fontSizes[2]};
   }
 
   @media (min-width: 1440px) {
-    font-size: 18px;
+    font-size: ${({ theme }) => theme.fontSizes[4]};
   }
 `;
 

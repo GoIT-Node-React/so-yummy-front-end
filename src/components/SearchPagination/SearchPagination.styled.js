@@ -33,11 +33,11 @@ export const SearchPaginationList = styled.ul`
   align-items: center;
   list-style: none;
 
-  background: #fafafa;
-  box-shadow: 0px 4px 4px rgba(135, 135, 135, 0.2);
-  border-radius: 26px;
-
   padding: 12px 25px;
+
+  background: ${({ theme }) => theme.colors.white[200]};
+  box-shadow: ${({ theme }) => theme.shadows.paginationList};
+  border-radius: 26px;
 
   @media (max-width: 767.98px) {
     width: 275px;
@@ -63,17 +63,17 @@ export const SearchPaginationListButton = styled.button`
   background-color: transparent;
   border-radius: 50%;
 
-  font-family: 'Poppins';
-  font-weight: 500;
-  font-size: 12px;
+  font-family: ${({ theme }) => theme.fonts.Poppins};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-size: ${({ theme }) => theme.fontSizes[1]};
   line-height: 18px;
-  color: #656565;
+  color: ${({ theme }) => theme.colors.green[400]};
 
   cursor: pointer;
 
   &:focus,
   &:hover {
-    background-color: #ebf3d4;
+    background-color: ${({ theme }) => theme.colors.green[100]};
   }
 `;
 

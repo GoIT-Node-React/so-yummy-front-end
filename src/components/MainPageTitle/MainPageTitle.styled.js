@@ -4,20 +4,20 @@ export const Title = styled.h2`
   margin-top: 0;
   margin-bottom: 50px;
 
-  font-family: 'Poppins';
-  font-weight: 600;
-  font-size: 28px;
+  font-family: ${({ theme }) => theme.fonts.Poppins};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
+  font-size: ${({ theme }) => theme.fontSizes[6]};
   line-height: 1;
   letter-spacing: -0.02em;
 
-  color: #001833;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: ${({ theme }) => theme.colors.gray[400]};
+  text-shadow: ${({ theme }) => theme.shadows.mainTitle};
 
   @media (min-width: 768px) and (max-width: 1439.98px) {
-    font-size: 32px;
+    font-size: ${({ theme }) => theme.fontSizes[10]};
   }
 
   @media (min-width: 1440px) {
-    font-size: 44px;
+    font-size: ${({ theme }) => theme.fontSizes[7]};
   }
 `;
