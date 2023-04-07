@@ -1,12 +1,12 @@
 import { ReactComponent as Logo } from '../../images/SVG/Logo/logo.svg';
-import { Button } from "../../components/Button/Button";
-import { SocialLinks } from '../../components/common/SocialLinks/SocialLinks'
+
 import {
   Main,
   Title,
   Subtitle,
   SvgWrapper,
   ButtonsWrapper,
+  LinkStyled
 } from "./WelcomePage.styled";
 export default function WelcomePage() {
   return (
@@ -21,26 +21,20 @@ export default function WelcomePage() {
         save and retrieve your own recipes at any time.
       </Subtitle>
       <ButtonsWrapper>
-        <Button
-            look="rounded_dark"
-            fontSize="14px"
-            fontSizeTablet="16px"
-            size="40px 24px"
-            sizeTablet="50px 42px"
+        <LinkStyled
+          to="/register"
+          look="rounded_dark"
           >
             Registration
-          </Button>
-          <Button
-            look="rounded"
-            fontSize="14px"
-            fontSizeTablet="16px"
-            size="40px 24px"
-            sizeTablet="50px 42px"
+          </LinkStyled>
+        <LinkStyled
+          to="/signin"
+          look="rounded"
           >
             Sign In
-        </Button>
-        <SocialLinks />
-        </ButtonsWrapper>
+        </LinkStyled>
+       
+      </ButtonsWrapper>
     </Main>
   )
 }
