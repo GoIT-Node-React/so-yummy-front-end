@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Select from 'react-select';
+import { theme } from '../../theme/theme';
 import { CustomInput, Input } from './MesureSelect.styled';
+
 export const MesureSelect = React.forwardRef(
   ({ onChange, onBlur, name, label }, ref) => {
-    const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
+    const isTablet = useMediaQuery({
+      query: `(min-width: 767px)`,
+    });
+
     const [inputValue, setInputValue] = useState('');
     const [selectValue, setSelectValue] = useState('tbs');
-    // const [measure, setMeasure] = useState('');
+
     const options = [
       { value: `tbs`, label: 'tbs' },
       { value: `tsp`, label: 'tsp' },
@@ -17,23 +22,26 @@ export const MesureSelect = React.forwardRef(
     const handleInputChange = event => {
       const newValue = event.target.value;
       setInputValue(newValue);
-      onBlur(`${newValue} ${selectValue}`);
+      onChange(`${newValue} ${selectValue}`);
     };
 
     return (
       <CustomInput>
         <Input
-          type="text"
+          type="number"
           value={inputValue}
           onChange={handleInputChange}
           placeholder="0"
+          name={name}
+          ref={ref}
         />
+
         <Select
           options={options}
           value={{ value: selectValue, label: selectValue }}
           onChange={selectedOption => {
             setSelectValue(selectedOption.value);
-            onBlur(`${inputValue} ${selectedOption.value}`);
+            onChange(`${inputValue} ${selectedOption.value}`);
           }}
           isSearchable={false}
           styles={{

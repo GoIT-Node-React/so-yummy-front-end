@@ -6,7 +6,8 @@ import AsyncSelect from 'react-select/async';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { selectStyles } from './SelectStyles/category';
+import useLocalStorage from 'hooks/localStorageHook';
+import { storage } from 'constants/storageKeys';
 import {
   Border,
   CameraContainer,
@@ -14,6 +15,7 @@ import {
   Counter,
   CounterButton,
   CounterContainer,
+  ErrorMessage,
   FileUploader,
   FlexContainer,
   Image,
@@ -56,27 +58,37 @@ const schema = yup
     description: yup.string().min(8).max(30).required(),
     category: yup.string().required(),
     time: yup.string().required(),
+    // ingredients: yup.array().of(
+    //   yup.object().shape({
+    //     ingredient: yup.string().required(),
+    //     measure: yup.string().required(),
+    //   })
+    // ),
+    instructions: yup.string().min(10).required(),
     // title: yup.number().positive().integer().required(),
   })
   .required();
 
 export default function AddRecipeForm() {
   const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
-  // const [inputs, setInputs] = useState(1);
-  const [file, setFile] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  // const [category, setCategory] = useState('Breakfast');
-  // const [time, setTime] = useState('5 min');
-  const [measure, setMeasure] = useState('');
-  const [ingredient, setIngredient] = useState('');
+  const [file, setFile] = useLocalStorage(storage.FILE, '');
+  const [title, setTitle] = useLocalStorage(storage.TITLE, '');
+  const [description, setDescription] = useLocalStorage(
+    storage.DESCRIPTION,
+    ''
+  );
+  const [category, setCategory] = useLocalStorage(storage.CATEGORY, '');
+  const [time, setTime] = useLocalStorage(storage.TIME, '');
+  const [instructions, setInstructions] = useLocalStorage(
+    storage.INSTRUCTIONS,
+    ''
+  );
 
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-    setValue,
   } = useForm({
     mode: 'all',
     resolver: yupResolver(schema),
@@ -84,9 +96,10 @@ export default function AddRecipeForm() {
       file,
       title,
       description,
-      category: '',
-      time: '',
-      ingredients: [{ ingredient, measure }],
+      category,
+      time,
+      ingredients: [{ ingredient: '', measure: '' }],
+      instructions,
     },
   });
   console.log(errors.file?.message);
@@ -94,12 +107,14 @@ export default function AddRecipeForm() {
   console.log(errors.description?.message);
   console.log(errors.category?.message);
   console.log(errors.time?.message);
+  console.log(errors.ingredients?.message);
+  console.log(errors.instructions?.message);
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'ingredients',
   });
-  console.log(fields);
+
   const onSubmitHandler = data => console.log(data);
 
   return (
@@ -113,6 +128,7 @@ export default function AddRecipeForm() {
               onChange: e => setFile(URL.createObjectURL(e.target.files[0])),
             })}
           />
+          {errors.file && <ErrorMessage>{errors.file?.message}</ErrorMessage>}
           {file && (
             <ImageContainer>
               <Image src={file} alt="Recipe" />
@@ -122,24 +138,32 @@ export default function AddRecipeForm() {
             <StyledCamera />
           </CameraContainer>
         </StyledLabel>
+
         <div>
           <TextLabel>
-            Enter item title
             <TextInput
+              placeholder="Enter item title"
               type="text"
               {...register('title', {
                 onChange: e => setTitle(e.target.value),
               })}
             />
+            {errors.title && (
+              <ErrorMessage>{errors.title?.message}</ErrorMessage>
+            )}
           </TextLabel>
+
           <TextLabel>
-            Enter about recipe
             <TextInput
+              placeholder="Enter about recipe"
               type="text"
               {...register('description', {
                 onChange: e => setDescription(e.target.value),
               })}
             />
+            {errors.description && (
+              <ErrorMessage>{errors.description?.message}</ErrorMessage>
+            )}
           </TextLabel>
           <TextLabel>
             Category
@@ -155,7 +179,10 @@ export default function AddRecipeForm() {
                     name={name}
                     options={categories}
                     isSearchable={false}
-                    onChange={selectedOption => onChange(selectedOption.value)}
+                    onChange={selectedOption => {
+                      onChange(selectedOption.value);
+                      setCategory(selectedOption.value);
+                    }}
                     styles={{
                       dropdownIndicator: () => ({
                         color: '#8BAA36',
@@ -232,6 +259,9 @@ export default function AddRecipeForm() {
               />
             </SelectContainer>
             <Border />
+            {errors.category && (
+              <ErrorMessage>{errors.category?.message}</ErrorMessage>
+            )}
           </TextLabel>
           <TextLabel>
             Cooking time
@@ -245,7 +275,10 @@ export default function AddRecipeForm() {
                     ref={ref}
                     value={value.value}
                     name={name}
-                    onChange={selectedOption => onChange(selectedOption.value)}
+                    onChange={selectedOption => {
+                      onChange(selectedOption.value);
+                      setTime(selectedOption.value);
+                    }}
                     options={cookingTime}
                     isSearchable={false}
                     styles={{
@@ -324,6 +357,7 @@ export default function AddRecipeForm() {
               />
             </SelectContainer>
             <Border />
+            {errors.time && <ErrorMessage>{errors.time?.message}</ErrorMessage>}
           </TextLabel>
         </div>
       </MediaContainer>
@@ -332,7 +366,7 @@ export default function AddRecipeForm() {
         <CounterContainer>
           <CounterButton
             type="button"
-            // onClick={}
+            onClick={() => remove(-1)}
             disabled={fields <= 1}
           >
             <Minus />
@@ -351,12 +385,12 @@ export default function AddRecipeForm() {
       {fields.map((field, index) => (
         <FlexContainer key={field.id}>
           <Controller
-            name="ingredient"
+            name={`ingredients.${index}.ingredient`}
             control={control}
             render={({ field: { onChange, value, name } }, ref) => (
               <AsyncSelect
                 // loadOptions
-                {...register(`ingredients${index}.ingredient`)}
+
                 placeholder="Ingredient"
                 onChange={onChange}
                 ref={ref}
@@ -418,14 +452,14 @@ export default function AddRecipeForm() {
             )}
           />
           <Controller
-            name={`ingredients${index}.measure`}
+            name={`ingredients.${index}.measure`}
             control={control}
-            render={({ field: { onBlur, onChange, value, name } }, ref) => (
+            render={({ field: { onChange, value, name } }, ref) => (
               <MesureSelect
                 name={name}
                 ref={ref}
-                onBlur={console.log(onBlur)}
-                onChange={data => onChange(data)}
+                // onBlur={console.log(onBlur)}
+                onChange={onChange}
                 value={value}
               />
             )}
@@ -437,7 +471,18 @@ export default function AddRecipeForm() {
       <UtilContainer>
         <Subtitle>Recipe preparation</Subtitle>
       </UtilContainer>
-      <StyledTextarea placeholder="Enter recipe" />
+      <div style={{ position: 'relative' }}>
+        <StyledTextarea
+          placeholder="Enter recipe"
+          {...register('instructions', {
+            onChange: event => setInstructions(event.target.value),
+          })}
+        />
+        {errors.instructions && (
+          <ErrorMessage>{errors.instructions?.message}</ErrorMessage>
+        )}
+      </div>
+
       {isTablet ? (
         <FigureButton variant="dark" w="161px" h="52px" p="52px 42px">
           Add

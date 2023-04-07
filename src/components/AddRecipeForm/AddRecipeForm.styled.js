@@ -46,6 +46,7 @@ export const TextLabel = styled.label`
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[1]} - 1px)) {
     width: 393px;
+
     font-size: ${({ theme }) => theme.fontSizes[3]};
   }
 `;
@@ -59,15 +60,28 @@ export const TextInput = styled.input`
   display: block;
   margin-bottom: 24px;
   width: 343px;
-  height: 18px;
+  height: 39px;
   border: none;
   outline: none;
   caret-color: ${({ theme }) => theme.colors.gray[600]};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray[600]};
+  &::placeholder {
+    font-size: ${({ theme }) => theme.fontSizes[2]};
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 18px;
+  }
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[1]} - 1px)) {
     width: 393px;
+    height: 42px;
     margin-bottom: 32px;
+    &::placeholder {
+      font-size: ${({ theme }) => theme.fontSizes[3]};
+      bottom: 18px;
+    }
   }
 `;
 export const Border = styled.p`
@@ -236,4 +250,11 @@ export const StyledTextarea = styled.textarea`
       font-size: ${({ theme }) => theme.fontSizes[4]};
     }
   }
+`;
+export const ErrorMessage = styled.span`
+  position: absolute;
+  display: block;
+  bottom: -20px;
+  color: #e74a3b;
+  font-size: ${({ theme }) => theme.fontSizes[1]};
 `;
