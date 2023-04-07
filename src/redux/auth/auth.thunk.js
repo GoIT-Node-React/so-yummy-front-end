@@ -9,7 +9,6 @@ import {
   currentService,
   loginUserService,
   logoutUserService,
-  refreshTokenService,
   registerUserService,
 } from 'services/auth.service';
 import { selectAccessToken } from './auth.selectors';

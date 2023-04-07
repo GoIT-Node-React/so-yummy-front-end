@@ -5,9 +5,6 @@ import bgTablet from 'images/recipe-info/recipe-info-tablet.jpg';
 import bgTablet2x from 'images/recipe-info/recipe-info-tablet@2x.jpg';
 import bgDesktop from 'images/recipe-info/recipe-info-desktop.jpg';
 import bgDesktop2x from 'images/recipe-info/recipe-info-desktop@2x.jpg';
-import Loader from 'components/common/Loader/Loader';
-
-import { css } from '@emotion/react';
 
 export const RecipeHeroContainer = styled.div`
   --bg-original: url(${bgMobile});
