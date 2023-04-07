@@ -1,22 +1,50 @@
 import RecipeInfo from 'components/RecipeInfo/RecipeInfo';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getRecipeInfo } from 'services/recipe.service';
+import { getRecipeInfoById } from 'services/recipe.service';
+import RecipeInfoContextProvider from './RecipeInfo.context';
+import {
+  addRecipeToFavoriteService,
+  deleteRecipeFromFavoriteService,
+} from 'services/favorite.service';
 
 export default function RecipeInfoPage() {
   const { recipeId } = useParams();
   const [recipeInfo, setRecipeInfo] = useState(null);
 
+  const getRecipeInfo = useCallback(async recipeId => {
+    const {
+      data: { recipe },
+    } = await getRecipeInfoById(recipeId);
+
+    setRecipeInfo(recipe);
+  }, []);
+
+  const addRecipeToFavorite = useCallback(
+    async recipeId => {
+      await addRecipeToFavoriteService(recipeId);
+      await getRecipeInfo(recipeId);
+    },
+    [getRecipeInfo]
+  );
+
+  const deleteRecipeFromFavorite = useCallback(
+    async recipeId => {
+      await deleteRecipeFromFavoriteService(recipeId);
+      await getRecipeInfo(recipeId);
+    },
+    [getRecipeInfo]
+  );
+
   useEffect(() => {
-    const f = async () => {
-      const {
-        data: { recipe },
-      } = await getRecipeInfo(recipeId);
+    getRecipeInfo(recipeId);
+  }, [getRecipeInfo, recipeId]);
 
-      setRecipeInfo(recipe);
-    };
-    f();
-  }, [recipeId]);
-
-  return <>{recipeInfo && <RecipeInfo info={recipeInfo} />}</>;
+  return (
+    <RecipeInfoContextProvider
+      value={{ addRecipeToFavorite, deleteRecipeFromFavorite }}
+    >
+      {recipeInfo && <RecipeInfo info={recipeInfo} />}
+    </RecipeInfoContextProvider>
+  );
 }

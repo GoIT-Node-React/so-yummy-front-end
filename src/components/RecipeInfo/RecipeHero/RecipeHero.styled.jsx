@@ -5,6 +5,9 @@ import bgTablet from 'images/recipe-info/recipe-info-tablet.jpg';
 import bgTablet2x from 'images/recipe-info/recipe-info-tablet@2x.jpg';
 import bgDesktop from 'images/recipe-info/recipe-info-desktop.jpg';
 import bgDesktop2x from 'images/recipe-info/recipe-info-desktop@2x.jpg';
+import Loader from 'components/common/Loader/Loader';
+
+import { css } from '@emotion/react';
 
 export const RecipeHeroContainer = styled.div`
   --bg-original: url(${bgMobile});
@@ -150,5 +153,17 @@ export const RecipeTime = styled.span`
 
     font-size: 14px;
     line-height: calc(20 / 14);
+  }
+`;
+
+export const RecipeHeroLoader = styled.span`
+  display: block;
+
+  transform: scale(0.5);
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    margin-top: 15px;
+
+    transform: scale(1);
   }
 `;

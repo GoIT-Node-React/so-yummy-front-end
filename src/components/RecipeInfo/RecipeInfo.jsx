@@ -6,6 +6,7 @@ import RecipePreparation from './RecipePreparation/RecipePreparation';
 
 export default function RecipeInfo({ info }) {
   const {
+    _id: recipeId,
     title,
     description,
     time,
@@ -15,12 +16,11 @@ export default function RecipeInfo({ info }) {
     thumb,
   } = info;
 
-  console.log(info);
-
   return (
     <Recipe>
       <RecipeContainer>
         <RecipeHero
+          _id={recipeId}
           title={title}
           description={description}
           time={time}
