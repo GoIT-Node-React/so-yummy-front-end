@@ -63,6 +63,7 @@ export const Form = styled.form`
 
 export const SearchFormField = styled.input`
   display: inline-block;
+  background-color: transparent;
 
   padding-left: 4px;
   padding-right: 4px;
@@ -94,6 +95,7 @@ export const SearchFormField = styled.input`
   }
 
   &[value] {
+    -webkit-tap-highlight-color: red;
     font-family: 'Poppins';
     font-weight: 400;
     font-size: 12px;
