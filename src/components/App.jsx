@@ -1,12 +1,13 @@
 import { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { currentThunk, loginThunk, logoutThunk } from 'redux/auth/auth.thunk';
+import { currentThunk, logoutThunk } from 'redux/auth/auth.thunk';
 import { selectAccessToken } from 'redux/auth/auth.selectors';
 import AppToastContainer from './AppToastContainer/AppToastContainer';
 import SharedLayout from './SharedLayout/SharedLayout';
 import { routes } from 'constants/routes';
 import { PrivatePage, RestrictedPage } from 'pages/access';
+import AuthLayout from './layouts/auth';
 
 const WelcomePage = lazy(() => import('pages/WelcomePage'));
 const RegisterPage = lazy(() => import('pages/Auth/RegisterPage'));
@@ -25,47 +26,38 @@ export const App = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken);
 
-  const loginHandler = () => {
-    dispatch(
-      loginThunk({
-        email: 'test4@gmail.com',
-        password: '1234567890',
-      })
-    );
-  };
   const logoutHandler = () => {
     dispatch(logoutThunk());
-  };
-  const googleHandler = () => {
-    window.location.href = 'http://localhost:8001/api/auth/google';
   };
 
   useEffect(() => {
     if (accessToken) {
       dispatch(currentThunk());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch /*, navigate, googleAuth*/]);
+  }, [dispatch, accessToken]);
 
   return (
     <>
-      <button onClick={loginHandler}>Login</button>
-      <button onClick={logoutHandler}>Logout</button>
-      <button onClick={googleHandler}>Google</button>
+      <button style={{ position: 'absolute' }} onClick={logoutHandler}>
+        Logout
+      </button>
 
       <Routes>
         <Route
           path={routes.WELCOME_PAGE}
           element={<RestrictedPage component={<WelcomePage />} />}
         />
-        <Route
-          path={routes.REGISTER_PAGE}
-          element={<RestrictedPage component={<RegisterPage />} />}
-        />
-        <Route
-          path={routes.SIGNIN_PAGE}
-          element={<RestrictedPage component={<SigninPage />} />}
-        />
+
+        <Route path={routes.MAIN_PAGE} element={<AuthLayout />}>
+          <Route
+            path={routes.REGISTER_PAGE}
+            element={<RestrictedPage component={<RegisterPage />} />}
+          />
+          <Route
+            path={routes.SIGNIN_PAGE}
+            element={<RestrictedPage component={<SigninPage />} />}
+          />
+        </Route>
 
         <Route path={routes.MAIN_PAGE} element={<SharedLayout />}>
           <Route index element={<PrivatePage component={<MainPage />} />} />
