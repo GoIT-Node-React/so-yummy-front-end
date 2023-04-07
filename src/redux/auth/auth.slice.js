@@ -2,12 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { Status } from 'constants';
-//import { isActionRejected } from 'helpers';
 import { authInitialState } from './auth.initial';
 import { loginThunk, logoutThunk, registrationThunk } from './auth.thunk';
-import { currentThunk, refreshTokenThunk } from 'redux/auth/auth.thunk';
-
-//const isAuthError = action => action?.payload?.status === 401;
+import { currentThunk } from 'redux/auth/auth.thunk';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -65,24 +62,15 @@ const authSlice = createSlice({
         state.statuses.current = Status.FULFILLED;
         state.isAuthorized = true;
       })
-      .addCase(currentThunk.rejected, () => authInitialState);
-    // Refresh
-    /*.addCase(refreshTokenThunk.pending, state => {
-        state.statuses.refreshToken = Status.PENDING;
-      })
-      .addCase(refreshTokenThunk.fulfilled, (state, { payload }) => {
-        state.accessToken = payload.newAccessToken;
-        state.refreshToken = payload.newRefreshToken;
-        state.isAuthorized = true;
-        state.statuses.refreshToken = Status.FULFILLED;
-      })
-      .addCase(refreshTokenThunk.rejected, () => authInitialState)*/
-    // Matches
-    /*.addMatcher(isActionRejected('user', isAuthError), () => authInitialState)
+      .addCase(currentThunk.rejected, () => authInitialState)
       .addMatcher(
-        isActionRejected('transactions', isAuthError),
-        () => authInitialState
-      );*/
+        action => action.type.endsWith(`/${Status.REJECTED}`),
+        (_state, { payload }) => {
+          if (payload.status === 403) {
+            return authInitialState;
+          }
+        }
+      );
   },
 });
 

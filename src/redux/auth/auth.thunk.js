@@ -53,8 +53,6 @@ export const logoutThunk = createAsyncThunk(
     try {
       await logoutUserService();
 
-      console.log('LOGOUT!!!!!!!!!!!!!!');
-
       warnNotification(`You are logged out.`);
     } catch (error) {
       return rejectWithValue(processingError(error));
@@ -76,24 +74,6 @@ export const currentThunk = createAsyncThunk(
 
       return data;
     } catch (error) {
-      return rejectWithValue(processingError(error));
-    }
-  }
-);
-
-export const refreshTokenThunk = createAsyncThunk(
-  'auth/refreshToken',
-  async (_, { rejectWithValue, getState, dispatch }) => {
-    //const sid = selectTokenSid(getState());
-    //const refreshToken = selectRefreshToken(getState());
-
-    try {
-      //const data = await refreshTokenService(refreshToken, sid);
-      //token.set(data.newAccessToken);
-      //await dispatch(getUserInfoThunk());
-      //return data;
-    } catch (error) {
-      token.unset();
       return rejectWithValue(processingError(error));
     }
   }
