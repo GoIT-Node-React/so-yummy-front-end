@@ -1,4 +1,4 @@
-import { lazy, useEffect } from 'react';
+import { lazy, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentThunk, logoutThunk } from 'redux/auth/auth.thunk';
@@ -17,7 +17,7 @@ const CategoriesPage = lazy(() => import('pages/CategoriesPage'));
 const FavoritePage = lazy(() => import('pages/FavoritePage'));
 const OwnRecipesPage = lazy(() => import('pages/OwnRecipesPage'));
 const AddRecipePage = lazy(() => import('pages/AddRecipePage'));
-const RecipePage = lazy(() => import('pages/RecipePage'));
+const RecipeInfoPage = lazy(() => import('pages/RecipeInfoPage'));
 const SearchPage = lazy(() => import('pages/SearchPage'));
 const ShoppingListPage = lazy(() => import('pages/ShoppingListPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
@@ -25,14 +25,16 @@ const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 export const App = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken);
+  const isFirst = useRef(true);
 
   const logoutHandler = () => {
     dispatch(logoutThunk());
   };
 
   useEffect(() => {
-    if (accessToken) {
+    if (accessToken && isFirst.current) {
       dispatch(currentThunk());
+      isFirst.current = false;
     }
   }, [dispatch, accessToken]);
 
@@ -78,8 +80,8 @@ export const App = () => {
             element={<PrivatePage component={<AddRecipePage />} />}
           />
           <Route
-            path={routes.RECIPE_PAGE}
-            element={<PrivatePage component={<RecipePage />} />}
+            path={`${routes.RECIPE_PAGE}`}
+            element={<PrivatePage component={<RecipeInfoPage />} />}
           />
           <Route
             path={routes.SEARCH_PAGE}

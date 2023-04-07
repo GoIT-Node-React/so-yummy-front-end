@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { theme } from 'theme';
 
 export const FigureButton = styled.button`
   width: ${props => props.w};
@@ -17,11 +16,11 @@ export const FigureButton = styled.button`
   background-color: ${props => {
     switch (props.variant) {
       case 'dark':
-        return theme.colors.black[400];
+        return props.theme.colors.black[400];
       case 'green':
-        return theme.colors.green[200];
+        return props.theme.colors.green[200];
       case 'white':
-        return theme.colors.white[200];
+        return props.theme.colors.white[200];
       case 'transparent':
         return 'transparent';
       default:
@@ -31,8 +30,8 @@ export const FigureButton = styled.button`
 
   color: ${props =>
     props.variant === 'white'
-      ? theme.colors.black[400]
-      : theme.colors.white[200]};
+      ? props.theme.colors.black[400]
+      : props.theme.colors.white[200]};
 
   transition: ${({ theme }) =>
     theme.transitions.create(['color', 'background-color'])};
@@ -41,13 +40,13 @@ export const FigureButton = styled.button`
     background-color: ${props => {
       switch (props.variant) {
         case 'dark':
-          return theme.colors.green[200];
+          return props.theme.colors.green[200];
         case 'green':
-          return theme.colors.black[400];
+          return props.theme.colors.black[400];
         case 'white':
-          return theme.colors.green[200];
+          return props.theme.colors.green[200];
         case 'transparent':
-          return theme.colors.white[200];
+          return props.theme.colors.white[200];
         default:
           return 'green';
       }
@@ -55,7 +54,7 @@ export const FigureButton = styled.button`
 
     color: ${props =>
       props.variant === 'transparent'
-        ? theme.colors.green[200]
-        : theme.colors.white[200]};
+        ? props.theme.colors.green[200]
+        : props.theme.colors.white[200]};
   }
 `;
