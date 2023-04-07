@@ -59,6 +59,7 @@ export const theme = {
     green: {
       100: '#EBF3D4', //delete-icon bg, pagination number hover, ingredient card bg
       200: '#8BAA36', //main green color
+      300: '#3CBC81', // validation success
     },
     gray: {
       100: '#BDBDBD', //tab color, input text in search
@@ -68,6 +69,10 @@ export const theme = {
       500: '#3E4462', //card-title color,page subtitle color, ingredient title color, arrow
       600: '#E0E0E0', //text input
       700: '#707070', //border
+      800: '#7E7E7E',
+    },
+    red: {
+      100: '#e74a3b', // validation error
     },
   },
 
@@ -87,3 +92,7 @@ function createTransitions(
     .map(property => `${property} ${duration} ${easing}`)
     .join(', ');
 }
+
+theme.breakpoints.mobile = theme.breakpoints[0];
+theme.breakpoints.tablet = theme.breakpoints[1];
+theme.breakpoints.desktop = theme.breakpoints[2];

@@ -3,6 +3,8 @@ import { useMediaQuery } from 'react-responsive';
 import Select from 'react-select';
 import { theme } from '../../theme/theme';
 import { CustomInput, Input } from './MesureSelect.styled';
+import { NumericFormat } from 'react-number-format';
+import { PatternFormat } from 'react-number-format';
 
 export const MesureSelect = React.forwardRef(
   ({ onChange, onBlur, name, label }, ref) => {
@@ -24,18 +26,30 @@ export const MesureSelect = React.forwardRef(
       setInputValue(newValue);
       onChange(`${newValue} ${selectValue}`);
     };
-
+    const MAX_LIMIT = 999;
     return (
       <CustomInput>
         <Input
-          type="number"
           value={inputValue}
           onChange={handleInputChange}
           placeholder="0"
           name={name}
           ref={ref}
         />
-
+        {/* <NumericFormat
+          displayType="input"
+          customInput={Input}
+          valueIsNumericString={true}
+          allowNegative={false}
+          decimalScale={1}
+          format="###"
+          isAllowed={values => {
+            const { floatValue } = values;
+            console.log(values);
+            return floatValue < MAX_LIMIT;
+          }}
+        />
+        <PatternFormat displayType="input" format="###" customInput={Input} /> */}
         <Select
           options={options}
           value={{ value: selectValue, label: selectValue }}

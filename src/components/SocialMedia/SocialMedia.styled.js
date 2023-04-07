@@ -1,16 +1,17 @@
 import styled from '@emotion/styled';
 
-import { SlSocialInstagram } from 'react-icons/sl';
+import { FaInstagram } from 'react-icons/fa';
 import { IoLogoYoutube } from 'react-icons/io';
 import { FaTwitter } from 'react-icons/fa';
-import { SiFacebook } from 'react-icons/si';
+import { MdFacebook } from 'react-icons/md';
 
 export const SocMediaContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-top: ${props => props.mt};
 `;
 
-export const Instagram = styled(SlSocialInstagram)`
+export const Instagram = styled(FaInstagram)`
   width: 24px;
   height: 24px;
 
@@ -105,7 +106,7 @@ export const YouTube = styled(IoLogoYoutube)`
   }
 `;
 
-export const Facebook = styled(SiFacebook)`
+export const Facebook = styled(MdFacebook)`
   width: 26px;
   height: 26px;
   margin-right: 20px;

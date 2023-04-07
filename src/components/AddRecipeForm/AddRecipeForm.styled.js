@@ -15,6 +15,12 @@ export const StyledLabel = styled.label`
       theme.breakpoints[1]} - 1px)) {
     margin: 0 32px 0 0;
   }
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[2]} - 1px)) {
+    width: 357px;
+    height: 344px;
+    margin: 0 50px 0 0;
+  }
 `;
 export const Image = styled.img`
   width: 100%;
@@ -81,7 +87,12 @@ export const TextInput = styled.input`
     &::placeholder {
       font-size: ${({ theme }) => theme.fontSizes[3]};
       bottom: 18px;
+      letter-spacing: -2%;
     }
+  }
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[2]} - 1px)) {
+    margin-bottom: 40px;
   }
 `;
 export const Border = styled.p`
@@ -93,6 +104,10 @@ export const Border = styled.p`
       theme.breakpoints[1]} - 1px)) {
     width: 393px;
     margin-bottom: 32px;
+  }
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[2]} - 1px)) {
+    margin-bottom: 40px;
   }
 `;
 export const CameraContainer = styled.div`
@@ -143,6 +158,11 @@ export const TitleContainer = styled.div`
     margin-top: 68px;
     margin-bottom: 32px;
     width: 704px;
+  }
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    margin-top: 72px;
+    width: 609px;
   }
 `;
 export const CounterContainer = styled.div`

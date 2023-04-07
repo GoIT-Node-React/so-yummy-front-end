@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import Select from 'react-select';
@@ -33,16 +32,17 @@ import {
   TitleContainer,
   UtilContainer,
 } from './AddRecipeForm.styled';
-// import AsyncSelectComponent from './AsyncSelect';
+
 import { categories, cookingTime } from './data';
 import { MesureSelect } from './MesureSelect';
 
 import { FigureButton } from 'components/common/FigureButton.styled';
-import { asyncSelect } from './SelectStyles/asyncSelect';
 
+import { getIngredientsByTitleService } from './../../services/ingredients.service';
+import { addRecipeService } from 'services/addRecipe.service';
 const schema = yup
   .object({
-    file: yup
+    thumb: yup
       .mixed()
       .test('required', 'photo is required', value => value.length > 0)
       .test('fileSize', 'File Size is too large', value => {
@@ -58,12 +58,12 @@ const schema = yup
     description: yup.string().min(8).max(30).required(),
     category: yup.string().required(),
     time: yup.string().required(),
-    // ingredients: yup.array().of(
-    //   yup.object().shape({
-    //     ingredient: yup.string().required(),
-    //     measure: yup.string().required(),
-    //   })
-    // ),
+    ingredients: yup.array().of(
+      yup.object().shape({
+        ingredient: yup.string().required(),
+        measure: yup.string().required(),
+      })
+    ),
     instructions: yup.string().min(10).required(),
     // title: yup.number().positive().integer().required(),
   })
@@ -71,7 +71,7 @@ const schema = yup
 
 export default function AddRecipeForm() {
   const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
-  const [file, setFile] = useLocalStorage(storage.FILE, '');
+  const [thumb, setFile] = useLocalStorage(storage.FILE, '');
   const [title, setTitle] = useLocalStorage(storage.TITLE, '');
   const [description, setDescription] = useLocalStorage(
     storage.DESCRIPTION,
@@ -83,7 +83,8 @@ export default function AddRecipeForm() {
     storage.INSTRUCTIONS,
     ''
   );
-
+  const [ingredient, setIngredient] = useLocalStorage(storage.INGREDIENT, '');
+  const [measure, setMeasure] = useLocalStorage(storage.MEASURE, '');
   const {
     register,
     handleSubmit,
@@ -93,30 +94,63 @@ export default function AddRecipeForm() {
     mode: 'all',
     resolver: yupResolver(schema),
     defaultValues: {
-      file,
+      thumb,
       title,
       description,
       category,
       time,
-      ingredients: [{ ingredient: '', measure: '' }],
+      ingredients: [{ ingredient, measure }],
       instructions,
     },
   });
-  console.log(errors.file?.message);
-  console.log(errors.title?.message);
-  console.log(errors.description?.message);
-  console.log(errors.category?.message);
-  console.log(errors.time?.message);
-  console.log(errors.ingredients?.message);
-  console.log(errors.instructions?.message);
+  // console.log(errors.file?.message);
+  // console.log(errors.title?.message);
+  // console.log(errors.description?.message);
+  // console.log(errors.category?.message);
+  // console.log(errors.time?.message);
+  // console.log(errors.ingredients?.message);
+  // console.log(errors.instructions?.message);
+
+  const convertData = async value => {
+    const { data } = await getIngredientsByTitleService(value);
+
+    return data.ingredients.map(ingredient => {
+      return {
+        value: ingredient._id,
+        label: ingredient.ttl,
+      };
+    });
+  };
+
+  const promiseOptions = inputValue =>
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve(convertData(inputValue));
+      }, 1000);
+    });
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'ingredients',
   });
 
-  const onSubmitHandler = data => console.log(data);
+  const onSubmitHandler = async data => {
+    try {
+      // delete data.thumb;
+      console.log(data.files[0]);
+      const formData = new FormData();
+      if (data?.files && data.files?.length > 0) {
+        formData.append('thumb', data.files[0]);
+      }
 
+      console.log(data);
+      const response = await addRecipeService(data);
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <MediaContainer>
@@ -124,14 +158,14 @@ export default function AddRecipeForm() {
           <FileUploader
             type="file"
             accept="image/*"
-            {...register('file', {
+            {...register('thumb', {
               onChange: e => setFile(URL.createObjectURL(e.target.files[0])),
             })}
           />
-          {errors.file && <ErrorMessage>{errors.file?.message}</ErrorMessage>}
-          {file && (
+          {errors.thumb && <ErrorMessage>{errors.thumb?.message}</ErrorMessage>}
+          {thumb && (
             <ImageContainer>
-              <Image src={file} alt="Recipe" />
+              <Image src={thumb} alt="Recipe" />
             </ImageContainer>
           )}
           <CameraContainer>
@@ -389,12 +423,14 @@ export default function AddRecipeForm() {
             control={control}
             render={({ field: { onChange, value, name } }, ref) => (
               <AsyncSelect
-                // loadOptions
-
+                loadOptions={promiseOptions}
                 placeholder="Ingredient"
-                onChange={onChange}
+                onChange={selectedOption => {
+                  onChange(selectedOption.value);
+                  setIngredient(selectedOption.label);
+                }}
                 ref={ref}
-                value={value}
+                value={value.value}
                 name={name}
                 styles={{
                   control: () => ({
@@ -421,18 +457,25 @@ export default function AddRecipeForm() {
                     caretColor: '#BDBDBD',
                     padding: '0',
                     margin: '0',
-                    height: '20px',
+                    height: isTablet ? '27px' : '20px',
+                    fontSize: isTablet ? '18px' : '14px',
+                    lineHeight: '1.5',
+                    letterSpacing: '-2%',
+                    color: '#23262A',
+                  }),
+                  placeholder: baseStyles => ({
+                    ...baseStyles,
                     fontSize: isTablet ? '18px' : '14px',
                     lineHeight: '1.5',
                     letterSpacing: '-2%',
                     color: 'rgba(0, 0, 0, 0.5)',
                   }),
-                  placeholder: baseStyles => ({
-                    ...baseStyles,
-                    fontSize: '14px',
+                  option: () => ({
+                    fontSize: isTablet ? '14px' : '12px',
                     lineHeight: '1.5',
-                    letterSpacing: '-2%',
                     color: 'rgba(0, 0, 0, 0.5)',
+                    letterSpacing: '-2%',
+                    marginBottom: '6px',
                   }),
                   menu: baseStyles => ({
                     ...baseStyles,
@@ -441,11 +484,31 @@ export default function AddRecipeForm() {
                     borderRadius: '6px',
                     boxShadow:
                       '0px 6.51852px 7.82222px rgba(0, 0, 0, 0.0314074)',
+                  }),
+                  menuList: baseStyles => ({
+                    ...baseStyles,
+                    width: isTablet ? '398px' : '194px',
+                    height: isTablet ? '172px' : '154px',
                     padding: '8px 4px 8px 18px',
                     fontSize: isTablet ? '14px' : '12px',
-                    lineHeight: '1.5',
-                    letterSpacing: '-2%',
-                    color: 'rgba(0, 0, 0, 0.5)',
+                    overflowY: 'scroll',
+                    cursor: 'pointer',
+                    '::-webkit-scrollbar-thumb': {
+                      backgroundColor: '#E7E5E5',
+                      height: '93px',
+                      width: isTablet ? '6px' : '4px',
+                      borderRadius: '12px',
+                    },
+                    '::-webkit-scrollbar-track': {
+                      background: '#FFFFFF',
+
+                      borderRadius: '12px',
+                      width: isTablet ? '6px' : '4px',
+                    },
+                    '::-webkit-scrollbar': {
+                      borderRadius: '12px',
+                      width: isTablet ? '6px' : '4px',
+                    },
                   }),
                 }}
               />
@@ -459,7 +522,10 @@ export default function AddRecipeForm() {
                 name={name}
                 ref={ref}
                 // onBlur={console.log(onBlur)}
-                onChange={onChange}
+                onChange={selectedOption => {
+                  onChange(selectedOption);
+                  setMeasure(selectedOption);
+                }}
                 value={value}
               />
             )}

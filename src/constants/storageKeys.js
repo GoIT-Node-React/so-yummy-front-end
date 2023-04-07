@@ -4,6 +4,7 @@ export const storage = {
   DESCRIPTION: 'description',
   CATEGORY: 'category',
   TIME: 'time',
-  INGREDIENTS: 'ingredients',
+  INGREDIENT: 'ingredient',
+  MEASURE: 'measure',
   INSTRUCTIONS: 'instructions',
 };
