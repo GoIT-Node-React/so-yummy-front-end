@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const NotFoundRecipesWrapper = styled.div`
+export const SearchRecipesMessageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +13,7 @@ export const NotFoundRecipesWrapper = styled.div`
   }
 `;
 
-export const NotFoundRecipesImage = styled.img`
+export const SearchRecipesMessageImage = styled.picture`
   margin-bottom: 24px;
 
   width: 208px;
@@ -27,7 +27,7 @@ export const NotFoundRecipesImage = styled.img`
   }
 `;
 
-export const NotFoundRecipesText = styled.p`
+export const SearchRecipesMessageText = styled.p`
   font-family: ${({ theme }) => theme.fonts.Poppins};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   font-size: ${({ theme }) => theme.fontSizes[2]};

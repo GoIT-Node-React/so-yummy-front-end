@@ -39,13 +39,21 @@ export const SearchedRecipesListItem = styled.li`
   @media (min-width: 768px) and (max-width: 1439.98px) {
     width: calc((100% - 32px) / 2);
 
-    &:nth-child(odd) {
+    /* &:nth-child(odd) {
+      margin-right: 32px;
+    } */
+
+    &:nth-of-type(odd) {
       margin-right: 32px;
     }
 
     margin-bottom: 32px;
 
-    &:nth-last-child((-n + 2)) {
+    /* &:nth-last-child((-n + 2)) {
+      margin-bottom: 0;
+    } */
+
+    &:nth-of-type((-n + 2)) {
       margin-bottom: 0;
     }
   }
@@ -56,7 +64,11 @@ export const SearchedRecipesListItem = styled.li`
     margin-right: 12px;
     margin-bottom: 100px;
 
-    &:nth-child(4n) {
+    /* &:nth-child(4n) {
+      margin-right: 0;
+    } */
+
+    &:nth-of-type(4n) {
       margin-right: 0;
     }
   }

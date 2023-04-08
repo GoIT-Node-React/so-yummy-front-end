@@ -23,8 +23,6 @@ export default function SearchTypeSelector() {
   // const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
   // const isDesctop = useMediaQuery({ query: '(min-width: 1439px)' });
 
-  console.log('searchType', searchType);
-
   return (
     <SearchTypeSelectorWrapper>
       <SearchTypeSelectorText>Search by:</SearchTypeSelectorText>
@@ -94,11 +92,9 @@ export default function SearchTypeSelector() {
               alignItems: 'center',
               marginBottom: '6px',
               borderColor: 'transparent',
-              backgroundColor:
-                state.isFocused || state.isSelected
-                  ? 'rgba(245, 245, 245, 1)'
-                  : 'rgba(250, 250, 250, 1)',
-              // webkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+              backgroundColor: state.isFocused
+                ? 'rgba(245, 245, 245, 1)'
+                : 'rgba(250, 250, 250, 1)',
               fontFamily: 'Poppins',
               fontStyle: 'normal',
               fontWeight: '400',

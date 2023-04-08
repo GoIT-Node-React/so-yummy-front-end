@@ -62,11 +62,10 @@ export const Form = styled.form`
 
 export const SearchFormField = styled.input`
   display: inline-block;
-  background-color: transparent;
+  background: transparent;
 
   padding-left: 4px;
   padding-right: 4px;
-  margin-right: 33px;
 
   width: 117px;
   height: 21px;
@@ -76,12 +75,19 @@ export const SearchFormField = styled.input`
   outline: none;
   cursor: pointer;
 
+  &:focus {
+    background: transparent;
+    background-color: transparent;
+  }
+
   &::placeholder {
     font-family: ${({ theme }) => theme.fonts.Poppins};
     font-weight: ${({ theme }) => theme.fontWeights.regular};
     font-size: ${({ theme }) => theme.fontSizes[1]};
     color: ${({ theme }) => theme.colors.gray[500]};
     line-height: 1.5;
+    background: transparent;
+    background-color: transparent;
 
     @media (min-width: 768px) and (max-width: 1439.98px) {
       font-size: ${({ theme }) => theme.fontSizes[2]};
@@ -98,12 +104,19 @@ export const SearchFormField = styled.input`
     font-size: ${({ theme }) => theme.fontSizes[1]};
     color: ${({ theme }) => theme.colors.gray[500]};
     line-height: 1.5;
+    background-color: transparent;
 
     @media (min-width: 768px) and (max-width: 1439.98px) {
+      width: 135px;
+      height: 24px;
+
       font-size: ${({ theme }) => theme.fontSizes[2]};
     }
 
     @media (min-width: 1440px) {
+      width: 240px;
+      height: 28px;
+
       font-size: ${({ theme }) => theme.fontSizes[3]};
     }
   }

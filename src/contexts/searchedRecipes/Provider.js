@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 
+import { Status } from 'constants';
+
 export const RecipesContext = createContext();
 
 export const useRecipes = () => useContext(RecipesContext);
@@ -7,7 +9,8 @@ export const useRecipes = () => useContext(RecipesContext);
 export const SearchedRecipesProvider = ({ children }) => {
   const [searchedResipes, setsearchedResipes] = useState([]);
   const [searchValue, setSearchValue] = useState('');
-  const [searchType, setSearchType] = useState('');
+  const [searchType, setSearchType] = useState('title');
+  const [status, setStatus] = useState(Status.IDLE);
 
   const updateRecipes = value => {
     setsearchedResipes(value);
@@ -18,8 +21,13 @@ export const SearchedRecipesProvider = ({ children }) => {
   };
 
   const updatesearchType = selectedType => {
+    console.log('selectedType', selectedType);
     const { value } = selectedType;
     setSearchType(value);
+  };
+
+  const updateStatus = value => {
+    setStatus(value);
   };
 
   return (
@@ -28,9 +36,11 @@ export const SearchedRecipesProvider = ({ children }) => {
         searchedResipes,
         searchValue,
         searchType,
+        status,
         updateRecipes,
         updatesearchValue,
         updatesearchType,
+        updateStatus,
       }}
     >
       {children}

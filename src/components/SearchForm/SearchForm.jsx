@@ -1,5 +1,11 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { privateApi } from 'services/api';
+import { RecipesContext } from '../../contexts/searchedRecipes/Provider';
+import { Status } from 'constants';
 import {
   FormWrapper,
   Form,
@@ -7,20 +13,20 @@ import {
   SearchFormButton,
 } from './SearchForm.styled';
 
-import { RecipesContext } from '../../contexts/searchedRecipes/Provider';
-import { useContext } from 'react';
-
 export default function SearchForm() {
   const {
     searchedResipes,
     searchValue,
     searchType,
+    status,
     updateRecipes,
     updatesearchValue,
+    updatesearchType,
+    updateStatus,
   } = useContext(RecipesContext);
 
   const FetchREcipes = async () => {
-    console.log(searchValue);
+    updateStatus(Status.PENDING);
 
     try {
       const {
@@ -30,10 +36,15 @@ export default function SearchForm() {
       );
 
       updateRecipes(data.recipes);
+      updateStatus(Status.RESOLVED);
 
       console.log('data', data);
       console.log('searchedResipes', searchedResipes);
+      console.log('searchType', searchType);
+      console.log('searchValue', searchValue);
+      console.log('status', status);
     } catch (error) {
+      updateStatus(Status.REJECTED);
       console.log(error);
     }
   };
@@ -46,22 +57,67 @@ export default function SearchForm() {
   const handleSubmit = event => {
     event.preventDefault();
 
+    if (searchValue.trim() === '') {
+      toast.warn("Введіть ім'я параметра у пошуку!");
+      return;
+    }
+
     FetchREcipes();
-    updatesearchValue('');
+    // updatesearchValue('');
   };
 
+  useEffect(() => {
+    if (
+      searchedResipes.length === 0 ||
+      !searchValue ||
+      searchValue.trim() === ''
+    ) {
+      return;
+    }
+
+    console.log('Рендер useEffect');
+    FetchREcipes();
+  }, [searchType, searchValue]);
+
+  // TransferSearchValue =============================
+  // const transferSearchValue = event => {
+  //   event.preventDefault();
+
+  //   const { value } = event.target;
+  //   updatesearchValue(value);
+  // };
+
+  // return (
+  //   <FormWrapper>
+  //     <Form onSubmit={transferSearchValue}>
+  //       <SearchFormField
+  //         type="text"
+  //         name="name"
+  //         value={searchValue}
+  //         onChange={handleChange}
+  //         placeholder="Search..."
+  //       ></SearchFormField>
+  //       <SearchFormButton>Search</SearchFormButton>
+  //     </Form>
+  //   </FormWrapper>
+  // );
+  // TransferSearchValue =============================
+
   return (
-    <FormWrapper>
-      <Form onSubmit={handleSubmit}>
-        <SearchFormField
-          type="text"
-          name="name"
-          value={searchValue}
-          onChange={handleChange}
-          placeholder="Search..."
-        ></SearchFormField>
-        <SearchFormButton>Search</SearchFormButton>
-      </Form>
-    </FormWrapper>
+    <>
+      <FormWrapper>
+        <Form onSubmit={handleSubmit}>
+          <SearchFormField
+            type="text"
+            name="name"
+            value={searchValue}
+            onChange={handleChange}
+            placeholder="Search..."
+          ></SearchFormField>
+          <SearchFormButton>Search</SearchFormButton>
+        </Form>
+      </FormWrapper>
+      <ToastContainer autoClose={3000} />
+    </>
   );
 }
