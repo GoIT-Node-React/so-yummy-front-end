@@ -26,7 +26,7 @@ export default function RecipeInfo({ info }) {
           time={time}
           favorites={favorites}
         />
-        <RecipeIngredients ingredients={ingredients} />
+        <RecipeIngredients recipeId={recipeId} ingredients={ingredients} />
         <RecipePreparation
           title={title}
           instructions={instructions}

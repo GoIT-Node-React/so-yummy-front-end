@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from 'redux/user/user.selectors';
 import { useRecipeInfoContext } from 'pages/RecipeInfoPage/RecipeInfo.context';
 import Loader from 'components/common/Loader/Loader';
+import { processingError } from 'helpers';
 
 export default function RecipeHero({
   _id: recipeId,
@@ -41,6 +42,7 @@ export default function RecipeHero({
         await addRecipeToFavorite(recipeId);
       }
     } catch (error) {
+      processingError(error);
     } finally {
       setIsLoading(false);
     }
