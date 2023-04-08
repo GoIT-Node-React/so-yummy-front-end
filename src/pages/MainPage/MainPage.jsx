@@ -1,3 +1,8 @@
 export default function MainPage() {
-  return <h1>Main page</h1>;
+  return (
+    <>
+            <h1>Welcome to the app!</h1>
+      
+    </>
+  )
 }
