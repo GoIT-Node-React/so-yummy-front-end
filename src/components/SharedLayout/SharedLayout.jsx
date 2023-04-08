@@ -4,10 +4,15 @@ import { Outlet } from 'react-router-dom';
 export default function SharedLayout() {
   return (
     <>
-      {/* <h1>Header</h1> */}
-      <Suspense fallback={null}>
-        <Outlet />
-      </Suspense>
+      <header>
+        <h1>Header</h1>
+      </header>
+      <main>
+        <Suspense fallback={<h2>Loading...</h2>}>
+          <Outlet />
+        </Suspense>
+      </main>
+      <footer></footer>
     </>
   );
 }
