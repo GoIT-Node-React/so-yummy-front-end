@@ -9,7 +9,7 @@ import { routes } from 'constants/routes';
 
 export default function PrivatePage({
   component: Component,
-  redirect = routes.SIGNIN_PAGE,
+  redirect = routes.WELCOME_PAGE,
 }) {
   const location = useLocation();
   const token = useSelector(selectAccessToken);
