@@ -1,4 +1,5 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useCallback } from 'react';
+import { debounce } from 'debounce';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,7 +26,7 @@ export default function SearchForm() {
     updateStatus,
   } = useContext(RecipesContext);
 
-  const FetchREcipes = async () => {
+  const FetchREcipes = useCallback(async () => {
     updateStatus(Status.PENDING);
 
     try {
@@ -47,12 +48,19 @@ export default function SearchForm() {
       updateStatus(Status.REJECTED);
       console.log(error);
     }
-  };
+  }, [updateRecipes, searchType, searchValue, updateStatus]);
 
   const handleChange = event => {
     const { value } = event.target;
     updatesearchValue(value);
+    console.log('Викликалась функція handleChange');
   };
+
+  // const handleChange = debounce(event => {
+  //   const { value } = event.target;
+  //   updatesearchValue(value);
+  //   console.log('Викликалась функція handleChange');
+  // }, 300);
 
   const handleSubmit = event => {
     event.preventDefault();

@@ -39,19 +39,11 @@ export const SearchedRecipesListItem = styled.li`
   @media (min-width: 768px) and (max-width: 1439.98px) {
     width: calc((100% - 32px) / 2);
 
-    /* &:nth-child(odd) {
-      margin-right: 32px;
-    } */
-
     &:nth-of-type(odd) {
       margin-right: 32px;
     }
 
     margin-bottom: 32px;
-
-    /* &:nth-last-child((-n + 2)) {
-      margin-bottom: 0;
-    } */
 
     &:nth-of-type((-n + 2)) {
       margin-bottom: 0;
@@ -64,71 +56,67 @@ export const SearchedRecipesListItem = styled.li`
     margin-right: 12px;
     margin-bottom: 100px;
 
-    /* &:nth-child(4n) {
-      margin-right: 0;
-    } */
-
     &:nth-of-type(4n) {
       margin-right: 0;
     }
   }
 `;
 
-export const SearchedRecipesItemImage = styled.img`
-  border-radius: 8px;
+// export const SearchedRecipesItemImage = styled.img`
+//   border-radius: 8px;
 
-  @media (max-width: 767.98px) {
-    width: 343px;
-    height: 323px;
-  }
+//   @media (max-width: 767.98px) {
+//     width: 343px;
+//     height: 323px;
+//   }
 
-  @media (min-width: 768px) and (max-width: 1439.98px) {
-    width: 100%;
-    height: 323px;
-  }
+//   @media (min-width: 768px) and (max-width: 1439.98px) {
+//     width: 100%;
+//     height: 323px;
+//   }
 
-  @media (min-width: 1440px) {
-    width: 100%;
-    height: 323px;
-  }
-`;
+//   @media (min-width: 1440px) {
+//     width: 100%;
+//     height: 323px;
+//   }
+// `;
 
-export const SearchedRecipesItemTitle = styled.p`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+// export const SearchedRecipesItemTitle = styled.p`
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
 
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
+//   position: absolute;
+//   left: 18px;
+//   bottom: 18px;
 
-  padding: 16px;
+//   padding: 16px;
 
-  background-color: ${({ theme }) => theme.colors.white[100]};
-  border-radius: 8px;
+//   background-color: ${({ theme }) => theme.colors.white[100]};
+//   border-radius: 8px;
 
-  font-family: ${({ theme }) => theme.fonts.Poppins};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  font-size: ${({ theme }) => theme.fontSizes[3]};
-  line-height: 0.8px;
-  letter-spacing: -0.24px;
-  color: ${({ theme }) => theme.colors.gray[500]};
+//   font-family: ${({ theme }) => theme.fonts.Poppins};
+//   font-weight: ${({ theme }) => theme.fontWeights.medium};
+//   font-size: ${({ theme }) => theme.fontSizes[3]};
+//   line-height: 0.8px;
+//   letter-spacing: -0.24px;
+//   color: ${({ theme }) => theme.colors.gray[500]};
 
-  @media (max-width: 767.98px) {
-    width: 307px;
-    height: 52px;
-  }
+//   @media (max-width: 767.98px) {
+//     width: 307px;
+//     height: 52px;
+//   }
 
-  @media (min-width: 768px) and (max-width: 1439.98px) {
-    width: 300px;
-    height: 52px;
-  }
+//   @media (min-width: 768px) and (max-width: 1439.98px) {
+//     width: 300px;
+//     height: 52px;
+//   }
 
-  @media (min-width: 1440px) {
-    left: 16px;
-    bottom: 16px;
+//   @media (min-width: 1440px) {
+//     left: 16px;
+//     bottom: 16px;
 
-    width: 268px;
-    height: 60px;
-  }
-`;
+//     width: 268px;
+//     height: 60px;
+//   }
+// `;

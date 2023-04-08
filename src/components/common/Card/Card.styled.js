@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 
 export const CardContainer = styled.div`
-  background-color: blue;
   position: relative;
   width: 343px;
   height: 323px;
