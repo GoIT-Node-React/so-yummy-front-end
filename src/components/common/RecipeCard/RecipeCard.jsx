@@ -1,6 +1,9 @@
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+
 import { FigureButton } from '../FigureButton.styled';
+import { theme } from 'theme';
 import {
   BinWrapper,
   Container,
@@ -23,8 +26,12 @@ export default function RecipeCard({
   onDeleteRecipe,
   to,
 }) {
-  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
-  const isTablet = useMediaQuery({ query: '(max-width: 1439px)' });
+  const isMobile = useMediaQuery({
+    query: `(max-width: calc(${theme.breakpoints[1]} - 1px))`,
+  });
+  const isTablet = useMediaQuery({
+    query: `(max-width: calc(${theme.breakpoints[2]} - 1px))`,
+  });
   const navigate = useNavigate();
 
   return (
@@ -142,3 +149,12 @@ export default function RecipeCard({
     </Container>
   );
 }
+RecipeCard.propTypes = {
+  src: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+  onDeleteRecipe: PropTypes.func.isRequired,
+  myRecipes: PropTypes.bool,
+};

@@ -1,16 +1,29 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-
+import { toast } from 'react-toastify';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import debounce from 'lodash.debounce';
+
+import { getIngredientsByTitleService } from './../../services/ingredients.service';
+import { addRecipeService } from 'services/addRecipe.service';
 import useLocalStorage from 'hooks/localStorageHook';
 import { storage } from 'constants/storageKeys';
+import { theme } from 'theme';
+import { routes } from '../../constants/routes';
+import { schema } from './schema';
+import { categories, cookingTime } from './data';
+import { MesureSelect } from './MesureSelect';
+import { FigureButton } from 'components/common/FigureButton.styled';
+import Loader from 'components/common/Loader';
 import {
   Border,
   CameraContainer,
   Close,
+  CloseButton,
   Counter,
   CounterButton,
   CounterContainer,
@@ -19,6 +32,8 @@ import {
   FlexContainer,
   Image,
   ImageContainer,
+  IngredientsError,
+  LoaderContainer,
   MediaContainer,
   Minus,
   Plus,
@@ -33,58 +48,25 @@ import {
   UtilContainer,
 } from './AddRecipeForm.styled';
 
-import { categories, cookingTime } from './data';
-import { MesureSelect } from './MesureSelect';
-
-import { FigureButton } from 'components/common/FigureButton.styled';
-
-import { getIngredientsByTitleService } from './../../services/ingredients.service';
-import { addRecipeService } from 'services/addRecipe.service';
-const schema = yup
-  .object({
-    thumb: yup
-      .mixed()
-      .test('required', 'photo is required', value => value.length > 0)
-      .test('fileSize', 'File Size is too large', value => {
-        return value.length && value[0].size <= 5242880;
-      })
-      .test('fileType', 'Unsupported File Format', value => {
-        return (
-          value.length &&
-          ['image/jpeg', 'image/png', 'image/jpg'].includes(value[0].type)
-        );
-      }),
-    title: yup.string().min(3).max(30).required(),
-    description: yup.string().min(8).max(30).required(),
-    category: yup.string().required(),
-    time: yup.string().required(),
-    ingredients: yup.array().of(
-      yup.object().shape({
-        ingredient: yup.string().required(),
-        measure: yup.string().required(),
-      })
-    ),
-    instructions: yup.string().min(10).required(),
-    // title: yup.number().positive().integer().required(),
-  })
-  .required();
-
 export default function AddRecipeForm() {
-  const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
-  const [thumb, setFile] = useLocalStorage(storage.FILE, '');
+  const isTablet = useMediaQuery({
+    query: `(min-width: calc(${theme.breakpoints[1]} - 1px))`,
+  });
+
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [thumb, setFile] = useState('');
   const [title, setTitle] = useLocalStorage(storage.TITLE, '');
   const [description, setDescription] = useLocalStorage(
     storage.DESCRIPTION,
     ''
   );
-  const [category, setCategory] = useLocalStorage(storage.CATEGORY, '');
-  const [time, setTime] = useLocalStorage(storage.TIME, '');
   const [instructions, setInstructions] = useLocalStorage(
     storage.INSTRUCTIONS,
     ''
   );
-  const [ingredient, setIngredient] = useLocalStorage(storage.INGREDIENT, '');
-  const [measure, setMeasure] = useLocalStorage(storage.MEASURE, '');
+
   const {
     register,
     handleSubmit,
@@ -97,19 +79,16 @@ export default function AddRecipeForm() {
       thumb,
       title,
       description,
-      category,
-      time,
-      ingredients: [{ ingredient, measure }],
+      category: '',
+      time: '',
+      ingredients: [{ id: '', measure: '' }],
       instructions,
     },
   });
-  // console.log(errors.file?.message);
-  // console.log(errors.title?.message);
-  // console.log(errors.description?.message);
-  // console.log(errors.category?.message);
-  // console.log(errors.time?.message);
-  // console.log(errors.ingredients?.message);
-  // console.log(errors.instructions?.message);
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'ingredients',
+  });
 
   const convertData = async value => {
     const { data } = await getIngredientsByTitleService(value);
@@ -122,48 +101,52 @@ export default function AddRecipeForm() {
     });
   };
 
-  const promiseOptions = inputValue =>
-    new Promise(resolve => {
-      setTimeout(() => {
-        resolve(convertData(inputValue));
-      }, 1000);
-    });
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'ingredients',
-  });
+  const promiseOptions = (inputValue, callback) => {
+    convertData(inputValue).then(results => callback(results));
+    return;
+  };
 
   const onSubmitHandler = async data => {
     try {
-      // delete data.thumb;
-      console.log(data.files[0]);
+      setIsLoading(true);
       const formData = new FormData();
-      if (data?.files && data.files?.length > 0) {
-        formData.append('thumb', data.files[0]);
-      }
+      formData.append('thumb', data.thumb[0]);
+      formData.append('title', data.title);
+      formData.append('description', data.description);
+      formData.append('category', data.category);
+      formData.append('time', data.time);
+      formData.append('ingredients', JSON.stringify(data.ingredients));
+      formData.append('instructions', data.instructions);
 
-      console.log(data);
-      const response = await addRecipeService(data);
+      await addRecipeService(formData);
 
-      console.log(response);
+      toast.success('Recipe added to your collection');
+
+      localStorage.removeItem(storage.TITLE);
+      localStorage.removeItem(storage.DESCRIPTION);
+      localStorage.removeItem(storage.INSTRUCTIONS);
+
+      navigate(routes.MY_RECIPES_PAGE);
     } catch (error) {
-      console.log(error);
+      toast.error('Something went wrong... Please, try again in few minutes');
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <MediaContainer>
         <StyledLabel>
           <FileUploader
             type="file"
-            accept="image/*"
+            accept="image/*,.png,.jpg,.web"
             {...register('thumb', {
               onChange: e => setFile(URL.createObjectURL(e.target.files[0])),
             })}
           />
           {errors.thumb && <ErrorMessage>{errors.thumb?.message}</ErrorMessage>}
-          {thumb && (
+          {thumb && !errors.thumb && (
             <ImageContainer>
               <Image src={thumb} alt="Recipe" />
             </ImageContainer>
@@ -199,6 +182,7 @@ export default function AddRecipeForm() {
               <ErrorMessage>{errors.description?.message}</ErrorMessage>
             )}
           </TextLabel>
+
           <TextLabel>
             Category
             <SelectContainer>
@@ -215,7 +199,6 @@ export default function AddRecipeForm() {
                     isSearchable={false}
                     onChange={selectedOption => {
                       onChange(selectedOption.value);
-                      setCategory(selectedOption.value);
                     }}
                     styles={{
                       dropdownIndicator: () => ({
@@ -297,6 +280,7 @@ export default function AddRecipeForm() {
               <ErrorMessage>{errors.category?.message}</ErrorMessage>
             )}
           </TextLabel>
+
           <TextLabel>
             Cooking time
             <SelectContainer>
@@ -311,7 +295,6 @@ export default function AddRecipeForm() {
                     name={name}
                     onChange={selectedOption => {
                       onChange(selectedOption.value);
-                      setTime(selectedOption.value);
                     }}
                     options={cookingTime}
                     isSearchable={false}
@@ -395,43 +378,46 @@ export default function AddRecipeForm() {
           </TextLabel>
         </div>
       </MediaContainer>
+
       <TitleContainer>
         <Subtitle>Ingredients</Subtitle>
         <CounterContainer>
           <CounterButton
             type="button"
             onClick={() => remove(-1)}
-            disabled={fields <= 1}
+            disabled={fields.length <= 1}
           >
             <Minus />
           </CounterButton>
-
           <Counter>{fields.length}</Counter>
           <CounterButton
             type="button"
-            onClick={() => append({ ingredient: '', measure: '' })}
-            disabled={fields >= 50}
+            onClick={() => append({ id: '', measure: '' })}
+            disabled={fields.length >= 30}
           >
             <Plus />
           </CounterButton>
         </CounterContainer>
       </TitleContainer>
+
       {fields.map((field, index) => (
         <FlexContainer key={field.id}>
           <Controller
-            name={`ingredients.${index}.ingredient`}
+            name={`ingredients.${index}.id`}
             control={control}
             render={({ field: { onChange, value, name } }, ref) => (
               <AsyncSelect
-                loadOptions={promiseOptions}
+                loadOptions={debounce(promiseOptions, 500)}
                 placeholder="Ingredient"
                 onChange={selectedOption => {
                   onChange(selectedOption.value);
-                  setIngredient(selectedOption.label);
                 }}
                 ref={ref}
-                value={value.value}
+                value={value?.value}
                 name={name}
+                noOptionsMessage={({ inputValue }) =>
+                  !inputValue ? 'No results found' : 'Ingredients not found'
+                }
                 styles={{
                   control: () => ({
                     width: isTablet ? '398px' : '194px',
@@ -439,6 +425,7 @@ export default function AddRecipeForm() {
                     borderRadius: '6px',
                     backgroundColor: '#F5F5F5',
                     padding: isTablet ? '16px 18px' : '16px',
+                    cursor: 'pointer',
                   }),
                   indicatorSeparator: () => ({
                     display: 'none',
@@ -521,22 +508,32 @@ export default function AddRecipeForm() {
               <MesureSelect
                 name={name}
                 ref={ref}
-                // onBlur={console.log(onBlur)}
                 onChange={selectedOption => {
                   onChange(selectedOption);
-                  setMeasure(selectedOption);
                 }}
                 value={value}
               />
             )}
           />
-
-          <Close onClick={() => remove(index)} />
+          <CloseButton
+            disabled={fields.length <= 1}
+            onClick={() => remove(index)}
+          >
+            <Close />
+          </CloseButton>
         </FlexContainer>
       ))}
+      {errors.ingredients && (
+        <IngredientsError>
+          {fields.length === 1
+            ? 'add at least one ingredient and measure to your recipe'
+            : 'choose ingredients and measure or remove extra fields'}
+        </IngredientsError>
+      )}
       <UtilContainer>
         <Subtitle>Recipe preparation</Subtitle>
       </UtilContainer>
+
       <div style={{ position: 'relative' }}>
         <StyledTextarea
           placeholder="Enter recipe"
@@ -548,15 +545,22 @@ export default function AddRecipeForm() {
           <ErrorMessage>{errors.instructions?.message}</ErrorMessage>
         )}
       </div>
-
-      {isTablet ? (
-        <FigureButton variant="dark" w="161px" h="52px" p="52px 42px">
-          Add
-        </FigureButton>
+      {isLoading ? (
+        <LoaderContainer>
+          <Loader />
+        </LoaderContainer>
       ) : (
-        <FigureButton variant="dark" w="129px" h="46px" p="48px 42px">
-          Add
-        </FigureButton>
+        <>
+          {isTablet ? (
+            <FigureButton variant="dark" w="161px" h="52px" p="52px 42px">
+              Add
+            </FigureButton>
+          ) : (
+            <FigureButton variant="dark" w="129px" h="46px" p="48px 42px">
+              Add
+            </FigureButton>
+          )}
+        </>
       )}
     </form>
   );

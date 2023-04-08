@@ -40,3 +40,10 @@ export const cookingTime = [
   { value: '115 min', label: '115 min' },
   { value: '120 min', label: '120 min' },
 ];
+
+export const options = [
+  { value: `tbs`, label: 'tbs' },
+  { value: `tsp`, label: 'tsp' },
+  { value: `kg`, label: 'kg' },
+  { value: `g`, label: 'g' },
+];
