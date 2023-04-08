@@ -12,8 +12,7 @@ import {
   registerUserService,
 } from 'services/auth.service';
 import { selectAccessToken } from './auth.selectors';
-//import { selectRefreshToken, selectTokenSid } from './auth.selectors';
-//import { getUserInfoThunk } from 'redux/user/user.thunk';
+import { getShoppingListThunk } from 'redux/shoppingList/shoppingList.thunk';
 
 export const registrationThunk = createAsyncThunk(
   'auth/registration',
@@ -31,12 +30,14 @@ export const registrationThunk = createAsyncThunk(
 
 export const loginThunk = createAsyncThunk(
   'auth/login',
-  async (credentials, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await loginUserService(credentials);
 
       // add token to header in axios request
       token.set(data.accessToken);
+
+      dispatch(getShoppingListThunk());
 
       successNotification(`"${data.user.email}" welcome.`);
       return data;
@@ -63,13 +64,15 @@ export const logoutThunk = createAsyncThunk(
 
 export const currentThunk = createAsyncThunk(
   'auth/current',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue, getState, dispatch }) => {
     const accessToken = selectAccessToken(getState());
 
     try {
       const { data } = await currentService(accessToken);
       // add token to header in axios request
       token.set(accessToken);
+
+      dispatch(getShoppingListThunk());
 
       return data;
     } catch (error) {

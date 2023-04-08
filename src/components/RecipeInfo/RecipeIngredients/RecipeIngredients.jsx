@@ -7,7 +7,7 @@ import {
 } from './RecipeIngredients.styled';
 import RecipeIngredietItem from './RecipeIngredietItem';
 
-export default function RecipeIngredients({ ingredients }) {
+export default function RecipeIngredients({ recipeId, ingredients }) {
   return (
     <RecipeIngredientsTable>
       <RecipeIngredientsHeader>
@@ -17,7 +17,11 @@ export default function RecipeIngredients({ ingredients }) {
       </RecipeIngredientsHeader>
       <RecipeIngredientsList>
         {ingredients.map(ingredient => (
-          <RecipeIngredietItem key={ingredient._id} ingredient={ingredient} />
+          <RecipeIngredietItem
+            key={ingredient._id}
+            recipeId={recipeId}
+            ingredient={ingredient}
+          />
         ))}
       </RecipeIngredientsList>
     </RecipeIngredientsTable>

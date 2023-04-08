@@ -1,7 +1,7 @@
 import { lazy, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { currentThunk, logoutThunk } from 'redux/auth/auth.thunk';
+import { currentThunk } from 'redux/auth/auth.thunk';
 import { selectAccessToken } from 'redux/auth/auth.selectors';
 import AppToastContainer from './AppToastContainer/AppToastContainer';
 import SharedLayout from './SharedLayout/SharedLayout';
@@ -27,10 +27,6 @@ export const App = () => {
   const accessToken = useSelector(selectAccessToken);
   const isFirst = useRef(true);
 
-  const logoutHandler = () => {
-    dispatch(logoutThunk());
-  };
-
   useEffect(() => {
     if (accessToken && isFirst.current) {
       dispatch(currentThunk());
@@ -40,10 +36,6 @@ export const App = () => {
 
   return (
     <>
-      <button style={{ position: 'absolute' }} onClick={logoutHandler}>
-        Logout
-      </button>
-
       <Routes>
         <Route
           path={routes.WELCOME_PAGE}
