@@ -55,7 +55,7 @@ export default function RecipeCard({
 
         <Text myRecipes={myRecipes}>{text}</Text>
         <FlexContainer>
-          <Time>{time}</Time>
+          <Time>{time} min</Time>
           {isMobile ? (
             <>
               {myRecipes ? (
