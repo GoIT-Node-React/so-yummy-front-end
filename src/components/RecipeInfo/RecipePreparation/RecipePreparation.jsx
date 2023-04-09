@@ -17,11 +17,13 @@ export default function RecipePreparation({ title, instructions, thumb }) {
       <RecipePreparationWrapper>
         <RecipePreparationHeader>Recipe Preparation</RecipePreparationHeader>
         <RecipePreparationList>
-          {instructionsList.map((instruction, index) => (
-            <RecipePreparationItem key={index}>
-              {instruction}
-            </RecipePreparationItem>
-          ))}
+          {instructionsList
+            .filter(i => i.trim().length)
+            .map((instruction, index) => (
+              <RecipePreparationItem key={index}>
+                {instruction}
+              </RecipePreparationItem>
+            ))}
         </RecipePreparationList>
       </RecipePreparationWrapper>
       <RecipeThumb src={thumb} alt={`Recip's "${title}" image`} />

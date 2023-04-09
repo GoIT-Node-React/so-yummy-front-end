@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+
 import { CardContainer, TitleContainer, Title, Image } from './Card.styled';
 
 export default function Card({ src, title, to }) {
@@ -13,3 +15,9 @@ export default function Card({ src, title, to }) {
     </CardContainer>
   );
 }
+
+Card.propTypes = {
+  src: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+};
