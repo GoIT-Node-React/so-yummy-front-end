@@ -1,3 +1,4 @@
+
 export default function MainPage() {
   return (
     <>
@@ -6,3 +7,4 @@ export default function MainPage() {
     </>
   )
 }
+
