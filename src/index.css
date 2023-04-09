@@ -9,6 +9,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
+
+  background-color: #fafafa;
 }
 #root {
   width: 100%;
@@ -21,8 +23,11 @@ code {
 }
 button {
   cursor: pointer;
+
+  background: none;
   border: none;
 }
+
 ul,
 li,
 p,
@@ -40,4 +45,11 @@ a {
 
 ul {
   list-style: none;
+}
+
+img {
+  display: block;
+
+  width: 100%;
+  height: auto;
 }

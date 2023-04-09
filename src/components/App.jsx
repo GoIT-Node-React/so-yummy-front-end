@@ -2,7 +2,7 @@ import { lazy, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentThunk } from 'redux/auth/auth.thunk';
-import { selectAccessToken } from 'redux/auth/auth.selectors';
+import { selectAccessToken, selectCurrent } from 'redux/auth/auth.selectors';
 import AppToastContainer from './AppToastContainer/AppToastContainer';
 import SharedLayout from './SharedLayout/SharedLayout';
 import { routes } from 'constants/routes';
@@ -24,6 +24,7 @@ const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
+  const { isLoading } = useSelector(selectCurrent);
   const accessToken = useSelector(selectAccessToken);
   const isFirst = useRef(true);
 
@@ -33,6 +34,8 @@ export const App = () => {
       isFirst.current = false;
     }
   }, [dispatch, accessToken]);
+
+  if (isLoading) return <>Loading...</>;
 
   return (
     <>
@@ -72,7 +75,7 @@ export const App = () => {
             element={<PrivatePage component={<AddRecipePage />} />}
           />
           <Route
-            path={`${routes.RECIPE_PAGE}`}
+            path={`${routes.RECIPE_PAGE}/:recipeId`}
             element={<PrivatePage component={<RecipeInfoPage />} />}
           />
           <Route
