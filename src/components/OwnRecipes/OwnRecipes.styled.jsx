@@ -43,17 +43,3 @@ export const OwnRecipesTitle = styled.h2`
     font-size: 44px;
   }
 `;
-export const OwnRecipesList = styled.ul`
-  @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-  }
-
-  @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
-  }
-`;
-export const OwnRecipesItem = styled.li`
-  @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-  }
-
-  @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
-  }
-`;

@@ -13,3 +13,9 @@ export const getOwnRecipesService = async (page = 1, limit = 4) => {
 
   return data;
 };
+
+export const removeOwnRecipesService = async recipeId => {
+  const { data } = await privateApi.delete(`/own-recipes/${recipeId}`);
+
+  return data;
+};

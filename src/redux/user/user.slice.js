@@ -27,7 +27,7 @@ const userSlice = createSlice({
       .addMatcher(
         action => action.type.endsWith(`/${Status.REJECTED}`),
         (_state, { payload }) => {
-          if (payload.status === 403) {
+          if (payload?.status === 403) {
             return userInitialState;
           }
         }

@@ -70,6 +70,7 @@ export const theme = {
       600: '#E0E0E0', //text input
       700: '#707070', //border
       800: '#7E7E7E',
+      900: '#656565', //pagination
     },
     red: {
       100: '#e74a3b', // validation error
