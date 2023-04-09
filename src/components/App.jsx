@@ -24,7 +24,6 @@ export const App = () => {
           <Route path={routes.SIGNIN_PAGE} element={<SigninPage />} />
 
           <Route path={routes.MAIN_PAGE} element={<SharedLayout />}>
-            <Route index element={<WelcomePage />} />
             <Route path={routes.CATEGORIES_PAGE} element={<CategoriesPage />} />
             <Route path={routes.FAVORITE_PAGE} element={<FavoritePage />} />
             <Route path={routes.MY_RECIPES_PAGE} element={<OwnRecipesPage />} />

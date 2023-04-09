@@ -116,26 +116,25 @@ export const Title = styled.h1`
 `;
 
 export const Subtitle = styled.p`
-  margin: 0 auto;
-  display: flex;
+  margin: 0;
   margin-bottom: 44px;
   text-align: center;
-  max-width: 305px;
+  width: 305px;
 
   font-weight: ${({ theme }) => theme.fontWeights.regular};
-  font-size: ${({ theme }) => theme.fontSizes[2]};
+  font-size:${({ theme }) => theme.fontSizes[2]} ;
   line-height: ${({ theme }) => theme.fontSizes[4]};
 
   letter-spacing: -0.02em;
   color: ${({ theme }) => theme.colors.white[200]};
   @media screen and (min-width: ${theme.breakpoints[1]}) {
     margin-bottom: 40px;
-    max-width: 505px;
+    width: 505px;
     font-size: ${({ theme }) => theme.fontSizes[4]};
     line-height: ${({ theme }) => theme.fontSizes[5]};
   }
   @media screen and (min-width: ${theme.breakpoints[2]}) {
-    max-width: 540px;
+    width: 540px;
   } ;
 `;
 
