@@ -1,8 +1,8 @@
 export const routes = {
+  MAIN_PAGE: '/',
   WELCOME_PAGE: '/welcome',
   REGISTER_PAGE: '/register',
   SIGNIN_PAGE: '/signin',
-  MAIN_PAGE: '/',
   CATEGORIES_PAGE: '/categories/:categoryName',
   ADD_RECIPE_PAGE: '/add',
   FAVORITE_PAGE: '/favorite',

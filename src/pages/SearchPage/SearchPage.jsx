@@ -18,7 +18,7 @@ export default function SearchPage() {
       <MainPageTitle />
       <SearchBar />
       {searchedResipes.length === 0 ? (
-        <SearchRecipesMessage text={searchRecipesMessage.notFound} />
+        <SearchRecipesMessage message={searchRecipesMessage.notFound} />
       ) : (
         <SearchedRecipesList />
       )}

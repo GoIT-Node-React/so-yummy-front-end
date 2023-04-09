@@ -1,13 +1,16 @@
 import styled from '@emotion/styled';
+
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
 export const Container = styled.div`
   position: relative;
-  background-color: ${({ theme }) => theme.colors.white[100]};
   display: flex;
   width: 343px;
   height: 152px;
   padding: ${props => (props.myRecipes ? '14px 9px' : '14px')};
+
+  background-color: ${({ theme }) => theme.colors.white[100]};
+
   border-radius: ${({ theme }) => theme.radii.lg};
 
   @media screen and (min-width: calc(${({ theme }) =>
@@ -28,9 +31,10 @@ export const Container = styled.div`
 export const Image = styled.img`
   width: 124px;
   height: 124px;
+  margin-right: 14px;
+
   border-radius: ${({ theme }) => theme.radii.lg};
   object-fit: cover;
-  margin-right: 14px;
 
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[1]} - 1px)) {
@@ -53,10 +57,10 @@ export const Content = styled.div`
 `;
 
 export const TitleContainer = styled.div`
-  height: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 24px;
 
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[1]} - 1px)) {
@@ -72,6 +76,7 @@ export const TitleContainer = styled.div`
 
 export const Title = styled.p`
   color: ${({ theme }) => theme.colors.gray[500]};
+
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   font-size: ${({ theme }) => theme.fontSizes[2]};
   line-height: 1;
@@ -86,6 +91,7 @@ export const Title = styled.p`
 export const DeleteBin = styled(RiDeleteBin6Line)`
   width: 10px;
   height: 12px;
+
   color: ${props =>
     props.myRecipes
       ? props.theme.colors.white[200]
@@ -110,10 +116,12 @@ export const BinWrapper = styled.div`
   justify-content: center;
   width: 24px;
   height: 24px;
+
   background-color: ${props =>
     props.myRecipes
       ? props.theme.colors.green[200]
       : props.theme.colors.green[100]};
+
   border-radius: ${({ theme }) => theme.radii.sm};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.create(['background-color'])};
@@ -150,6 +158,7 @@ export const Text = styled.p`
   -webkit-line-clamp: 5;
   overflow: hidden;
   text-overflow: ellipsis;
+
   font-size: 8px;
   line-height: 1.25;
   letter-spacing: -2%;
@@ -187,9 +196,10 @@ export const FlexContainer = styled.div`
 `;
 
 export const Time = styled.p`
+  color: ${({ theme }) => theme.colors.gray[500]};
+
   font-size: ${({ theme }) => theme.fontSizes[0]};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.gray[500]};
   line-height: 1.4;
   letter-spacing: -0.24px;
 

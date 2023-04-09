@@ -1,8 +1,4 @@
 import { useContext } from 'react';
-// import { Container, Pagination, TextField, Stack, Link } from '@mui/material';
-// import { Container, Pagination, Stack } from '@mui/material';
-
-// import SearchPagination from '../../components/SearchPagination';
 import Loader from 'components/common/Loader/Loader';
 import Card from 'components/common/Card/Card';
 
@@ -16,8 +12,7 @@ import {
 import { Status } from 'constants';
 
 export default function SearchedRecipesList() {
-  const { searchedResipes, status, page, totalRecipePage, updatePage } =
-    useContext(RecipesContext);
+  const { searchedResipes, status } = useContext(RecipesContext);
 
   return (
     <>
@@ -38,18 +33,6 @@ export default function SearchedRecipesList() {
               );
             })}
           </SearchedRecipes>
-          {/* <SearchPagination /> */}
-          {/* <Container>
-            <Stack spacing={2}>
-              <Pagination
-                count={totalRecipePage}
-                page={page}
-                onChange={(_, num) => {
-                  updatePage(num);
-                }}
-              />
-            </Stack>
-          </Container> */}
         </>
       )}
     </>

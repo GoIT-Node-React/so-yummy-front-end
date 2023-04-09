@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useCallback } from 'react';
-// import { debounce } from 'debounce';
+import { useSearchParams } from 'react-router-dom';
+
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,6 +26,11 @@ export default function SearchForm() {
     updateStatus,
   } = useContext(RecipesContext);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const typeSearchParams = searchParams.get('type');
+  const valueSearchParams = searchParams.get('value');
+
   const FetchREcipes = useCallback(async () => {
     updateStatus(Status.PENDING);
 
@@ -38,11 +44,7 @@ export default function SearchForm() {
       updateRecipes(data.recipes);
       updateStatus(Status.RESOLVED);
 
-      console.log('data', data);
-      console.log('searchedResipes', searchedResipes);
       console.log('searchType', searchType);
-      console.log('searchValue', searchValue);
-      console.log('status', status);
     } catch (error) {
       updateStatus(Status.REJECTED);
       console.log(error);
@@ -62,12 +64,6 @@ export default function SearchForm() {
     console.log('Викликалась функція handleChange');
   };
 
-  // const handleChange = debounce(event => {
-  //   const { value } = event.target;
-  //   updatesearchValue(value);
-  //   console.log('Викликалась функція handleChange');
-  // }, 300);
-
   const handleSubmit = event => {
     event.preventDefault();
 
@@ -77,7 +73,6 @@ export default function SearchForm() {
     }
 
     FetchREcipes();
-    // updatesearchValue('');
   };
 
   useEffect(() => {

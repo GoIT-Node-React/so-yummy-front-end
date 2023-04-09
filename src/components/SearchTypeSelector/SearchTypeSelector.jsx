@@ -16,12 +16,18 @@ const options = [
   { value: 'ingredient', label: 'Ingredients' },
 ];
 
+console.log();
+
 export default function SearchTypeSelector() {
   const { searchType, updatesearchType } = useContext(RecipesContext);
 
   const isMobile = useMediaQuery({ query: '(max-width: 767.98px)' });
-  // const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
-  // const isDesctop = useMediaQuery({ query: '(min-width: 1439px)' });
+
+  const onChangeFunc = event => {
+    const selectedValue = event.value;
+    updatesearchType(selectedValue);
+    console.log('event.value', selectedValue);
+  };
 
   return (
     <SearchTypeSelectorWrapper>
@@ -39,8 +45,9 @@ export default function SearchTypeSelector() {
         }}
       >
         <SelectControl
+          className="selected"
           defaultValue={searchType}
-          onChange={updatesearchType}
+          onChange={onChangeFunc}
           options={options}
           placeholder="Title"
           styles={{
@@ -121,17 +128,3 @@ export default function SearchTypeSelector() {
     </SearchTypeSelectorWrapper>
   );
 }
-
-// export function SearchTypeSelector() {
-//   return (
-//     <SearchTypeSelectorWrapper>
-//       <SearchTypeSelectorText>Search by:</SearchTypeSelectorText>
-//       <SearchTypeSelectorList>
-//         <SearchTypeSelectorItem value="title">Title</SearchTypeSelectorItem>
-//         <SearchTypeSelectorItem value="ingredients">
-//           Ingredients
-//         </SearchTypeSelectorItem>
-//       </SearchTypeSelectorList>
-//     </SearchTypeSelectorWrapper>
-//   );
-// }
