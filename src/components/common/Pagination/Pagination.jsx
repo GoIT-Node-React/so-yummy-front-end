@@ -18,22 +18,36 @@ export default function Pagination({ items = [] }) {
             break;
           case 'next':
             children = (
-              <PaginationItemNext type="button" selected={selected} {...item}>
+              <PaginationItemNext
+                type="button"
+                selected={selected}
+                {...item}
+                data-type={type}
+              >
                 {`>`}
               </PaginationItemNext>
             );
             break;
           case 'previous':
-            console.log(items);
             children = (
-              <PaginationItemPrev type="button" selected={selected} {...item}>
+              <PaginationItemPrev
+                type="button"
+                selected={selected}
+                {...item}
+                data-type={type}
+              >
                 {`<`}
               </PaginationItemPrev>
             );
             break;
           default: // Page
             children = (
-              <PaginationItem type="button" selected={selected} {...item}>
+              <PaginationItem
+                type="button"
+                selected={selected}
+                {...item}
+                data-type={type}
+              >
                 {page}
               </PaginationItem>
             );

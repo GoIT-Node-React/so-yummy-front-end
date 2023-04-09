@@ -10,47 +10,13 @@ import {
 } from 'services/recipe.service';
 import OwnRecipesList from './OwnRecipesList/OwnRecipesList';
 import OwnRecipesContextProvider from './OwnRecipes.context';
-
-import usePagination from '@mui/material/usePagination/usePagination';
-import { styled } from '@mui/material/styles';
-import Pagination from 'components/common/Pagination';
-
-const List = styled('ul')({
-  listStyle: 'none',
-  padding: 0,
-
-  display: 'flex',
-  justifyContent: 'center',
-});
+import useAppPagination from 'hooks/useAppPagination';
 
 export default function OwnRecipes() {
   const pagination = useRef({
     page: 1,
     totalPages: 1,
   });
-
-  const { items } = usePagination({
-    count: pagination.current.totalPages,
-    defaultPage: 1,
-    page: pagination.current.page,
-
-    onChange: async evt => {
-      const {
-        target: { textContent },
-      } = evt;
-      let page = pagination.current.page;
-      if (textContent === '>') {
-        page += 1;
-      } else if (textContent === '<') {
-        page -= 1;
-      } else {
-        page = +textContent;
-      }
-
-      getRecipes(page);
-    },
-  });
-
   const [recipesList, setRecipesList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -85,6 +51,12 @@ export default function OwnRecipes() {
     [getRecipes, recipesList]
   );
 
+  const { Component: Pagination } = useAppPagination({
+    totalPages: pagination.current.totalPages,
+    page: pagination.current.page,
+    onFetch: getRecipes,
+  });
+
   useEffect(() => {
     getRecipes();
   }, [getRecipes]);
@@ -100,7 +72,7 @@ export default function OwnRecipes() {
             <OwnRecipesList recipes={recipesList} />
           )}
         </OwnRecipesContextProvider>
-        <Pagination items={items} />
+        {pagination.current.totalPages > 1 && <Pagination />}
       </OwnRecipesContainer>
     </OwnRecipesSection>
   );

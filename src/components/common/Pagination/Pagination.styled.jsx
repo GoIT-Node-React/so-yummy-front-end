@@ -7,13 +7,20 @@ export const PaginationList = styled.ul`
   gap: 10px;
 
   width: fit-content;
-  margin: 50px auto 0;
+  margin: 18px auto 0;
   padding: 14px 24px;
 
   background: ${({ theme }) => theme.colors.white[100]};
   border-radius: 26px;
 
   box-shadow: 0px 4px 4px rgba(135, 135, 135, 0.2);
+  @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    margin-top: 40px;
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
+    margin-top: 50px;
+  }
 `;
 
 export const PaginationItem = styled.button`
