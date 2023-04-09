@@ -15,9 +15,8 @@ export default function OwnRecipes() {
     setIsLoading(true);
 
     try {
-      const { data, limit, page, total } = await getOwnRecipesService();
-
-      setRecipesList(data.recipes);
+      // const { data, limit, page, total } = await getOwnRecipesService();
+      //setRecipesList(data.recipes);
     } catch (error) {
     } finally {
       setIsLoading(false);
