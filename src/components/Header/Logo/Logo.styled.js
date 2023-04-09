@@ -6,6 +6,6 @@ export const LogoLink = styled(Link)`
     align-items: center;
 
     @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
-        margin-right: 187px;
+        margin-right: ${props => props.mr || '187px'};
     }
 `;

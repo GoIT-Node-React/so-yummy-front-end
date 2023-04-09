@@ -2,7 +2,7 @@ import { NavBar, NavItem, NavLink, SearchIcon } from './Navigation.styled';
 
 function Navigation(props) {
     return (
-        <NavBar>
+        <NavBar mr={props.mr} fd={props.fd}>
             <NavItem>
                 <NavLink to="/categories">Categories</NavLink>
             </NavItem>

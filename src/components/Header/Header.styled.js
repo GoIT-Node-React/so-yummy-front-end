@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
-import { Container as StyledContainer } from '../Container.styled';
+import { Container as StyledContainer } from '../common/Container.styled';
 
 export const Container = styled(StyledContainer)`
     margin-top: 18px;
-    padding: 0;
     height: 46px;
 
     display: flex;
@@ -14,3 +13,4 @@ export const Container = styled(StyledContainer)`
         justify-content: start;
     }
 `;
+export const StyledHeader = styled.header``;

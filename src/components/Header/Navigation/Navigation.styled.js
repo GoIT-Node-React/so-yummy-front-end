@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
 
 export const NavBar = styled.ul`
-    margin-right: 227px;
+    margin-right: ${props => props.mr || '227px'};
+
     align-items: center;
     list-style: none;
     display: flex;
+    flex-direction: ${props => props.fd || 'row'};
     column-gap: 30px;
+    /* column-gap: ${props => props.cg || '30px'}; */
+    row-gap: 32px;
+
+    @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+        row-gap: 40px;
+    }
 `;
 
 export const NavItem = styled.li`
