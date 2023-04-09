@@ -1,160 +1,79 @@
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
-
-import { FigureButton } from '../FigureButton.styled';
-import { theme } from 'theme';
+import { RecipeCardPropTypes } from './RecipeCard.props';
 import {
-  BinWrapper,
-  Container,
-  Content,
-  DeleteBin,
-  FlexContainer,
-  Image,
-  Text,
-  Time,
-  Title,
-  TitleContainer,
+  RecipeCardContainer,
+  RecipeCardRemoveButton,
+  RecipeCardDescription,
+  RecipeCardImage,
+  RecipeCardSeeRecipeButton,
+  RecipeCardThumb,
+  RecipeCardTime,
+  RecipeCardTitle,
+  ReipeCardStyle,
+  RecipeCardRemovLoader,
+  RecipeCardWrapper,
+  RecipeCardRemoveLoaderWrapper,
 } from './RecipeCard.styled';
+import { FiTrash2 } from 'react-icons/fi';
+import Loader from '../Loader/Loader';
+import { useState } from 'react';
+import { processingError } from 'helpers';
 
-export default function RecipeCard({
-  myRecipes,
-  src,
-  title,
-  text,
-  time,
-  onDeleteRecipe,
-  to,
-}) {
-  const isMobile = useMediaQuery({
-    query: `(max-width: calc(${theme.breakpoints[1]} - 1px))`,
-  });
-  const isTablet = useMediaQuery({
-    query: `(max-width: calc(${theme.breakpoints[2]} - 1px))`,
-  });
+export default function RecipeCard({ owner, to, onDelete, recipe }) {
+  const { thumb, title, time, description } = recipe;
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const seeRecipeHandler = () => {
+    navigate(to);
+  };
+
+  const removeHandler = async () => {
+    setIsLoading(true);
+    try {
+      await onDelete();
+    } catch (error) {
+      processingError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <Container myRecipes={myRecipes}>
-      <Image src={src} alt={title} />
-      <Content>
-        {isMobile ? (
-          <>
-            {myRecipes ? (
-              <TitleContainer>
-                <Title>{title}</Title>
-                <BinWrapper myRecipes={myRecipes} onClick={onDeleteRecipe}>
-                  <DeleteBin myRecipes={myRecipes} />
-                </BinWrapper>
-              </TitleContainer>
-            ) : (
-              <Title>{title}</Title>
-            )}
-          </>
-        ) : (
-          <TitleContainer>
-            <Title>{title}</Title>
-            <BinWrapper myRecipes={myRecipes} onClick={onDeleteRecipe}>
-              <DeleteBin myRecipes={myRecipes} />
-            </BinWrapper>
-          </TitleContainer>
-        )}
-
-        <Text myRecipes={myRecipes}>{text}</Text>
-        <FlexContainer>
-          <Time>{time}</Time>
-          {isMobile ? (
-            <>
-              {myRecipes ? (
-                <FigureButton
-                  variant="green"
-                  fs="10px"
-                  w="87px"
-                  h="27px"
-                  p="28px 14px"
-                  m="0 0 -14px 0"
-                  onClick={() => navigate(to)}
-                >
-                  See recipe
-                </FigureButton>
-              ) : (
-                <BinWrapper onClick={onDeleteRecipe}>
-                  <DeleteBin />
-                </BinWrapper>
-              )}
-            </>
-          ) : (
-            <>
-              {myRecipes ? (
-                <>
-                  {isTablet ? (
-                    <FigureButton
-                      variant="green"
-                      fs="14px"
-                      w="138px"
-                      h="45px"
-                      p="40px 32px"
-                      m="0 0 -18px 0"
-                      onClick={() => navigate(to)}
-                    >
-                      See recipe
-                    </FigureButton>
-                  ) : (
-                    <FigureButton
-                      variant="green"
-                      fs="16px"
-                      w="160px"
-                      h="54px"
-                      p="50px 38px"
-                      m="0 0 -22px 0"
-                      onClick={() => navigate(to)}
-                    >
-                      See recipe
-                    </FigureButton>
-                  )}
-                </>
-              ) : (
-                <>
-                  {isTablet ? (
-                    <FigureButton
-                      variant="dark"
-                      fs="14px"
-                      w="138px"
-                      h="45px"
-                      p="40px 32px"
-                      m="0 0 -18px 0"
-                      onClick={() => navigate(to)}
-                    >
-                      See recipe
-                    </FigureButton>
-                  ) : (
-                    <FigureButton
-                      variant="dark"
-                      fs="16px"
-                      w="160px"
-                      h="54px"
-                      p="50px 38px"
-                      m="0 0 -22px 0"
-                      onClick={() => navigate(to)}
-                    >
-                      See recipe
-                    </FigureButton>
-                  )}
-                </>
-              )}
-            </>
-          )}
-        </FlexContainer>
-      </Content>
-    </Container>
+    <ReipeCardStyle owner={owner} isDeleting={isLoading}>
+      <RecipeCardWrapper>
+        <RecipeCardThumb>
+          <RecipeCardImage src={thumb} />
+        </RecipeCardThumb>
+        <RecipeCardContainer>
+          <RecipeCardTitle>{title}</RecipeCardTitle>
+          <RecipeCardDescription>{description}</RecipeCardDescription>
+          <RecipeCardTime>{time} min</RecipeCardTime>
+          <RecipeCardRemoveButton
+            type="button"
+            onClick={removeHandler}
+            aria-label="Delete recipe from favorite button"
+          >
+            <FiTrash2 />
+          </RecipeCardRemoveButton>
+          <RecipeCardSeeRecipeButton type="button" onClick={seeRecipeHandler}>
+            See recipe
+          </RecipeCardSeeRecipeButton>
+        </RecipeCardContainer>
+      </RecipeCardWrapper>
+      {isLoading && (
+        <RecipeCardRemovLoader>
+          <RecipeCardRemoveLoaderWrapper>
+            <Loader />
+            Deleting recipe...
+          </RecipeCardRemoveLoaderWrapper>
+        </RecipeCardRemovLoader>
+      )}
+    </ReipeCardStyle>
   );
 }
-RecipeCard.propTypes = {
-  src: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  time: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
-  onDeleteRecipe: PropTypes.func.isRequired,
-  myRecipes: PropTypes.bool,
+
+RecipeCard.propTypes = RecipeCardPropTypes;
+RecipeCard.defaultProps = {
+  owner: false,
 };
