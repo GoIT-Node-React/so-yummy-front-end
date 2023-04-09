@@ -8,6 +8,7 @@ import {
   ButtonsWrapper,
   LinkStyled
 } from "./WelcomePage.styled";
+
 export default function WelcomePage() {
   return (
     <Main>
@@ -33,7 +34,6 @@ export default function WelcomePage() {
           >
             Sign In
         </LinkStyled>
-       
       </ButtonsWrapper>
     </Main>
   )
