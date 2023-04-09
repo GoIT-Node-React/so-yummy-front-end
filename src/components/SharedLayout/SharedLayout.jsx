@@ -1,5 +1,4 @@
-import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import MainSection from 'components/common/Main/Main';
 
 export default function SharedLayout() {
   return (
@@ -7,12 +6,8 @@ export default function SharedLayout() {
       <header>
         <h1>Header</h1>
       </header>
-      <main>
-        <Suspense fallback={<h2>Loading...</h2>}>
-          <Outlet />
-        </Suspense>
-      </main>
-      <footer></footer>
+      <MainSection />
+      <footer style={{ height: '414px', backgroundColor: '#22252A' }}></footer>
     </>
   );
 }

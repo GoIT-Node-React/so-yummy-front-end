@@ -82,7 +82,10 @@ export const TextInput = styled.input`
   display: block;
   width: 343px;
   height: 39px;
+  padding-bottom: 18px;
   margin-bottom: 24px;
+
+  background-color: 'transparent';
 
   border: none;
   outline: none;
@@ -364,6 +367,7 @@ export const ErrorMessage = styled.span`
 `;
 
 export const IngredientsError = styled.p`
+  margin-top: -14px;
   color: #e74a3b;
 
   font-size: ${({ theme }) => theme.fontSizes[1]};
@@ -371,4 +375,7 @@ export const IngredientsError = styled.p`
 
 export const LoaderContainer = styled.div`
   margin-top: 32px;
+`;
+export const RelativeContainer = styled.div`
+  position: relative;
 `;

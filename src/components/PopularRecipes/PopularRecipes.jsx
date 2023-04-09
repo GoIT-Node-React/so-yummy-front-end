@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-import { getPopularRecipesService } from 'services/popularRecipes.service';
+import { getPopularRecipesService } from 'services/recipe.service';
 import PopularRecipeCard from './PopularRecipeCard';
 import { Subtitle } from 'components/AddRecipeForm/AddRecipeForm.styled';
 import { PopularRecipesContainer, RecipesList } from './PopularRecipes.styled';
