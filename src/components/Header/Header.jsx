@@ -36,7 +36,7 @@ export default function Header() {
         setIsEditPopupShow(!isEditPopupShow);
     };
 
-    const HandleLogoutPopupShow = () => {
+    const HandleLogoutPopupShow = async () => {
         setIsLogoutPopupShow(!isLogoutPopupShow);
     };
 
@@ -44,14 +44,20 @@ export default function Header() {
         <StyledHeader>
             {isMobileOrTablet ? (
                 <Container>
-                    <Logo />
-                    <Wrapper>
-                        <UserLogo
-                            HandleEditPopupShow={HandleEditPopupShow}
-                            HandleLogoutPopupShow={HandleLogoutPopupShow}
-                        />
-                        <BurgerButton onClick={handleBurgerButton} />
-                    </Wrapper>
+                    {!isBurgerMenuShow && (
+                        <>
+                            <Logo />
+                            <Wrapper>
+                                <UserLogo
+                                    HandleEditPopupShow={HandleEditPopupShow}
+                                    HandleLogoutPopupShow={
+                                        HandleLogoutPopupShow
+                                    }
+                                />
+                                <BurgerButton onClick={handleBurgerButton} />
+                            </Wrapper>
+                        </>
+                    )}
                     {isBurgerMenuShow && (
                         <Modal onClose={handleMenuOnClose}>
                             <BurgerMenu onClose={handleMenuOnClose} />
@@ -71,7 +77,7 @@ export default function Header() {
             ) : (
                 <Container>
                     <Logo mr="187px" />
-                    <Navigation />
+                    <Navigation onClick={handleMenuOnClose} />
                     <UserLogo
                         HandleEditPopupShow={HandleEditPopupShow}
                         HandleLogoutPopupShow={HandleLogoutPopupShow}

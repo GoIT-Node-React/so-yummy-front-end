@@ -6,9 +6,12 @@ export default function SharedLayout() {
     return (
         <>
             <Header />
-            <Suspense fallback={null}>
-                <Outlet />
-            </Suspense>
+            <main>
+                <Suspense fallback={<h2>Loading...</h2>}>
+                    <Outlet />
+                </Suspense>
+            </main>
+            <footer></footer>
         </>
     );
 }

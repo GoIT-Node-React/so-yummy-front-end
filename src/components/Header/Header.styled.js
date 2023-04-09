@@ -13,4 +13,7 @@ export const Container = styled(StyledContainer)`
         justify-content: start;
     }
 `;
-export const StyledHeader = styled.header``;
+export const StyledHeader = styled.header`
+    position: relative;
+    z-index: 2;
+`;

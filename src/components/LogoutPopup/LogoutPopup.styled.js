@@ -91,7 +91,7 @@ export const ButtonsWrapper = styled.div`
     }
 `;
 
-export const LogoutButton = () => {
+export const LogoutButton = ({ onClick }) => {
     const mobileMaxWidth = theme.breakpoints[1].slice(0, -2) - 1;
 
     const isMobile = useMediaQuery({
@@ -101,11 +101,23 @@ export const LogoutButton = () => {
     return (
         <>
             {isMobile ? (
-                <RectButton variant="greenToBlack" w="137px" h="59px" fs="14px">
+                <RectButton
+                    variant="greenToBlack"
+                    w="137px"
+                    h="59px"
+                    fs="14px"
+                    onClick={onClick}
+                >
                     Log out
                 </RectButton>
             ) : (
-                <RectButton variant="greenToBlack" w="192px" h="59px" fs="16px">
+                <RectButton
+                    variant="greenToBlack"
+                    w="192px"
+                    h="59px"
+                    fs="16px"
+                    onClick={onClick}
+                >
                     Log out
                 </RectButton>
             )}
