@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import MainPageTitle from '../../components/MainPageTitle';
 import SearchBar from '../../components/SerchBar';
@@ -10,6 +10,9 @@ import { searchRecipesMessage } from 'constants/message';
 import SearchContextProvider from 'contexts/Search.context';
 import { useSearchParams } from 'react-router-dom';
 import { searchService } from 'services/search.service';
+import { processingError } from 'helpers';
+import useAppPagination from 'hooks/useAppPagination';
+import { useMediaQuery } from 'react-responsive';
 
 export default function SearchPage() {
     const [recipes, setRecipes] = useState(null);
@@ -26,6 +29,21 @@ export default function SearchPage() {
         }
     });
     const [isLoading, setIsLoading] = useState(false);
+    const isTabletOrMobile = useMediaQuery({
+        maxWidth: 1439,
+    });
+    console.log(isTabletOrMobile);
+    const pagination = useRef({
+        page: 1,
+        totalPages: 1,
+        limit: 12,
+    });
+
+    const { Component: Pagination } = useAppPagination({
+        totalPages: pagination.current.totalPages,
+        page: pagination.current.page,
+        onFetch: p => fetchData(p, pagination.current.limit),
+    });
 
     const updateQuery = value => {
         setQuery(value);
@@ -35,21 +53,32 @@ export default function SearchPage() {
         setType(value);
     };
 
-    const fetchData = async () => {
-        setIsLoading(true);
-        try {
-            const { data } = await searchService(type, query);
-            const { recipes, limit, page, total } = data;
+    const fetchData = useCallback(
+        async (p = 1, l = 12) => {
+            setIsLoading(true);
+            try {
+                const { data } = await searchService(type, query, p, l);
+                const { recipes, limit, page, total } = data;
 
-            setRecipes(recipes);
-        } catch (error) {
-            // updateStatus(Status.REJECTED);
-            console.log(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    // const { searchedResipes } = useContext(RecipesContext);
+                pagination.current = {
+                    totalPages: Math.ceil(total / limit),
+                    page,
+                };
+
+                setRecipes(recipes);
+            } catch (error) {
+                processingError(error);
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [query, type]
+    );
+
+    useEffect(() => {
+        pagination.current.limit = isTabletOrMobile ? 6 : 12;
+        fetchData(1, pagination.current.limit);
+    }, [isTabletOrMobile, fetchData]);
 
     return (
         <Container style={{ backgroundColor: '##ECECEC' }}>
@@ -68,7 +97,10 @@ export default function SearchPage() {
                 <SearchBar />
                 {recipes ? (
                     recipes.length ? (
-                        <SearchedRecipesList />
+                        <>
+                            <SearchedRecipesList />
+                            <Pagination />
+                        </>
                     ) : (
                         <SearchRecipesMessage
                             message={searchRecipesMessage.notFound}
