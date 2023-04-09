@@ -8,7 +8,6 @@ import { App } from 'components/App';
 import { theme } from 'theme/theme';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
-import { SearchedRecipesProvider } from './contexts/searchedRecipes/Provider';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
@@ -16,9 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistedStore}>
         <BrowserRouter>
-          <SearchedRecipesProvider>
-            <App />
-          </SearchedRecipesProvider>
+          <App />
         </BrowserRouter>
       </PersistGate>
     </Provider>

@@ -1,32 +1,27 @@
-import { useContext } from 'react';
 import Loader from 'components/common/Loader/Loader';
 import Card from 'components/common/Card/Card';
-
-import { RecipesContext } from '../../contexts/searchedRecipes/Provider';
-
 import {
   SearchedRecipes,
   SearchedRecipesListItem,
 } from './SearchedRecipesList.styled';
-
-import { Status } from 'constants';
+import { useSearchContext } from 'contexts/Search.context';
 
 export default function SearchedRecipesList() {
-  const { searchedResipes, status } = useContext(RecipesContext);
+  const { recipes, isLoading } = useSearchContext();
 
   return (
     <>
-      {status === Status.PENDING && <Loader />}
-      {searchedResipes.length > 0 && status !== Status.PENDING && (
+      {isLoading && <Loader />}
+      {recipes.length > 0 && !isLoading && (
         <>
           <SearchedRecipes>
-            {searchedResipes.map(({ _id, title, thumb }) => {
+            {recipes.map(({ _id, title, thumb }) => {
               return (
                 <SearchedRecipesListItem key={_id}>
                   <Card
                     src={thumb}
                     title={title}
-                    to={`/recipes/${_id}`}
+                    to={`/recipe/${_id}`}
                     id={_id}
                   />
                 </SearchedRecipesListItem>
