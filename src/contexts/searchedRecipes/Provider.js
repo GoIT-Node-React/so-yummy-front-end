@@ -11,6 +11,9 @@ export const SearchedRecipesProvider = ({ children }) => {
   const [searchValue, setSearchValue] = useState('');
   const [searchType, setSearchType] = useState('title');
   const [status, setStatus] = useState(Status.IDLE);
+  const [page, setpage] = useState(2);
+  const [limit, setlimit] = useState(3);
+  const [totalRecipePage, setTotalRecipePage] = useState(null);
 
   const updateRecipes = value => {
     setsearchedResipes(value);
@@ -30,6 +33,18 @@ export const SearchedRecipesProvider = ({ children }) => {
     setStatus(value);
   };
 
+  const updatePage = page => {
+    setpage(page);
+  };
+
+  const updateLimit = limit => {
+    setlimit(limit);
+  };
+
+  const updateTotalRecipePage = total => {
+    setTotalRecipePage(total);
+  };
+
   return (
     <RecipesContext.Provider
       value={{
@@ -37,10 +52,16 @@ export const SearchedRecipesProvider = ({ children }) => {
         searchValue,
         searchType,
         status,
+        page,
+        limit,
+        totalRecipePage,
         updateRecipes,
         updatesearchValue,
         updatesearchType,
         updateStatus,
+        updatePage,
+        updateLimit,
+        updateTotalRecipePage,
       }}
     >
       {children}

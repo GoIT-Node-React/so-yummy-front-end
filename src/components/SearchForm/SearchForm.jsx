@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useCallback } from 'react';
-import { debounce } from 'debounce';
+// import { debounce } from 'debounce';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,7 +22,6 @@ export default function SearchForm() {
     status,
     updateRecipes,
     updatesearchValue,
-    updatesearchType,
     updateStatus,
   } = useContext(RecipesContext);
 
@@ -48,7 +47,14 @@ export default function SearchForm() {
       updateStatus(Status.REJECTED);
       console.log(error);
     }
-  }, [updateRecipes, searchType, searchValue, updateStatus]);
+  }, [
+    updateRecipes,
+    searchType,
+    searchValue,
+    updateStatus,
+    searchedResipes,
+    status,
+  ]);
 
   const handleChange = event => {
     const { value } = event.target;
@@ -85,31 +91,8 @@ export default function SearchForm() {
 
     console.log('Рендер useEffect');
     FetchREcipes();
+    // eslint-disable-next-line
   }, [searchType, searchValue]);
-
-  // TransferSearchValue =============================
-  // const transferSearchValue = event => {
-  //   event.preventDefault();
-
-  //   const { value } = event.target;
-  //   updatesearchValue(value);
-  // };
-
-  // return (
-  //   <FormWrapper>
-  //     <Form onSubmit={transferSearchValue}>
-  //       <SearchFormField
-  //         type="text"
-  //         name="name"
-  //         value={searchValue}
-  //         onChange={handleChange}
-  //         placeholder="Search..."
-  //       ></SearchFormField>
-  //       <SearchFormButton>Search</SearchFormButton>
-  //     </Form>
-  //   </FormWrapper>
-  // );
-  // TransferSearchValue =============================
 
   return (
     <>
