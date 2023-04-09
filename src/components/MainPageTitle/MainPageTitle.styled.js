@@ -11,7 +11,6 @@ export const Title = styled.h2`
   letter-spacing: -0.02em;
 
   color: ${({ theme }) => theme.colors.gray[400]};
-  text-shadow: ${({ theme }) => theme.shadows.mainTitle};
 
   @media (min-width: 768px) and (max-width: 1439.98px) {
     font-size: ${({ theme }) => theme.fontSizes[10]};

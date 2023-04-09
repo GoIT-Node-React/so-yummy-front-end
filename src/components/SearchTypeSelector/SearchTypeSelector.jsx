@@ -1,32 +1,30 @@
 import { useMediaQuery } from 'react-responsive';
-
 import {
   SearchTypeSelectorWrapper,
   SearchTypeSelectorText,
   SelectControl,
 } from './SearchTypeSelector.styled';
-
-import React from 'react';
-
-import { RecipesContext } from '../../contexts/searchedRecipes/Provider';
-import { useContext } from 'react';
+import React, { useState } from 'react';
+import { useSearchContext } from 'contexts/Search.context';
 
 const options = [
   { value: 'title', label: 'Title' },
   { value: 'ingredient', label: 'Ingredients' },
 ];
 
-console.log();
+const searchOptionByType = type => options.find(o => o.value === type);
 
 export default function SearchTypeSelector() {
-  const { searchType, updatesearchType } = useContext(RecipesContext);
+  const { type, updateType } = useSearchContext();
+  const [selectValue, setSelectValue] = useState(() =>
+    searchOptionByType(type)
+  );
 
   const isMobile = useMediaQuery({ query: '(max-width: 767.98px)' });
 
-  const onChangeFunc = event => {
-    const selectedValue = event.value;
-    updatesearchType(selectedValue);
-    console.log('event.value', selectedValue);
+  const onChangeFunc = value => {
+    updateType(value.value);
+    setSelectValue(value);
   };
 
   return (
@@ -46,7 +44,7 @@ export default function SearchTypeSelector() {
       >
         <SelectControl
           className="selected"
-          defaultValue={searchType}
+          value={selectValue}
           onChange={onChangeFunc}
           options={options}
           placeholder="Title"
