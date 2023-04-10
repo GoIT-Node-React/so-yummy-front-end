@@ -2,8 +2,7 @@ import styled from '@emotion/styled';
 import { Container } from 'components/common/Container.styled';
 
 export const Recipe = styled.section`
-    position: absolute;
-    top: 0;
+    margin-top: -64px;
 
     width: 100%;
     height: 100%;

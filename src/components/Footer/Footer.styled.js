@@ -10,6 +10,8 @@ import RigthDesk1x from '../../images/footer/footer-pasta-rigth-1xdesc.png';
 import RigthDesk2x from '../../images/footer/footer-pasta-rigth-2xdesc.png';
 
 export const Main = styled.div`
+    margin-top: auto;
+
     background-image: url('${RigthMobile1x}');
     background-repeat: no-repeat;
     background-size: contain;

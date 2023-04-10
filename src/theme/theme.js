@@ -6,16 +6,17 @@ export const theme = {
   },
 
   fontSizes: [
-    '10px',
-    '12px',
-    '14px',
-    '16px',
-    '18px',
-    '24px',
-    '28px',
-    '44px',
-    '48px',
-    '100px',
+    '10px', //0
+    '12px', //1
+    '14px', //2
+    '16px', //3
+    '18px', //4
+    '24px', //5
+    '28px', //6
+    '44px', //7
+    '48px', //8
+    '100px', //9
+    '32px', //10
   ],
 
   fontWeights: {
@@ -36,6 +37,8 @@ export const theme = {
     base: '0px 4px 48px rgba(0, 0, 0, 0.1)', //form, modal
     select: '0px 6.51852px 7.82222px rgba(0, 0, 0, 0.0314074)', //select
     switchBody: 'inset 0px 6px 8px 3px rgba(0, 0, 0, 0.1)', //switch body
+    mainTitle: '0px 4px 4px rgba(0, 0, 0, 0.25)', //main title
+    paginationList: '0px 4px 4px rgba(135, 135, 135, 0.2)', //pagination list
   },
 
   gradients: {
@@ -60,6 +63,7 @@ export const theme = {
       100: '#EBF3D4', //delete-icon bg, pagination number hover, ingredient card bg
       200: '#8BAA36', //main green color
       300: '#3CBC81', // validation success
+      400: '#656565', // pagination button color
     },
     gray: {
       100: '#BDBDBD', //tab color, input text in search
