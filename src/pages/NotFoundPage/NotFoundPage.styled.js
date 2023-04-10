@@ -1,5 +1,19 @@
 import styled from '@emotion/styled';
 
+export const Section = styled.section`
+  padding: 100px 0;
+
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    padding: 100px 0 204px;
+  }
+
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[2]} - 1px)) {
+    padding: 138px 0 203px;
+  }
+`;
+
 export const Image = styled.img`
   display: block;
 

@@ -29,6 +29,7 @@ export const MesureSelect = React.forwardRef(({ onChange, name }, ref) => {
         displayType="input"
         format="###"
         customInput={Input}
+        valueIsNumericString={true}
         value={inputValue}
         onValueChange={handleInputChange}
       />

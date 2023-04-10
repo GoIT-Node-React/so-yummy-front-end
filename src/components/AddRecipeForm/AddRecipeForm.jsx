@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import debounce from 'lodash.debounce';
 
 import { getIngredientsByTitleService } from './../../services/ingredients.service';
-import { addRecipeService } from 'services/addRecipe.service';
+import { addRecipeService } from 'services/recipe.service';
 import useLocalStorage from 'hooks/localStorageHook';
 import { storage } from 'constants/storageKeys';
 import { theme } from 'theme';
@@ -37,6 +37,7 @@ import {
   MediaContainer,
   Minus,
   Plus,
+  RelativeContainer,
   SelectContainer,
   StyledCamera,
   StyledLabel,
@@ -79,12 +80,13 @@ export default function AddRecipeForm() {
       thumb,
       title,
       description,
-      category: '',
-      time: '',
+      category: 'Breakfast',
+      time: '5 min',
       ingredients: [{ id: '', measure: '' }],
       instructions,
     },
   });
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'ingredients',
@@ -226,6 +228,11 @@ export default function AddRecipeForm() {
                         justifyContent: 'flex-end',
                         alignItems: 'flex-end',
                       }),
+                      placeholder: () => ({
+                        fontSize: isTablet ? '14px' : '12px',
+                        lineHeight: '1.5',
+                        color: '#000000',
+                      }),
                       option: () => ({
                         fontSize: isTablet ? '14px' : '12px',
                         lineHeight: '1.5',
@@ -309,6 +316,11 @@ export default function AddRecipeForm() {
                       }),
                       indicatorSeparator: () => ({
                         display: 'none',
+                      }),
+                      placeholder: () => ({
+                        fontSize: isTablet ? '14px' : '12px',
+                        lineHeight: '1.5',
+                        color: '#000000',
                       }),
                       control: () => ({
                         display: 'flex',
@@ -416,7 +428,7 @@ export default function AddRecipeForm() {
                 value={value?.value}
                 name={name}
                 noOptionsMessage={({ inputValue }) =>
-                  !inputValue ? 'No results found' : 'Ingredients not found'
+                  !inputValue ? 'Start typing...' : 'Ingredients not found'
                 }
                 styles={{
                   control: () => ({
@@ -534,7 +546,7 @@ export default function AddRecipeForm() {
         <Subtitle>Recipe preparation</Subtitle>
       </UtilContainer>
 
-      <div style={{ position: 'relative' }}>
+      <RelativeContainer>
         <StyledTextarea
           placeholder="Enter recipe"
           {...register('instructions', {
@@ -544,7 +556,7 @@ export default function AddRecipeForm() {
         {errors.instructions && (
           <ErrorMessage>{errors.instructions?.message}</ErrorMessage>
         )}
-      </div>
+      </RelativeContainer>
       {isLoading ? (
         <LoaderContainer>
           <Loader />

@@ -1,40 +1,37 @@
 import * as React from 'react';
 
 import {
-  Main,
-  FirstBlock,
-  FooterMain,
-  FooterMainBlock,
-  FooterWrapper,
-  FooterLeftBg
+    Main,
+    FirstBlock,
+    FooterMain,
+    FooterMainBlock,
+    FooterWrapper,
 } from './Footer.styled';
 
-import {FooterTitle} from './FooterTitle'
-import { FooterList } from './FooterList'
-import { FooterNavigate } from './FooterNav'
+import { FooterTitle } from './FooterTitle';
+import { FooterList } from './FooterList';
+import { FooterNavigate } from './FooterNav';
 import { SubscribeForm } from '../SubscribeForm/SubscribeForm';
 import { SocialLinks } from '../common/SocialLinks/SocialLinks';
-import { FooterDown } from './FooterDown'
+import { FooterDown } from './FooterDown';
 
 export const Footer = () => {
-  return (
-    <Main>
-      <FooterWrapper> 
-      <FooterMain>
-        <FooterMainBlock>
-          <FirstBlock>
-            <FooterTitle />
-            <FooterList />
-          </FirstBlock>
-          <FooterNavigate />
-        </FooterMainBlock>
-        <SubscribeForm />
-      </FooterMain>
-        <SocialLinks />
-       <FooterLeftBg /> 
-      </FooterWrapper>
-      <FooterDown />
-      
-    </Main>
-  );
+    return (
+        <Main>
+            <FooterWrapper>
+                <FooterMain>
+                    <FooterMainBlock>
+                        <FirstBlock>
+                            <FooterTitle />
+                            <FooterList />
+                        </FirstBlock>
+                        <FooterNavigate />
+                    </FooterMainBlock>
+                    <SubscribeForm />
+                </FooterMain>
+                <SocialLinks />
+            </FooterWrapper>
+            <FooterDown />
+        </Main>
+    );
 };

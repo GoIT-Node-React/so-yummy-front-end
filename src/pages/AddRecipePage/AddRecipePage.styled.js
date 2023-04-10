@@ -1,5 +1,19 @@
 import styled from '@emotion/styled';
 
+export const Section = styled.section`
+  padding: 50px 0 76px;
+
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    padding: 72px 0 200px;
+  }
+
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[2]} - 1px)) {
+    padding: 100px 0 180px;
+  }
+`;
+
 export const FlexContainer = styled.div`
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[2]} - 1px)) {
