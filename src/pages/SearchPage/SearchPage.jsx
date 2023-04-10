@@ -15,108 +15,105 @@ import useAppPagination from 'hooks/useAppPagination';
 import { useMediaQuery } from 'react-responsive';
 
 export default function SearchPage() {
-    const [params] = useSearchParams();
-    const searchParams = Object.fromEntries(params);
-    const [recipes, setRecipes] = useState(null);
-    const [query, setQuery] = useState(() => searchParams.value ?? '');
-    const [type, setType] = useState(() => {
-        switch (searchParams.type) {
-            case 'ingredient':
-                return 'ingredient';
-            case 'title':
-            default:
-                return 'title';
-        }
-    });
-    const [isLoading, setIsLoading] = useState(false);
-    const isTabletOrMobile = useMediaQuery({
-        maxWidth: 1439,
-    });
+  const [params] = useSearchParams();
+  const searchParams = Object.fromEntries(params);
+  const [recipes, setRecipes] = useState(null);
+  const [query, setQuery] = useState(() => searchParams.value ?? '');
+  const [type, setType] = useState(() => {
+    switch (searchParams.type) {
+      case 'ingredient':
+        return 'ingredient';
+      case 'title':
+      default:
+        return 'title';
+    }
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const isTabletOrMobile = useMediaQuery({
+    maxWidth: 1439,
+  });
 
-    const pagination = useRef({
-        page: 1,
-        totalPages: 1,
-        limit: 12,
-    });
+  const pagination = useRef({
+    page: 1,
+    totalPages: 1,
+    limit: 12,
+  });
 
-    const { Component: Pagination } = useAppPagination({
-        totalPages: pagination.current.totalPages,
-        page: pagination.current.page,
-        onFetch: p => fetchData(p, pagination.current.limit),
-    });
+  const { Component: Pagination } = useAppPagination({
+    totalPages: pagination.current.totalPages,
+    page: pagination.current.page,
+    onFetch: p => fetchData(p, pagination.current.limit),
+  });
 
-    const updateQuery = value => {
-        setQuery(value);
-    };
+  const updateQuery = value => {
+    setQuery(value);
+  };
 
-    const updateType = value => {
-        setType(value);
-    };
+  const updateType = value => {
+    setType(value);
+  };
 
-    const fetchData = useCallback(
-        async (p = 1, l = 12) => {
-            if (query.length === 0 || !type) return;
+  const fetchData = useCallback(
+    async (p = 1, l = pagination.current.limit) => {
+      if (query.length === 0 || !type) return;
 
-            setIsLoading(true);
-            try {
-                const { data } = await searchService(type, query, p, l);
-                const { recipes, limit, page, total } = data;
+      setIsLoading(true);
 
-                pagination.current = {
-                    totalPages: Math.ceil(total / limit),
-                    page,
-                };
+      try {
+        const { data } = await searchService(type, query, p, l);
+        const { recipes, limit, page, total } = data;
 
-                setRecipes(recipes);
-            } catch (error) {
-                processingError(error);
-            } finally {
-                setIsLoading(false);
-            }
-        },
-        [query, type]
-    );
+        pagination.current = {
+          totalPages: Math.ceil(total / limit),
+          page,
+        };
 
-    useEffect(() => {
-        pagination.current.limit = isTabletOrMobile ? 6 : 12;
+        setRecipes(recipes);
+      } catch (error) {
+        processingError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [query, type]
+  );
 
-        fetchData(1, pagination.current.limit);
+  useEffect(() => {
+    pagination.current.limit = isTabletOrMobile ? 6 : 12;
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isTabletOrMobile]);
+    fetchData(1, pagination.current.limit);
 
-    return (
-        <Container>
-            <MainPageTitle />
-            <SearchContextProvider
-                value={{
-                    recipes,
-                    query,
-                    type,
-                    isLoading,
-                    updateQuery,
-                    updateType,
-                    fetchData,
-                }}
-            >
-                <SearchBar />
-                {recipes ? (
-                    recipes.length ? (
-                        <>
-                            <SearchedRecipesList />
-                            <Pagination />
-                        </>
-                    ) : (
-                        <SearchRecipesMessage
-                            message={searchRecipesMessage.notFound}
-                        />
-                    )
-                ) : (
-                    <SearchRecipesMessage
-                        message={searchRecipesMessage.trySearch}
-                    />
-                )}
-            </SearchContextProvider>
-        </Container>
-    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTabletOrMobile]);
+
+  return (
+    <Container>
+      <MainPageTitle />
+      <SearchContextProvider
+        value={{
+          recipes,
+          query,
+          type,
+          isLoading,
+          updateQuery,
+          updateType,
+          fetchData,
+        }}
+      >
+        <SearchBar />
+        {recipes ? (
+          recipes.length ? (
+            <>
+              <SearchedRecipesList />
+              <Pagination />
+            </>
+          ) : (
+            <SearchRecipesMessage message={searchRecipesMessage.notFound} />
+          )
+        ) : (
+          <SearchRecipesMessage message={searchRecipesMessage.trySearch} />
+        )}
+      </SearchContextProvider>
+    </Container>
+  );
 }
