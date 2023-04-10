@@ -3,7 +3,6 @@ import { theme } from '../../theme/theme';
 
 export const FavoriteContainer = styled.div`
 margin-top: 48px;
-background-color: ${({ theme }) => theme.colors.white[200]};
 
 @media screen and (min-width: calc(${theme.breakpoints[1]}-1px)) {
   margin-top: 74px;

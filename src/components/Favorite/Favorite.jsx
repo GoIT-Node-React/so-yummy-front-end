@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { getAllFavorites, deleteFavoriteById } from 'services/api/recipesApi';
+
 import RecipeCard from '../common/RecipeCard/RecipeCard';
 import NothingAdd from './NothingAdd/NothingAdd';
 import {
@@ -11,6 +11,10 @@ import {
 } from './Favorite.styled';
 import Loader from '../common/Loader/Loader';
 import { Container } from 'components/common/Container.styled';
+import {
+  deleteRecipeFromFavoriteService,
+  getFavoritesService,
+} from 'services/favorite.service';
 
 const Favorite = () => {
   const [page, setPage] = useState(1);
@@ -22,7 +26,8 @@ const Favorite = () => {
     setIsLoading(true);
     try {
       setTimeout(async () => {
-        await getAllFavorites(page, 4).then(data => {
+        await getFavoritesService(page, 4).then(data => {
+          console.log(data);
           if (!data) {
             return;
           }
@@ -30,7 +35,7 @@ const Favorite = () => {
           if (pageCounts > 1) {
             setTotalPage(pageCounts);
           }
-          setAllRecipes(data.recipes);
+          setAllRecipes(data.data.recipes);
         });
         setIsLoading(false);
       }, 500);
@@ -47,13 +52,13 @@ const Favorite = () => {
     }
     event.target.disable = true;
 
-    const result = await deleteFavoriteById(id);
+    const result = await deleteRecipeFromFavoriteService(id);
     console.log(result);
     const newRecipes = allRecipes.filter(({ _id }) => _id !== id);
     setAllRecipes(newRecipes);
 
-    await getAllFavorites(page, 4)
-      .then(data => {
+    await getFavoritesService(page, 4)
+      .then(({ data }) => {
         if (data.total === 4) {
           setPage(1);
           setTotalPage(null);
@@ -86,21 +91,15 @@ const Favorite = () => {
             {isLoading ? (
               <Loader />
             ) : allRecipes.length !== 0 && !isLoading ? (
-              allRecipes.map(({ _id, title, description, time, preview }) => {
+              allRecipes.map(recipe => {
                 return (
-                  <FavoriteItem>
+                  <FavoriteItem key={recipe._id}>
                     <RecipeCard
-                      key={_id}
-                      id={_id}
-                      trashClass={'lightBcg'}
-                      title={title}
-                      time={time}
-                      text={description}
-                      onDeleteRecipe={e => {
-                        handleDelete(_id, e);
+                      recipe={recipe}
+                      onDelete={e => {
+                        handleDelete(recipe._id, e);
                       }}
-                      to={`/recipe/${_id}`}
-                      src={preview}
+                      to={`/recipe/${recipe._id}`}
                     />
                   </FavoriteItem>
                 );

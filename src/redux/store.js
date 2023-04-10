@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
-  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -9,27 +8,22 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-
-import { authSlice } from './auth/authSlice';
-
-const persistConfig = {
-  key: 'refresh-user-token',
-  storage,
-  whitelist: ['accessToken'],
-};
+import { persistedAuthReducer } from './auth/auth.slice';
+import { userReducer } from './user/user.slice';
+import { shoppingListReducer } from './shoppingList/shoppingList.slice';
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(persistConfig, authSlice.reducer),
+    auth: persistedAuthReducer,
+    user: userReducer,
+    shoppingList: shoppingListReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        ignoredActionPaths: ['payload.error'],
       },
     }),
 });
 
-export const persistor = persistStore(store);
+export const persistedStore = persistStore(store);
