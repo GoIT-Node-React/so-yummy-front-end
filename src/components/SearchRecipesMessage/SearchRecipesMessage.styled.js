@@ -28,6 +28,7 @@ export const SearchRecipesMessageImage = styled.picture`
 `;
 
 export const SearchRecipesMessageText = styled.p`
+  text-align: center;
   font-family: ${({ theme }) => theme.fonts.Poppins};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   font-size: ${({ theme }) => theme.fontSizes[2]};

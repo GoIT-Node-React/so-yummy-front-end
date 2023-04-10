@@ -152,7 +152,7 @@ export const SearchFormButton = styled.button`
     theme.transitions.create(['color', 'background-color'])};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.white[400]};
+    background-color: ${({ theme }) => theme.colors.black[400]};
     color: ${({ theme }) => theme.colors.white[200]};
   }
 
