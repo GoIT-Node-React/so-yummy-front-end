@@ -1,7 +1,7 @@
 import { privateApi } from './api';
 
 export const getCategoriesListAPI = async () => {
-  const { data } = await privateApi.get(`/categories`);
+  const { data } = await privateApi.get(`/recipes/categories`);
   return data;
 };
 

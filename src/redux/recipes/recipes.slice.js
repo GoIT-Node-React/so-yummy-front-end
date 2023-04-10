@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {   logoutThunk } from 'redux/auth/auth.thunk';
-import {   getCategoryList } from './recipes.thunk';
+import { logoutThunk } from 'redux/auth/auth.thunk';
+import { getCategoryList } from './recipes.thunk';
 import { categoryListInitial } from './recipes.initial';
 import { Status } from 'constants';
 
@@ -11,9 +11,7 @@ const categoriesSlice = createSlice({
     builder
       // When success login set user dat
       .addCase(getCategoryList.fulfilled, (state, { payload }) => {
-        console.log(payload)
-        state.categories = payload;
-        
+        state.categories = payload.categories;
       })
       .addCase(logoutThunk.fulfilled, () => categoryListInitial)
       .addMatcher(
