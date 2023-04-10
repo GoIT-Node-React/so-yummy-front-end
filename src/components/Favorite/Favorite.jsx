@@ -26,8 +26,7 @@ const Favorite = () => {
     setIsLoading(true);
     try {
       setTimeout(async () => {
-        await getFavoritesService(page, 4).then(data => {
-          console.log(data);
+        await getFavoritesService(page, 4).then(({ data }) => {
           if (!data) {
             return;
           }
@@ -35,7 +34,7 @@ const Favorite = () => {
           if (pageCounts > 1) {
             setTotalPage(pageCounts);
           }
-          setAllRecipes(data.data.recipes);
+          setAllRecipes(data.recipes);
         });
         setIsLoading(false);
       }, 500);
@@ -45,12 +44,8 @@ const Favorite = () => {
     }
   }, [page]);
 
-  const handleDelete = async (id, event) => {
+  const handleDelete = async id => {
     console.log(id);
-    if (event.target.disabled) {
-      return;
-    }
-    event.target.disable = true;
 
     const result = await deleteRecipeFromFavoriteService(id);
     console.log(result);
@@ -96,8 +91,8 @@ const Favorite = () => {
                   <FavoriteItem key={recipe._id}>
                     <RecipeCard
                       recipe={recipe}
-                      onDelete={e => {
-                        handleDelete(recipe._id, e);
+                      onDelete={() => {
+                        handleDelete(recipe._id);
                       }}
                       to={`/recipe/${recipe._id}`}
                     />
