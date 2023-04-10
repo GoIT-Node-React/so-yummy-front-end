@@ -45,8 +45,6 @@ const Favorite = () => {
   }, [page]);
 
   const handleDelete = async id => {
-    console.log(id);
-
     const result = await deleteRecipeFromFavoriteService(id);
     console.log(result);
     const newRecipes = allRecipes.filter(({ _id }) => _id !== id);
@@ -74,7 +72,7 @@ const Favorite = () => {
         setAllRecipes(data.recipes ?? []);
       })
       .catch(error => {
-        console.log(error.message);
+        console.log(error.message, totalPage);
       });
   };
   return (
