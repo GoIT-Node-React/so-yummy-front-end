@@ -15,9 +15,9 @@ import useAppPagination from 'hooks/useAppPagination';
 import { useMediaQuery } from 'react-responsive';
 
 export default function SearchPage() {
-    const [recipes, setRecipes] = useState(null);
     const [params] = useSearchParams();
     const searchParams = Object.fromEntries(params);
+    const [recipes, setRecipes] = useState(null);
     const [query, setQuery] = useState(() => searchParams.value ?? '');
     const [type, setType] = useState(() => {
         switch (searchParams.type) {
@@ -32,7 +32,7 @@ export default function SearchPage() {
     const isTabletOrMobile = useMediaQuery({
         maxWidth: 1439,
     });
-    console.log(isTabletOrMobile);
+
     const pagination = useRef({
         page: 1,
         totalPages: 1,
@@ -86,7 +86,7 @@ export default function SearchPage() {
     }, [isTabletOrMobile]);
 
     return (
-        <Container style={{ backgroundColor: '##ECECEC' }}>
+        <Container>
             <MainPageTitle />
             <SearchContextProvider
                 value={{

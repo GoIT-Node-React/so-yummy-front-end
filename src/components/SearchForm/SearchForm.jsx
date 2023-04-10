@@ -18,6 +18,7 @@ export default function SearchForm() {
 
   const handleSubmit = event => {
     event.preventDefault();
+
     if (query.length === 0) {
       return warnNotification('Enter the name of the parameter in the search!');
     }
