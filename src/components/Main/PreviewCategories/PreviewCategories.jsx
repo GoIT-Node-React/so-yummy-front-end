@@ -1,29 +1,44 @@
 import { OtherCatBtn } from './Buttons';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getMainPage } from '../../../redux/commonRecipes/commonOperations';
 import Category from './Category';
-import {
-  Box,
-  Section,
-} from './PreviewCategories.styled';
+import { Box, Section } from './PreviewCategories.styled';
+import { getMainPageRecipesService } from 'services/recipe.service';
 
 const PreviewCategories = () => {
   const [allCategories, setAllCategories] = useState([]);
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getMaitPageRecipes = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await getMainPageRecipesService();
+
+      setAllCategories(Object.entries(data.categories));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    dispatch(getMainPage()).then(result => {
-      const dishArray = Object.entries(result.payload);
-      setAllCategories(dishArray);
-    });
-  }, [dispatch]);
+    getMaitPageRecipes();
+  }, [getMaitPageRecipes]);
+
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getMainPage()).then(result => {
+  //
+  //   });
+  // }, [dispatch]);
 
   return (
     <Section>
-      {allCategories.map((item, index) => (
-        <Category key={index} data={item} />
-      ))}
+      {/* {allCategories.map(item => (
+        <Category key={item[0]} data={item} />
+      ))} */}
       <Box>
         <OtherCatBtn>Other categories</OtherCatBtn>
       </Box>

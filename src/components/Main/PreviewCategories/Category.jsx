@@ -5,12 +5,15 @@ import { SeeAllBtn } from './Buttons';
 import { Box, Container, ListRecipe, Title } from './Category.styled';
 
 const Category = ({ data }) => {
+  console.log(data);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isTab = useMediaQuery({ minWidth: 768 });
   const isDesc = useMediaQuery({ minWidth: 1440 });
+
+  console.log(data[0].charAt(0).toUpperCase() + data[0].slice(1));
   return (
     <Container>
-      <Title>{data[0].charAt(0).toUpperCase() + data[0].slice(1)}</Title>
+      {/* <Title>{data[0].charAt(0).toUpperCase() + data[0].slice(1)}</Title>
       {isDesc ? (
         <ListRecipe>
           {data[1].map(({ category, description, preview, title, _id }) => (
@@ -67,7 +70,7 @@ const Category = ({ data }) => {
         >
           See all
         </SeeAllBtn>
-      </Box>
+      </Box> */}
     </Container>
   );
 };
