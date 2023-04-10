@@ -20,7 +20,7 @@ export const FormWrapper = styled.div`
     margin-bottom: 28px;
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 511px;
     height: 71px;
 
@@ -56,7 +56,7 @@ export const Form = styled.form`
     margin-bottom: 24px;
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 510px;
     height: 71px;
 
@@ -97,7 +97,7 @@ export const SearchFormField = styled.input`
       font-size: ${({ theme }) => theme.fontSizes[2]};
     }
 
-    @media (min-width: 1440px) {
+    @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
       font-size: ${({ theme }) => theme.fontSizes[3]};
     }
   }
@@ -110,14 +110,15 @@ export const SearchFormField = styled.input`
     line-height: 1.5;
     background-color: transparent;
 
-    @media (min-width: 768px) and (max-width: 1439.98px) {
+    @media (min-width: 768px) and (max-width: calc(${({ theme }) =>
+        theme.breakpoints.desktop} - 0.2px)) {
       width: 135px;
       height: 24px;
 
       font-size: ${({ theme }) => theme.fontSizes[2]};
     }
 
-    @media (min-width: 1440px) {
+    @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
       width: 240px;
       height: 28px;
 
@@ -125,7 +126,7 @@ export const SearchFormField = styled.input`
     }
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: ${({ theme }) => theme.fontSizes[3]};
   }
 `;

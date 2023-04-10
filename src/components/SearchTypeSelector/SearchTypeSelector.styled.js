@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Select from 'react-select';
+import React from 'react';
 
 export const SearchTypeSelectorWrapper = styled.div`
   display: flex;
@@ -41,5 +42,67 @@ export const SearchTypeSelectorText = styled.p`
 `;
 
 export const SelectControl = styled(Select)`
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  .Select__control {
+    width: 146px;
+    height: 38px;
+
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: rgba(250, 250, 250, 1);
+
+    font-family: ${({ theme }) => theme.fonts.Poppins};
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
+    font-size: ${({ theme }) => theme.fontSizes[1]};
+    line-height: 0.7;
+    letter-spacing: 0.02em;
+
+    color: gray;
+    border-radius: 6px 6px 6px 6px;
+    border-color: black;
+    border: none;
+    box-shadow: none;
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      font-size: ${({ theme }) => theme.fontSizes[2]};
+    }
+  }
+
+  .Select__menu {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 4px 8px;
+
+    box-shadow: none;
+    background-color: rgba(250, 250, 250, 1);
+
+    height: 76px;
+    border-radius: 6px 6px 6px 6px;
+    border-color: transparent;
+  }
+
+  .Select__option {
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6px;
+    font-family: ${({ theme }) => theme.fonts.Poppins};
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
+    font-size: ${({ theme }) => theme.fontSizes[1]};
+    line-height: 0.7;
+    letter-spacing: 0.02em;
+    color: grey;
+    border-radius: 6px 6px 6px 6px;
+    border: none;
+    height: 28px;
+    cursor: pointer;
+    background-color: rgba(250, 250, 250, 1);
+
+    &:hover,
+    &:focus {
+      background-color: rgba(245, 245, 245, 1);
+    }
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      font-size: ${({ theme }) => theme.fontSizes[2]};
+    }
+  }
 `;

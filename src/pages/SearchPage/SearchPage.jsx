@@ -106,13 +106,25 @@ export default function SearchPage() {
             recipes.length ? (
               <SearchedRecipesListWrapper>
                 <SearchedRecipesList />
-                <Pagination />
+                {!isLoading && <Pagination />}
               </SearchedRecipesListWrapper>
             ) : (
-              <SearchRecipesMessage message={searchRecipesMessage.notFound} />
+              <>
+                {!isLoading && (
+                  <SearchRecipesMessage
+                    message={searchRecipesMessage.notFound}
+                  />
+                )}
+              </>
             )
           ) : (
-            <SearchRecipesMessage message={searchRecipesMessage.trySearch} />
+            <>
+              {!isLoading && (
+                <SearchRecipesMessage
+                  message={searchRecipesMessage.trySearch}
+                />
+              )}
+            </>
           )}
         </SearchContextProvider>
       </Container>
