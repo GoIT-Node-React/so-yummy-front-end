@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import Select from 'react-select';
-import React from 'react';
 
 export const SearchTypeSelectorWrapper = styled.div`
   display: flex;
@@ -61,6 +60,7 @@ export const SelectControl = styled(Select)`
     border-color: black;
     border: none;
     box-shadow: none;
+    cursor: pointer;
 
     @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
       font-size: ${({ theme }) => theme.fontSizes[2]};
