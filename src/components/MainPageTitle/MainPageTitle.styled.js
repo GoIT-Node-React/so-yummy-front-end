@@ -12,11 +12,12 @@ export const Title = styled.h2`
 
   color: ${({ theme }) => theme.colors.gray[400]};
 
-  @media (min-width: 768px) and (max-width: 1439.98px) {
+  @media (min-width: 768px) and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.desktop} - 0.2px)) {
     font-size: ${({ theme }) => theme.fontSizes[10]};
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: ${({ theme }) => theme.fontSizes[7]};
   }
 `;

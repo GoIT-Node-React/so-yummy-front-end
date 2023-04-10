@@ -37,7 +37,6 @@ export const TitleContainer = styled.div`
   bottom: 26px;
   left: 18px;
   width: 307px;
-  height: 52px;
   padding: 16px;
 
   background-color: ${({ theme }) => theme.colors.white[100]};
