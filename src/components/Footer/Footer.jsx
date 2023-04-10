@@ -6,6 +6,7 @@ import {
   FooterMain,
   FooterMainBlock,
   FooterWrapper,
+  FooterContainer,
 } from './Footer.styled';
 
 import { FooterTitle } from './FooterTitle';
@@ -17,21 +18,23 @@ import { FooterDown } from './FooterDown';
 
 export const Footer = () => {
   return (
-    <Main>
-      <FooterWrapper>
-        <FooterMain>
-          <FooterMainBlock>
-            <FirstBlock>
-              <FooterTitle />
-              <FooterList />
-            </FirstBlock>
-            <FooterNavigate />
-          </FooterMainBlock>
-          <SubscribeForm />
-        </FooterMain>
-        <SocialLinks />
-      </FooterWrapper>
-      <FooterDown />
-    </Main>
+    <FooterContainer>
+      <Main>
+        <FooterWrapper>
+          <FooterMain>
+            <FooterMainBlock>
+              <FirstBlock>
+                <FooterTitle />
+                <FooterList />
+              </FirstBlock>
+              <FooterNavigate />
+            </FooterMainBlock>
+            <SubscribeForm />
+          </FooterMain>
+          <SocialLinks />
+        </FooterWrapper>
+        <FooterDown />
+      </Main>
+    </FooterContainer>
   );
 };

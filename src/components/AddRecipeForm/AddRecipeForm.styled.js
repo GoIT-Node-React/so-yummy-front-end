@@ -85,7 +85,7 @@ export const TextInput = styled.input`
   padding-bottom: 18px;
   margin-bottom: 24px;
 
-  background-color: 'transparent';
+  background-color: ${({ theme }) => theme.colors.white[200]};
 
   border: none;
   outline: none;
