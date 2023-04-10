@@ -47,7 +47,7 @@ export const SelectControl = styled(Select)`
 
     padding-left: 8px;
     padding-right: 8px;
-    background-color: rgba(250, 250, 250, 1);
+    background-color: rgba(217, 217, 217, 0.16);
 
     font-family: ${({ theme }) => theme.fonts.Poppins};
     font-weight: ${({ theme }) => theme.fontWeights.regular};
@@ -98,7 +98,7 @@ export const SelectControl = styled(Select)`
 
     &:hover,
     &:focus {
-      background-color: rgba(245, 245, 245, 1);
+      background-color: rgba(217, 217, 217, 0.16);
     }
 
     @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {

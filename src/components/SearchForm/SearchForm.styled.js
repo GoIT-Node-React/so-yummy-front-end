@@ -37,10 +37,11 @@ export const Form = styled.form`
 
   padding: 16px 32px;
 
-  background-color: ${({ theme }) => theme.colors.white[100]};
+  background-color: ${({ theme }) => theme.colors.white[200]};
   clip-path: inset(2px 1px 1px 2px round 20px 50px 20px 50px);
 
-  @media (min-width: 375px) and (max-width: 767.98px) {
+  @media (min-width: 375px) and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.tablet} - 0.2px)) {
     width: 295px;
     height: 53px;
 
