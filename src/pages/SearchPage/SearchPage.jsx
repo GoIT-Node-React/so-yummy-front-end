@@ -55,7 +55,7 @@ export default function SearchPage() {
   };
 
   const fetchData = useCallback(
-    async (p = 1, l = 12) => {
+    async (p = 1, l = pagination.current.limit) => {
       if (query.length === 0 || !type) return;
 
       setIsLoading(true);
