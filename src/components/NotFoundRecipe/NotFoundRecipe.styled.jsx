@@ -1,19 +1,13 @@
 import styled from '@emotion/styled';
 
-export const SearchRecipesMessageWrapper = styled.div`
+export const NotFoundRecipeWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-
-  /* margin-bottom: 100px; */
-
-  @media (min-width: 768px) {
-    margin-bottom: 200px;
-  }
 `;
 
-export const SearchRecipesMessageImage = styled.picture`
+export const NotFoundRecipeImage = styled.picture`
   margin-bottom: 24px;
 
   width: 208px;
@@ -27,8 +21,7 @@ export const SearchRecipesMessageImage = styled.picture`
   }
 `;
 
-export const SearchRecipesMessageText = styled.p`
-  font-family: ${({ theme }) => theme.fonts.Poppins};
+export const NotFoundRecipeText = styled.p`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   font-size: ${({ theme }) => theme.fontSizes[2]};
   line-height: 1;
