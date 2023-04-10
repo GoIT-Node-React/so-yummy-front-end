@@ -27,4 +27,7 @@ export const store = configureStore({
 });
 
 export const persistedStore = persistStore(store);
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
