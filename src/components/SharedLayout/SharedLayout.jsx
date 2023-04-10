@@ -1,13 +1,15 @@
-import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import Header from '../Header';
+import { Footer } from '../../components/Footer/Footer';
+import MainSection from 'components/common/Main/Main';
 
 export default function SharedLayout() {
-  return (
-    <>
-      <h1>Header</h1>
-      <Suspense fallback={null}>
-        <Outlet />
-      </Suspense>
-    </>
-  );
+    return (
+        <div
+            style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+        >
+            <Header />
+            <MainSection />
+            <Footer />
+        </div>
+    );
 }
