@@ -81,7 +81,7 @@ export const CategoryList = () => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {/* <Tabs
+      <Tabs
         onChange={handleChange}
         value={value}
         variant="scrollable"
@@ -123,7 +123,7 @@ export const CategoryList = () => {
         }}
       >
         {items}
-      </Tabs> */}
+      </Tabs>
     </Box>
   );
 };
