@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { GrClose } from 'react-icons/gr';
 
 import {
   ShoppingListHeader,
@@ -22,7 +23,7 @@ import {
 } from '../../redux/shoppingList/shoppingList.thunk';
 
 const ShopingListSection = () => {
-  const { list, statuses, errors } = useSelector(
+  const { list } = useSelector(
     // (state) => console.log(state)
     state => state.shoppingList
   );
@@ -63,7 +64,7 @@ const ShopingListSection = () => {
                 </NumberWrap>
                 <BtnWrap>
                   <Btn type="button" onClick={() => onDelete(_id)}>
-                    x
+                    <GrClose />
                   </Btn>
                 </BtnWrap>
               </NumberAndDelWrap>

@@ -11,7 +11,7 @@ export const ShoppingListHeader = styled.div`
 
   background: #8baa36;
   color: #fafafa;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  
 
   padding: 10px;
   margin-bottom: 32px;
@@ -70,7 +70,7 @@ export const ShoppingListItem = styled.li`
   }
 
   border-bottom: 1px solid #e0e0e0;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     padding-left: 0;
@@ -118,37 +118,10 @@ export const NumberAndDelWrap = styled.div`
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
-    gap:142px;
+    gap:140px;
   }
 `;
-export const Number = styled.p`
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 10px;
-  line-height: 1.5;
 
-  width: 37px;
-  height: 23px;
-  text-align: center;
-  padding: 4px 0px;
-  border-radius: 4px;
-
-  background: #8baa36;
-  color: #fafafa;
-
-  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-    font-size: 18px;
-    width: 68px;
-    height: 35px;
-  }
-
-  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
-    
-    width: 75px;
-    height: 35px;
-  }
-`;
 
 export const Img = styled.img`
   border-radius: 6px;
@@ -172,24 +145,53 @@ export const Btn = styled.button`
   display: flex;
   justify-content: center;
 
+    width: 23px;
+    height: 23px;
+
   cursor: pointer;
   background: inherit;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
   }
 `;
 
 export const NumberWrap = styled.div`
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
 
-  min-width: 65px;
-  background: inherit;
+  width: 65px;
+  // background: inherit;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-    min-width: 75px;
+     width: 84px;
+  }
+`;
+
+export const Number = styled.p`
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 1.5;
+
+  margin: 0 auto;
+  width: fit-content;
+  min-height: 20px;
+  text-align: center;
+  padding: 4px;
+  border-radius: 4px;
+
+  background: #8baa36;
+  color: #fafafa;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    font-size: 18px;
+    padding: 4px 8px;
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
   }
 `;
 

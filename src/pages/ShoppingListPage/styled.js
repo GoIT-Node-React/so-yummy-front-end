@@ -5,6 +5,7 @@ export const ShoppingListSection = styled.div`
 `;
 
 export const ShoppingListTitle = styled.p`
+  margin-top: 50px;
   margin-bottom: 50px;
 
   font-family: 'Poppins';
@@ -18,10 +19,14 @@ export const ShoppingListTitle = styled.p`
   color: #001833;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    margin-top: 72px;
     margin-bottom: 72px;
+
+    font-size: 32px;
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    margin-top: 100px;
     font-size: 44px;
   }
 `;
