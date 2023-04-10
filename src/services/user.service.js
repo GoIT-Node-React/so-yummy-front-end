@@ -7,3 +7,9 @@ export const updateUserService = async newData => {
 
   return data;
 };
+
+export const subscribeService = async email => {
+  const { data } = await privateApi.patch('users/subscribe', email);
+
+  return data;
+};

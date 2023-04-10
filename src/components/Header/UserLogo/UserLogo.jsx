@@ -5,13 +5,16 @@ import {
   Avatar,
 } from './UserLogo.styled';
 import PromptPopup from '../PromptPopup/PromptPopup.jsx';
-import avatar from '../../../images/avatar.webp';
+
 import { useState } from 'react';
+import { selectUser } from 'redux/user/user.selectors';
+import { useSelector } from 'react-redux';
 
 export default function UserLogo({
   HandleEditPopupShow,
   HandleLogoutPopupShow,
 }) {
+  const { avatarURL, name } = useSelector(selectUser);
   const [isPromptPopupShow, setIsPromptPopupShow] = useState(false);
 
   const handleUserLogoClick = event => {
@@ -22,10 +25,10 @@ export default function UserLogo({
   return (
     <ContentWrapper>
       <UserAvatarWrapper tabIndex={0} onClick={handleUserLogoClick}>
-        <Avatar src={avatar} alt="user avatar" />
+        <Avatar src={avatarURL} alt="user avatar" />
       </UserAvatarWrapper>
       <UserName tabIndex={0} onClick={handleUserLogoClick}>
-        Denys
+        {name}
       </UserName>
       {isPromptPopupShow && (
         <PromptPopup

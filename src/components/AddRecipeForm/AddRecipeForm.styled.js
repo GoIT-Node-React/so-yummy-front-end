@@ -44,6 +44,12 @@ export const ImageContainer = styled.div`
   height: 268px;
 
   border-radius: ${({ theme }) => theme.radii.lg};
+
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[2]} - 1px)) {
+    width: 357px;
+    height: 344px;
+  }
 `;
 
 export const FileUploader = styled.input`

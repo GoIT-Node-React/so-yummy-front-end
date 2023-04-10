@@ -19,6 +19,7 @@ export const UserAvatarWrapper = styled.div`
   border-radius: 50%;
   overflow: hidden;
 
+  cursor: pointer;
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     width: 44px;
     height: 44px;

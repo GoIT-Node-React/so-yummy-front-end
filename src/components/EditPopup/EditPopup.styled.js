@@ -126,7 +126,6 @@ export const ChangeAvatarButton = styled.label`
   display: flex;
   align-items: center;
 
-  /* border-radius: 50%; */
   overflow: hidden;
   cursor: pointer;
 
@@ -162,9 +161,15 @@ export const FileInput = styled.input`
 export const Avatar = styled.img`
   position: absolute;
   display: block;
-  max-width: 100%;
-  height: auto;
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
   border-radius: 50%;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    width: 103px;
+    height: 103px;
+  }
 `;
 
 export const NameInputWrapper = styled.div`
@@ -258,3 +263,10 @@ export const SaveChangesButton = () => {
     </>
   );
 };
+
+export const ErrorMessage = styled.p`
+  margin-top: 4px;
+  color: ${props => props.theme.colors.red[100]};
+
+  font-size: ${({ theme }) => theme.fontSizes[1]};
+`;
