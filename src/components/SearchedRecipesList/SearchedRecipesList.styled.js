@@ -2,8 +2,6 @@ import styled from '@emotion/styled';
 
 export const SearchedRecipes = styled.ul`
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 28px;
 
   padding: 0;
@@ -24,6 +22,8 @@ export const SearchedRecipes = styled.ul`
     flex-wrap: wrap;
     row-gap: 100px;
     column-gap: 14px;
+
+    margin-bottom: 50px;
   }
 `;
 
