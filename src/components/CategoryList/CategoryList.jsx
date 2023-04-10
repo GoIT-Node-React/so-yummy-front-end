@@ -3,30 +3,31 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getCategories } from './';
-// import { getFullCategories } from './';
+import { getCategoryList } from '../../redux/recipes/recipes.thunk';
+import { selectFullCategoryList } from '../../redux/recipes/recipes.selectors';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 export const CategoryList = () => {
   const { categoryName } = useParams();
+  console.log("Hello")
   const dispatcher = useDispatch();
   const [value, setValue] = useState(0);
   const [mapArray, setMapArray] = useState([]);
   const navigate = useNavigate();
   const [flag, setFlag] = useState(false);
-  const fullCategoryList = useSelector(getFullCategories);
+  const fullCategoryList = useSelector(selectFullCategoryList);
 
   useEffect(() => {
-    dispatcher(getCategories());
+    dispatcher(getCategoryList());
   }, [dispatcher]);
 
   useEffect(() => {
     if (fullCategoryList.length === 0) return;
 
     const newArray = fullCategoryList.map((e, index) => {
-      if (index === 3) {
-        return 'dessert';
+      if (index === 0) {
+        return 'beef';
       }
       return e;
     });

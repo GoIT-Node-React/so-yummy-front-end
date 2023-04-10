@@ -1,5 +1,29 @@
 import { privateApi } from './api';
 
+
+export const getAllRecioesAPI = async () => {
+    const { data } = await privateApi.get(`/`);
+    return data;
+    
+  };
+
+export const getCategoriesListAPI = async () => {
+    const { data } = await privateApi.get(`/categories`);
+    return data;
+    
+  };
+
+  export const getRecipeByCategoryAPI = async categoryName => {
+    const { data } = await privateApi.get(`/categories/${categoryName}`);
+    return data;
+  };
+
+  export const getMainPageAPI = async () => {
+    const { data } = await privateApi.get(`/main-page/`);
+    return data;
+  };
+
+
 export const addRecipeService = async recipeData => {
     const { data } = await privateApi.post('/own-recipes', recipeData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -13,6 +37,7 @@ export const getRecipeInfoById = async recipeId => {
 
     return data;
 };
+
 
 export const getOwnRecipesService = async (page = 1, limit = 4) => {
     const { data } = await privateApi.get(

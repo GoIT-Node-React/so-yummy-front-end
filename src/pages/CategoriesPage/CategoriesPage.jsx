@@ -1,17 +1,9 @@
-import React from 'react';
-// import { CategoryList } from 'components/CategoryList/CategoryList';
-// import { TitleBox, Title } from './CategoriesPage.styled';
+import {CategoryList} from '../../components/CategoryList/CategoryList'
 
-export default function  CategoriesPage() {
+export default function CategoriesPage() {
   return (
-    <>
-      <div>
-        <h2>Categories</h2>
-      </div>
-      {/* <CategoryList /> */}
+        <CategoryList/>
       
-
-    </>
   );
-};
+}
 

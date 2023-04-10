@@ -1,8 +1,8 @@
 import React from 'react';
-import { RecipeCard } from '../../common/RecipeCard/RecipeCard';
+import { RecipeCard } from './RecipeCard';
 import { useMediaQuery } from 'react-responsive';
-import { SeeAllBtn } from '../../common/Buttons/Button';
-import { Box, Container, ListRecipe, Title } from './Categories.styled';
+import { SeeAllBtn } from './Buttons';
+import { Box, Container, ListRecipe, Title } from './Category.styled';
 
 const Category = ({ data }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
