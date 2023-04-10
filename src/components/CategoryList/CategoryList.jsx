@@ -1,5 +1,3 @@
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,10 +5,11 @@ import { getCategoryList } from '../../redux/recipes/recipes.thunk';
 import { selectFullCategoryList } from '../../redux/recipes/recipes.selectors';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { Tab, Tabs } from '@mui/material';
 
 export const CategoryList = () => {
   const { categoryName } = useParams();
-  console.log("Hello")
+
   const dispatcher = useDispatch();
   const [value, setValue] = useState(0);
   const [mapArray, setMapArray] = useState([]);
@@ -44,24 +43,27 @@ export const CategoryList = () => {
   }, [fullCategoryList, categoryName]);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-    navigate(`/categories/${event.target.textContent}`);
+    // setValue(newValue);
+    // navigate(`/categories/${event.target.textContent}`);
   };
 
-  const items = mapArray.map((e, index) => (
-    <Tab
-      label={e.toLowerCase()}
-      key={index}
-      sx={{
-        padding: '0',
-        paddingBottom: '28px',
-        color: '#BDBDBD',
-        '&.Mui-selected': {
-          color: '#8BAA36',
-        },
-      }}
-    />
-  ));
+  const items = mapArray.map((e, index) => {
+    console.log(e, index);
+    return (
+      <Tab
+        label={e.toLowerCase()}
+        key={index}
+        sx={{
+          padding: '0',
+          paddingBottom: '28px',
+          color: '#BDBDBD',
+          '&.Mui-selected': {
+            color: '#8BAA36',
+          },
+        }}
+      />
+    );
+  });
   const onMouseEnter = () => {
     setFlag(true);
   };
