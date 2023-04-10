@@ -1,22 +1,22 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  OwnRecipesContainer,
-  OwnRecipesSection,
-  OwnRecipesTitle,
-} from './OwnRecipes.styled';
-import {
-  getOwnRecipesService,
-  removeOwnRecipesService,
-} from 'services/recipe.service';
-import OwnRecipesList from './OwnRecipesList/OwnRecipesList';
-import OwnRecipesContextProvider from './OwnRecipes.context';
 import useAppPagination from 'hooks/useAppPagination';
 import { processingError } from 'helpers';
 import { searchRecipesMessage } from 'constants/message';
 import NotFoundRecipe from 'components/NotFoundRecipe';
 import Loader from 'components/common/Loader';
+import {
+  FavoriteRecipesContainer,
+  FavoriteRecipesSection,
+  FavoriteRecipesTitle,
+} from './FavoriteRecipes.styled';
+import FavoriteRecipesContextProvider from './FavoriteRecipes.context';
+import {
+  deleteRecipeFromFavoriteService,
+  getFavoritesService,
+} from 'services/favorite.service';
+import FavoriteRecipesList from './FavoriteRecipesList';
 
-export default function OwnRecipes() {
+export default function FavoriteRecipes() {
   const pagination = useRef({
     page: 1,
     totalPages: 1,
@@ -28,7 +28,7 @@ export default function OwnRecipes() {
     setIsLoading(true);
 
     try {
-      const { data } = await getOwnRecipesService(p, l);
+      const { data } = await getFavoritesService(p, l);
       const { recipes, limit, total, page } = data;
 
       pagination.current = { totalPages: Math.ceil(total / limit), page };
@@ -41,7 +41,7 @@ export default function OwnRecipes() {
     }
   }, []);
 
-  const removeOwnRecipe = useCallback(
+  const removeRecipeFromFavorite = useCallback(
     async recipeId => {
       const page =
         recipesList.length === 1
@@ -49,7 +49,7 @@ export default function OwnRecipes() {
             ? 1
             : pagination.current.page - 1
           : pagination.current.page;
-      await removeOwnRecipesService(recipeId);
+      await deleteRecipeFromFavoriteService(recipeId);
 
       await getRecipes(page);
     },
@@ -67,20 +67,20 @@ export default function OwnRecipes() {
   }, [getRecipes]);
 
   return (
-    <OwnRecipesSection>
-      <OwnRecipesContainer>
-        <OwnRecipesTitle>My recipes</OwnRecipesTitle>
-        <OwnRecipesContextProvider value={{ removeOwnRecipe }}>
+    <FavoriteRecipesSection>
+      <FavoriteRecipesContainer>
+        <FavoriteRecipesTitle>Favorites</FavoriteRecipesTitle>
+        <FavoriteRecipesContextProvider value={{ removeRecipeFromFavorite }}>
           {isLoading ? (
             <Loader />
           ) : recipesList.length > 0 ? (
-            <OwnRecipesList recipes={recipesList} />
+            <FavoriteRecipesList recipes={recipesList} />
           ) : (
-            <NotFoundRecipe message={searchRecipesMessage.ownRecipesNotFound} />
+            <NotFoundRecipe message={searchRecipesMessage.favoritesNotFound} />
           )}
-        </OwnRecipesContextProvider>
+        </FavoriteRecipesContextProvider>
         {pagination.current.totalPages > 1 && <Pagination />}
-      </OwnRecipesContainer>
-    </OwnRecipesSection>
+      </FavoriteRecipesContainer>
+    </FavoriteRecipesSection>
   );
 }
