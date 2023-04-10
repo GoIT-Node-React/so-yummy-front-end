@@ -1,6 +1,5 @@
- import React, { useEffect } from 'react';
- import { useSelector, useDispatch } from "react-redux";
-
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   ShoppingListHeader,
@@ -17,26 +16,29 @@ import {
   BtnWrap,
 } from './styled';
 
-import { getShoppingListThunk,removeIngredientFromShoppingListThunk } from '../../redux/shoppingList/shoppingList.thunk'
+import {
+  getShoppingListThunk,
+  removeIngredientFromShoppingListThunk,
+} from '../../redux/shoppingList/shoppingList.thunk';
 
 const ShopingListSection = () => {
-  
-    const { list, statuses, errors } = useSelector(
-      // (state) => console.log(state)
-      state => state.shoppingList
-    );
+  const { list, statuses, errors } = useSelector(
+    // (state) => console.log(state)
+    state => state.shoppingList
+  );
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const onDelete = ingredientId => {
-      dispatch(removeIngredientFromShoppingListThunk(ingredientId));
-    };
-  
+  const onDelete = ingredientId => {
+    dispatch(removeIngredientFromShoppingListThunk(ingredientId));
+  };
+
   useEffect(() => {
     dispatch(getShoppingListThunk());
     // eslint-disable-next-line
   }, []);
 
+  console.log(list);
 
   return (
     <div>
@@ -48,16 +50,16 @@ const ShopingListSection = () => {
         </NumberRemoveWrap>
       </ShoppingListHeader>
       <ul>
-        {list.map(({ _id, number, ttl, thb }) => {
+        {list.map(({ _id, value, ingredient }) => {
           return (
             <ShoppingListItem key={_id}>
               <ProductNameAndImgWrap>
-                <Img src={thb} alt="" />
-                <ProductName>{ttl}</ProductName>
+                <Img src={ingredient.thb} alt="" />
+                <ProductName>{ingredient.ttl}</ProductName>
               </ProductNameAndImgWrap>
               <NumberAndDelWrap>
                 <NumberWrap>
-                  <Number>{number}</Number>
+                  <Number>{value}</Number>
                 </NumberWrap>
                 <BtnWrap>
                   <Btn type="button" onClick={() => onDelete(_id)}>
