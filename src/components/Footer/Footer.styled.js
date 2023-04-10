@@ -17,6 +17,8 @@ import LeftDesk1x from '../../images/footer/footer-pasta-left-1xdesc.png';
 import LeftDesk2x from '../../images/footer/footer-pasta-left-2xdesc.png';
 
 export const Main = styled.div`
+    margin-top: auto;
+
     background-image: url('${RigthMobile1x}');
     background-repeat: no-repeat;
     background-size: contain;

@@ -5,7 +5,9 @@ import { Footer } from '../../components/Footer/Footer';
 
 export default function SharedLayout() {
     return (
-        <>
+        <div
+            style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+        >
             <Header />
             <main>
                 <Suspense fallback={<h2>Loading...</h2>}>
@@ -13,6 +15,6 @@ export default function SharedLayout() {
                 </Suspense>
             </main>
             <Footer />
-        </>
+        </div>
     );
 }

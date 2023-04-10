@@ -55,6 +55,8 @@ export default function SearchPage() {
 
     const fetchData = useCallback(
         async (p = 1, l = 12) => {
+            if (query.length === 0 || !type) return;
+
             setIsLoading(true);
             try {
                 const { data } = await searchService(type, query, p, l);
@@ -77,8 +79,11 @@ export default function SearchPage() {
 
     useEffect(() => {
         pagination.current.limit = isTabletOrMobile ? 6 : 12;
+
         fetchData(1, pagination.current.limit);
-    }, [isTabletOrMobile, fetchData]);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isTabletOrMobile]);
 
     return (
         <Container style={{ backgroundColor: '##ECECEC' }}>
