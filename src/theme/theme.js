@@ -47,6 +47,7 @@ export const theme = {
       100: '#FFFFFF', //card-title bg
       200: '#FAFAFA', //main light text color
       300: '#EFEFEF', //switch body bg
+      400: '#F5F5F5', //textarea, inputs bg
     },
     black: {
       100: '#000000', //notfound page text
@@ -66,6 +67,10 @@ export const theme = {
       300: '#333333', //close button
       400: '#001833', //category text color, page title color
       500: '#3E4462', //card-title color,page subtitle color, ingredient title color, arrow
+      600: '#E0E0E0', //text input
+      700: '#707070', //border
+      800: '#7E7E7E',
+      900: '#656565', //pagination
     },
     red: {
       100: '#e74a3b', // validation error

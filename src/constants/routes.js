@@ -6,7 +6,7 @@ export const routes = {
   CATEGORIES_PAGE: '/categories/:categoryName',
   ADD_RECIPE_PAGE: '/add',
   FAVORITE_PAGE: '/favorite',
-  RECIPE_PAGE: '/recipe/:recipeId',
+  RECIPE_PAGE: '/recipe',
   MY_RECIPES_PAGE: '/my',
   SEARCH_PAGE: '/search',
   SHOPPING_LIST_PAGE: '/shopping-list',

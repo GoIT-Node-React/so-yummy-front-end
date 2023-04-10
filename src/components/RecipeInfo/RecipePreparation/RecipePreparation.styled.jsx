@@ -9,6 +9,7 @@ export const RecipePreparationContainer = styled.div`
 
   @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
     display: flex;
+    justify-content: space-between;
     gap: 50px;
 
     margin-top: 100px;
@@ -20,9 +21,6 @@ export const RecipePreparationWrapper = styled.div`
 
   @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
     margin-bottom: 50px;
-  }
-
-  @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
   }
 `;
 
@@ -40,9 +38,6 @@ export const RecipePreparationHeader = styled.h2`
   @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
     margin-bottom: 32px;
   }
-
-  @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
-  }
 `;
 
 export const RecipePreparationList = styled.ul`
@@ -50,12 +45,6 @@ export const RecipePreparationList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 14px;
-
-  @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-  }
-
-  @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
-  }
 `;
 
 export const RecipePreparationItem = styled.li`
@@ -109,5 +98,6 @@ export const RecipeThumb = styled.img`
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
+    flex-shrink: 0;
   }
 `;

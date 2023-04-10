@@ -1,18 +1,13 @@
-import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import Header from '../Header';
+import { Footer } from '../../components/Footer/Footer';
+import MainSection from 'components/common/Main/Main';
 
 export default function SharedLayout() {
-  return (
-    <>
-      <header>
-        <h1>Header</h1>
-      </header>
-      <main>
-        <Suspense fallback={<h2>Loading...</h2>}>
-          <Outlet />
-        </Suspense>
-      </main>
-      <footer></footer>
-    </>
-  );
+    return (
+        <>
+            <Header />
+            <MainSection />
+            <Footer />
+        </>
+    );
 }
