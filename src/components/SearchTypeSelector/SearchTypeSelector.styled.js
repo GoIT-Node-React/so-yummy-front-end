@@ -5,15 +5,16 @@ export const SearchTypeSelectorWrapper = styled.div`
   display: flex;
   align-items: baseline;
 
-  @media (max-width: 767.98px) {
+  @media (max-width: calc(${({ theme }) => theme.breakpoints.tablet} - 0.2px)) {
     margin-bottom: 42px;
   }
 
-  @media (min-width: 768px) and (max-width: 1439.98px) {
+  @media (min-width: 768px) and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.desktop} - 0.2px)) {
     margin-bottom: 40px;
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin-bottom: 90px;
   }
 `;
@@ -28,11 +29,13 @@ export const SearchTypeSelectorText = styled.p`
   letter-spacing: -0.24px;
   color: ${({ theme }) => theme.colors.gray[400]};
 
-  @media (min-width: 768px) and (max-width: 1439.98px) {
+  @media (min-width: (${({ theme }) =>
+      theme.breakpoints.tablet})) and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.desktop} - 0.2px)) {
     font-size: ${({ theme }) => theme.fontSizes[2]};
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: ${({ theme }) => theme.fontSizes[4]};
   }
 `;

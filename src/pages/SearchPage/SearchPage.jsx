@@ -5,7 +5,7 @@ import SearchBar from '../../components/SerchBar';
 import SearchedRecipesList from '../../components/SearchedRecipesList';
 import SearchRecipesMessage from 'components/SearchRecipesMessage';
 import { Container } from '../../components/common/Container.styled';
-import { Section } from './SearchPage.styled';
+import { Section, SearchedRecipesListWrapper } from './SearchPage.styled';
 
 import { searchRecipesMessage } from 'constants/message';
 import SearchContextProvider from 'contexts/Search.context';
@@ -104,10 +104,10 @@ export default function SearchPage() {
           <SearchBar />
           {recipes ? (
             recipes.length ? (
-              <>
+              <SearchedRecipesListWrapper>
                 <SearchedRecipesList />
                 <Pagination />
-              </>
+              </SearchedRecipesListWrapper>
             ) : (
               <SearchRecipesMessage message={searchRecipesMessage.notFound} />
             )

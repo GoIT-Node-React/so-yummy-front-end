@@ -4,14 +4,16 @@ export const FormWrapper = styled.div`
   background-color: #f0f0f0;
   clip-path: inset(0px 0px 0px 0px round 20px 50px 20px 50px);
 
-  @media (min-width: 375px) and (max-width: 767.98px) {
+  @media (min-width: 375px) and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.tablet} - 0.2px)) {
     width: 296px;
     height: 54px;
 
     margin-bottom: 24px;
   }
 
-  @media (min-width: 768px) and (max-width: 1439.98px) {
+  @media (min-width: 768px) and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.desktop} - 0.2px)) {
     width: 363px;
     height: 57px;
 
@@ -45,7 +47,9 @@ export const Form = styled.form`
     margin-bottom: 24px;
   }
 
-  @media (min-width: 768px) and (max-width: 1439.98px) {
+  @media (min-width: (${({ theme }) =>
+      theme.breakpoints.tablet})) and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.desktop} - 0.2px)) {
     width: 363px;
     height: 57px;
 
@@ -156,7 +160,8 @@ export const SearchFormButton = styled.button`
     color: ${({ theme }) => theme.colors.white[200]};
   }
 
-  @media (min-width: 768px) and (max-width: 1439.98px) {
+  @media (min-width: 768px) and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.desktop} - 0.2px)) {
     width: 161px;
     height: 57px;
 
@@ -164,7 +169,7 @@ export const SearchFormButton = styled.button`
     padding: 50px 42px;
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 161px;
     height: 70px;
 
