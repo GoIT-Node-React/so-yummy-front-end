@@ -13,14 +13,14 @@ const Category = ({ data }) => {
   console.log(data[0].charAt(0).toUpperCase() + data[0].slice(1));
   return (
     <Container>
-      {/* <Title>{data[0].charAt(0).toUpperCase() + data[0].slice(1)}</Title>
+      <Title>{data[0].charAt(0).toUpperCase() + data[0].slice(1)}</Title>
       {isDesc ? (
         <ListRecipe>
-          {data[1].map(({ category, description, preview, title, _id }) => (
+          {data[1].map(({ category, description, thumb, title, _id }) => (
             <li key={_id}>
               <RecipeCard
                 id={_id}
-                image={preview}
+                image={thumb}
                 altText={description}
                 text={title}
               />
@@ -32,11 +32,11 @@ const Category = ({ data }) => {
           <ListRecipe>
             {data[1]
               .slice(0, -2)
-              .map(({ category, description, preview, title, _id }) => (
+              .map(({ category, description, thumb, title, _id }) => (
                 <li key={_id}>
                   <RecipeCard
                     id={_id}
-                    image={preview}
+                    image={thumb}
                     altText={description}
                     text={title}
                   />
@@ -48,11 +48,11 @@ const Category = ({ data }) => {
           <ListRecipe>
             {data[1]
               .slice(0, -3)
-              .map(({ category, description, preview, title, _id }) => (
+              .map(({ category, description, thumb, title, _id }) => (
                 <li key={_id}>
                   <RecipeCard
                     id={_id}
-                    image={preview}
+                    image={thumb}
                     altText={description}
                     text={title}
                   />
@@ -70,7 +70,7 @@ const Category = ({ data }) => {
         >
           See all
         </SeeAllBtn>
-      </Box> */}
+      </Box>
     </Container>
   );
 };

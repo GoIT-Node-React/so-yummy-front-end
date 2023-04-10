@@ -62,7 +62,7 @@ export const App = () => {
             path={routes.CATEGORIES_PAGE}
             element={<PrivatePage component={<CategoriesPage />} />}
           >
-            <Route path="/:categoryName" component={<>HEllo</>} />
+            <Route path=":categoryName" element={<>HEllo</>} />
           </Route>
           <Route
             path={routes.FAVORITE_PAGE}

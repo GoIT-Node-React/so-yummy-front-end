@@ -36,9 +36,9 @@ const PreviewCategories = () => {
 
   return (
     <Section>
-      {/* {allCategories.map(item => (
+      {allCategories.map(item => (
         <Category key={item[0]} data={item} />
-      ))} */}
+      ))}
       <Box>
         <OtherCatBtn>Other categories</OtherCatBtn>
       </Box>
