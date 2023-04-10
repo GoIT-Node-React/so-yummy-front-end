@@ -1,4 +1,4 @@
-import {StyledOtherCatBtn, StyledSeeAllBtn} from './Buttons.styled'
+import { StyledOtherCatBtn, StyledSeeAllBtn} from './Buttons.styled'
 import { Link } from 'react-router-dom';
 
 export const OtherCatBtn = ({ children }) => {

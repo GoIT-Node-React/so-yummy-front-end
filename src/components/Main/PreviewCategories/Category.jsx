@@ -1,7 +1,7 @@
 import React from 'react';
 import { RecipeCard } from './RecipeCard';
 import { useMediaQuery } from 'react-responsive';
-import { SeeAllBtn } from './Buttons';
+import {SeeAllBtn}  from './Buttons';
 import { Box, Container, ListRecipe, Title } from './Category.styled';
 
 const Category = ({ data }) => {
