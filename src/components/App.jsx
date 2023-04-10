@@ -23,80 +23,75 @@ const ShoppingListPage = lazy(() => import('pages/ShoppingListPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 export const App = () => {
-    const dispatch = useDispatch();
-    const { isLoading } = useSelector(selectCurrent);
-    const accessToken = useSelector(selectAccessToken);
-    const isFirst = useRef(true);
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector(selectCurrent);
+  const accessToken = useSelector(selectAccessToken);
+  const isFirst = useRef(true);
 
-    useEffect(() => {
-        if (accessToken && isFirst.current) {
-            dispatch(currentThunk());
-            isFirst.current = false;
-        }
-    }, [dispatch, accessToken]);
+  useEffect(() => {
+    if (accessToken && isFirst.current) {
+      dispatch(currentThunk());
+      isFirst.current = false;
+    }
+  }, [dispatch, accessToken]);
 
-    if (isLoading) return <>Loading...</>;
+  if (isLoading) return <>Loading...</>;
 
-    return (
-        <>
-            <Routes>
-                <Route
-                    path={routes.WELCOME_PAGE}
-                    element={<RestrictedPage component={<WelcomePage />} />}
-                />
+  return (
+    <>
+      <Routes>
+        <Route
+          path={routes.WELCOME_PAGE}
+          element={<RestrictedPage component={<WelcomePage />} />}
+        />
 
-                <Route path={routes.MAIN_PAGE} element={<AuthLayout />}>
-                    <Route
-                        path={routes.REGISTER_PAGE}
-                        element={
-                            <RestrictedPage component={<RegisterPage />} />
-                        }
-                    />
-                    <Route
-                        path={routes.SIGNIN_PAGE}
-                        element={<RestrictedPage component={<SigninPage />} />}
-                    />
-                </Route>
+        <Route path={routes.MAIN_PAGE} element={<AuthLayout />}>
+          <Route
+            path={routes.REGISTER_PAGE}
+            element={<RestrictedPage component={<RegisterPage />} />}
+          />
+          <Route
+            path={routes.SIGNIN_PAGE}
+            element={<RestrictedPage component={<SigninPage />} />}
+          />
+        </Route>
 
-                <Route path={routes.MAIN_PAGE} element={<SharedLayout />}>
-                    <Route
-                        index
-                        element={<PrivatePage component={<MainPage />} />}
-                    />
-                    <Route
-                        path={routes.CATEGORIES_PAGE}
-                        element={<PrivatePage component={<CategoriesPage />} />}
-                    />
-                    <Route
-                        path={routes.FAVORITE_PAGE}
-                        element={<PrivatePage component={<FavoritePage />} />}
-                    />
-                    <Route
-                        path={routes.MY_RECIPES_PAGE}
-                        element={<PrivatePage component={<OwnRecipesPage />} />}
-                    />
-                    <Route
-                        path={routes.ADD_RECIPE_PAGE}
-                        element={<PrivatePage component={<AddRecipePage />} />}
-                    />
-                    <Route
-                        path={`${routes.RECIPE_PAGE}/:recipeId`}
-                        element={<PrivatePage component={<RecipeInfoPage />} />}
-                    />
-                    <Route
-                        path={routes.SEARCH_PAGE}
-                        element={<PrivatePage component={<SearchPage />} />}
-                    />
-                    <Route
-                        path={routes.SHOPPING_LIST_PAGE}
-                        element={
-                            <PrivatePage component={<ShoppingListPage />} />
-                        }
-                    />
-                    <Route path="*" element={<NotFoundPage />} />
-                </Route>
-            </Routes>
-            <AppToastContainer />
-        </>
-    );
+        <Route path={routes.MAIN_PAGE} element={<SharedLayout />}>
+          <Route index element={<PrivatePage component={<MainPage />} />} />
+          <Route
+            path={routes.CATEGORIES_PAGE}
+            element={<PrivatePage component={<CategoriesPage />} />}
+          >
+            <Route path="/:categoryName" component={<>HEllo</>} />
+          </Route>
+          <Route
+            path={routes.FAVORITE_PAGE}
+            element={<PrivatePage component={<FavoritePage />} />}
+          />
+          <Route
+            path={routes.MY_RECIPES_PAGE}
+            element={<PrivatePage component={<OwnRecipesPage />} />}
+          />
+          <Route
+            path={routes.ADD_RECIPE_PAGE}
+            element={<PrivatePage component={<AddRecipePage />} />}
+          />
+          <Route
+            path={`${routes.RECIPE_PAGE}/:recipeId`}
+            element={<PrivatePage component={<RecipeInfoPage />} />}
+          />
+          <Route
+            path={routes.SEARCH_PAGE}
+            element={<PrivatePage component={<SearchPage />} />}
+          />
+          <Route
+            path={routes.SHOPPING_LIST_PAGE}
+            element={<PrivatePage component={<ShoppingListPage />} />}
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+      <AppToastContainer />
+    </>
+  );
 };
