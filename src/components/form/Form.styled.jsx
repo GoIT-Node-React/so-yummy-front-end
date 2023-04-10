@@ -13,7 +13,7 @@ export const AuthForm = styled.form`
 
   background-color: ${({ theme }) => theme.colors.black[300]};
 
-  box-shadow: 0px 4px 48px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ theme }) => theme.shadows.base};
   border-radius: 30px;
 
   & > div:not(:last-of-type) {
