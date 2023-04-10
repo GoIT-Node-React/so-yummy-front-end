@@ -7,7 +7,6 @@ import {
     InputWrapper,
     Input,
     SubscribeButton,
-    IconLetterStyle,
     IconLetter,
     SubscribeTitle,
     SubscribeText,
