@@ -1,15 +1,14 @@
 import Header from '../Header';
-import { Footer } from '../../components/Footer/Footer';
-import MainSection from 'components/common/Main/Main';
+// import { Footer } from '../../components/Footer/Footer';
+// import MainSection from 'components/common/Main/Main';
+
+import MainPageHero from '../MainPageHero';
 
 export default function SharedLayout() {
     return (
-        <div
-            style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
-        >
+        <>
             <Header />
-            <MainSection />
-            <Footer />
-        </div>
+            <MainPageHero />
+        </>
     );
 }
