@@ -11,12 +11,14 @@ import {
 import { persistedAuthReducer } from './auth/auth.slice';
 import { userReducer } from './user/user.slice';
 import { shoppingListReducer } from './shoppingList/shoppingList.slice';
+import { recipesReducer } from './recipes/recipes.slice';
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     user: userReducer,
     shoppingList: shoppingListReducer,
+    recipes: recipesReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

@@ -8,27 +8,25 @@ export const SearchedRecipes = styled.ul`
 
   @media (max-width: calc(${({ theme }) => theme.breakpoints.tablet} - 0.2px)) {
     flex-direction: column;
-    margin-bottom: 40px;
   }
 
   @media (min-width: 768px) and (max-width: 1439.98px) {
     flex-wrap: wrap;
-    gap: 32px;
+    row-gap: 32px;
+    column-gap: 32px;
 
-    margin-bottom: 50px;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     flex-wrap: wrap;
     row-gap: 100px;
     column-gap: 14px;
-
-    margin-bottom: 50px;
   }
 `;
 
 export const SearchedRecipesListItem = styled.li`
   position: relative;
+  cursor: pointer;
 
   @media (max-width: calc(${({ theme }) => theme.breakpoints.tablet} - 0.2px)) {
     width: 343px;
@@ -37,10 +35,12 @@ export const SearchedRecipesListItem = styled.li`
 
   @media (min-width: 768px) and (max-width: calc(${({ theme }) =>
       theme.breakpoints.desktop} - 0.2px)) {
-    width: calc((100% - 32px) / 2);
+    width: 336px;
+    height: 323px;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: calc((100% - 14px * 3) / 4);
+    width: 299px;
+    height: 323px;
   }
 `;

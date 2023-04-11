@@ -3,7 +3,7 @@ export const routes = {
   WELCOME_PAGE: '/welcome',
   REGISTER_PAGE: '/register',
   SIGNIN_PAGE: '/signin',
-  CATEGORIES_PAGE: '/categories/:categoryName',
+  CATEGORIES_PAGE: '/categories',
   ADD_RECIPE_PAGE: '/add',
   FAVORITE_PAGE: '/favorite',
   RECIPE_PAGE: '/recipe',
