@@ -8,6 +8,7 @@ export const PaginationList = styled.ul`
 
   width: fit-content;
   margin: 0 auto 0;
+  margin-top: 50px;
   padding: 14px 24px;
 
   background: ${({ theme }) => theme.colors.white[100]};
