@@ -1,10 +1,11 @@
 import React from 'react';
-import Favorite from 'components/Favorite/Favorite';
+
+import FavoriteRecipes from 'components/FavoriteRecipes/FavoriteRecipes';
 
 export default function FavoritePage() {
   return (
     <>
-      <Favorite />
+      <FavoriteRecipes />
     </>
   );
 }
