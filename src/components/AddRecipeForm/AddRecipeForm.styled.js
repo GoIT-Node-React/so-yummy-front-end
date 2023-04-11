@@ -380,7 +380,13 @@ export const IngredientsError = styled.p`
 `;
 
 export const LoaderContainer = styled.div`
+  width: 160px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 32px;
+  margin-right: auto;
 `;
 export const RelativeContainer = styled.div`
   position: relative;
