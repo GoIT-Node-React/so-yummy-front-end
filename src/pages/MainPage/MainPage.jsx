@@ -15,6 +15,7 @@ import {
 } from './MainPage.styled';
 import { routes } from 'constants/routes';
 import { useMediaQuery } from 'react-responsive';
+import MainPageHero from 'components/MainPageHero/MainPageHero';
 
 export default function MainPage() {
   const [recipesByCategories, setRecipesByCategories] = useState([]);
@@ -42,42 +43,47 @@ export default function MainPage() {
 
   console.log(isLoading);
   return (
-    <MainPageSection>
-      <Container>
-        <MainPageCategoriesList>
-          {recipesByCategories.map(([categoryTitle, recipes]) => {
-            return (
-              <MainPageCategoriesItem key={categoryTitle}>
-                <MainPageTitle>{categoryTitle}</MainPageTitle>
-                <MainPageRecipesList>
-                  {recipes
-                    .filter(
-                      (t, index) =>
-                        (isMobile && index < 1) ||
-                        (isTablet && index < 2) ||
-                        isDesktop
-                    )
-                    .map(({ _id, title, thumb }) => (
-                      <MainPageRecipesItem key={_id}>
-                        <Card
-                          src={thumb}
-                          title={title}
-                          to={`${routes.RECIPE_PAGE}/${_id}`}
-                        />
-                      </MainPageRecipesItem>
-                    ))}
-                </MainPageRecipesList>
-                <SeeAllButton to={`${routes.CATEGORIES_PAGE}/${categoryTitle}`}>
-                  See all
-                </SeeAllButton>
-              </MainPageCategoriesItem>
-            );
-          })}
-        </MainPageCategoriesList>
-        <MainPageOtherCategoriesButton to={`${routes.CATEGORIES_PAGE}`}>
-          Other categories
-        </MainPageOtherCategoriesButton>
-      </Container>
-    </MainPageSection>
+    <>
+      <MainPageHero />
+      <MainPageSection>
+        <Container>
+          <MainPageCategoriesList>
+            {recipesByCategories.map(([categoryTitle, recipes]) => {
+              return (
+                <MainPageCategoriesItem key={categoryTitle}>
+                  <MainPageTitle>{categoryTitle}</MainPageTitle>
+                  <MainPageRecipesList>
+                    {recipes
+                      .filter(
+                        (t, index) =>
+                          (isMobile && index < 1) ||
+                          (isTablet && index < 2) ||
+                          isDesktop
+                      )
+                      .map(({ _id, title, thumb }) => (
+                        <MainPageRecipesItem key={_id}>
+                          <Card
+                            src={thumb}
+                            title={title}
+                            to={`${routes.RECIPE_PAGE}/${_id}`}
+                          />
+                        </MainPageRecipesItem>
+                      ))}
+                  </MainPageRecipesList>
+                  <SeeAllButton
+                    to={`${routes.CATEGORIES_PAGE}/${categoryTitle}`}
+                  >
+                    See all
+                  </SeeAllButton>
+                </MainPageCategoriesItem>
+              );
+            })}
+          </MainPageCategoriesList>
+          <MainPageOtherCategoriesButton to={`${routes.CATEGORIES_PAGE}`}>
+            Other categories
+          </MainPageOtherCategoriesButton>
+        </Container>
+      </MainPageSection>
+    </>
   );
 }
