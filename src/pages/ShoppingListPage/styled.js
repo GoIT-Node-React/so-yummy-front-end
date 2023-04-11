@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ShoppingListSection = styled.div`
-  background: #FAFAFA;
-`;
+export const ShoppingListSection = styled.section``;
 
 export const ShoppingListTitle = styled.p`
   margin-top: 50px;

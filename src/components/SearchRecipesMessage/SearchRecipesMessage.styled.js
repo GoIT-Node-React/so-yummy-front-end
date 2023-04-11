@@ -5,12 +5,6 @@ export const SearchRecipesMessageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  /* margin-bottom: 100px; */
-
-  @media (min-width: 768px) {
-    margin-bottom: 200px;
-  }
 `;
 
 export const SearchRecipesMessageImage = styled.picture`
@@ -19,7 +13,7 @@ export const SearchRecipesMessageImage = styled.picture`
   width: 208px;
   height: 133px;
 
-  @media (min-width: 768px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin-bottom: 32px;
 
     width: 350px;
@@ -28,6 +22,7 @@ export const SearchRecipesMessageImage = styled.picture`
 `;
 
 export const SearchRecipesMessageText = styled.p`
+  text-align: center;
   font-family: ${({ theme }) => theme.fonts.Poppins};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   font-size: ${({ theme }) => theme.fontSizes[2]};
@@ -39,7 +34,7 @@ export const SearchRecipesMessageText = styled.p`
   color: ${({ theme }) => theme.colors.black[100]};
   opacity: 0.5;
 
-  @media (min-width: 768px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: ${({ theme }) => theme.fontSizes[5]};
   }
 `;

@@ -5,6 +5,7 @@ import SearchBar from '../../components/SerchBar';
 import SearchedRecipesList from '../../components/SearchedRecipesList';
 import SearchRecipesMessage from 'components/SearchRecipesMessage';
 import { Container } from '../../components/common/Container.styled';
+import { Section, SearchedRecipesListWrapper } from './SearchPage.styled';
 
 import { searchRecipesMessage } from 'constants/message';
 import SearchContextProvider from 'contexts/Search.context';
@@ -58,7 +59,6 @@ export default function SearchPage() {
       if (query.length === 0 || !type) return;
 
       setIsLoading(true);
-
       try {
         const { data } = await searchService(type, query, p, l);
         const { recipes, limit, page, total } = data;
@@ -87,33 +87,47 @@ export default function SearchPage() {
   }, [isTabletOrMobile]);
 
   return (
-    <Container>
-      <MainPageTitle />
-      <SearchContextProvider
-        value={{
-          recipes,
-          query,
-          type,
-          isLoading,
-          updateQuery,
-          updateType,
-          fetchData,
-        }}
-      >
-        <SearchBar />
-        {recipes ? (
-          recipes.length ? (
-            <>
-              <SearchedRecipesList />
-              <Pagination />
-            </>
+    <Section>
+      <Container>
+        <MainPageTitle />
+        <SearchContextProvider
+          value={{
+            recipes,
+            query,
+            type,
+            isLoading,
+            updateQuery,
+            updateType,
+            fetchData,
+          }}
+        >
+          <SearchBar />
+          {recipes ? (
+            recipes.length ? (
+              <SearchedRecipesListWrapper>
+                <SearchedRecipesList />
+                {!isLoading && <Pagination />}
+              </SearchedRecipesListWrapper>
+            ) : (
+              <>
+                {!isLoading && (
+                  <SearchRecipesMessage
+                    message={searchRecipesMessage.notFound}
+                  />
+                )}
+              </>
+            )
           ) : (
-            <SearchRecipesMessage message={searchRecipesMessage.notFound} />
-          )
-        ) : (
-          <SearchRecipesMessage message={searchRecipesMessage.trySearch} />
-        )}
-      </SearchContextProvider>
-    </Container>
+            <>
+              {!isLoading && (
+                <SearchRecipesMessage
+                  message={searchRecipesMessage.trySearch}
+                />
+              )}
+            </>
+          )}
+        </SearchContextProvider>
+      </Container>
+    </Section>
   );
 }

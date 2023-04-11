@@ -23,10 +23,7 @@ import {
 } from '../../redux/shoppingList/shoppingList.thunk';
 
 const ShopingListSection = () => {
-  const { list } = useSelector(
-    // (state) => console.log(state)
-    state => state.shoppingList
-  );
+  const { list } = useSelector(state => state.shoppingList);
 
   const dispatch = useDispatch();
 
@@ -36,10 +33,7 @@ const ShopingListSection = () => {
 
   useEffect(() => {
     dispatch(getShoppingListThunk());
-    // eslint-disable-next-line
-  }, []);
-
-  console.log(list);
+  }, [dispatch]);
 
   return (
     <div>
