@@ -3,7 +3,7 @@ import useAppPagination from 'hooks/useAppPagination';
 import { processingError } from 'helpers';
 import { searchRecipesMessage } from 'constants/message';
 import NotFoundRecipe from 'components/NotFoundRecipe';
-import Loader from 'components/common/Loader';
+
 import {
   FavoriteRecipesContainer,
   FavoriteRecipesSection,
@@ -15,6 +15,7 @@ import {
   getFavoritesService,
 } from 'services/favorite.service';
 import FavoriteRecipesList from './FavoriteRecipesList';
+import MainLoader from 'components/MainLoader/MainLoader';
 
 export default function FavoriteRecipes() {
   const pagination = useRef({
@@ -72,7 +73,7 @@ export default function FavoriteRecipes() {
         <FavoriteRecipesTitle>Favorites</FavoriteRecipesTitle>
         <FavoriteRecipesContextProvider value={{ removeRecipeFromFavorite }}>
           {isLoading ? (
-            <Loader />
+            <MainLoader />
           ) : recipesList.length > 0 ? (
             <FavoriteRecipesList recipes={recipesList} />
           ) : (
