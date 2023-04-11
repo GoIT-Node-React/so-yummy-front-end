@@ -6,10 +6,10 @@ export const Wrapper = styled.div`
   right: 0;
   z-index: 2;
 
-  padding: 18px 18px 0;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  row-gap: 44px;
+  row-gap: 28px;
   border-radius: 8px;
   border: 1px solid ${props => props.theme.colors.green[200]};
 
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   min-width: 161px;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-    row-gap: 50px;
+    row-gap: 32px;
     min-width: 177px;
     border: none;
   }

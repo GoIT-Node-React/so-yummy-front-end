@@ -17,7 +17,7 @@ import { routes } from '../../constants/routes';
 import { schema } from './schema';
 import { categories, cookingTime } from './data';
 import { MesureSelect } from './MesureSelect';
-import { FigureButton } from 'components/common/FigureButton.styled';
+import { MainButton } from 'components/common/FigureButton.styled';
 import Loader from 'components/common/Loader';
 import {
   Border,
@@ -564,13 +564,13 @@ export default function AddRecipeForm() {
       ) : (
         <>
           {isTablet ? (
-            <FigureButton variant="dark" w="161px" h="52px" p="52px 42px">
+            <MainButton variant="dark" w="161px" p="14px 64px">
               Add
-            </FigureButton>
+            </MainButton>
           ) : (
-            <FigureButton variant="dark" w="129px" h="46px" p="48px 42px">
+            <MainButton variant="dark" w="129px" p="12px 48px">
               Add
-            </FigureButton>
+            </MainButton>
           )}
         </>
       )}

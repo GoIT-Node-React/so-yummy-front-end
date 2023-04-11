@@ -7,8 +7,10 @@ import {
   addRecipeToFavoriteService,
   deleteRecipeFromFavoriteService,
 } from 'services/favorite.service';
+import { useScrollToTop } from 'hooks/useScrollToTop';
 
 export default function RecipeInfoPage() {
+  useScrollToTop();
   const { recipeId } = useParams();
   const [recipeInfo, setRecipeInfo] = useState(null);
 

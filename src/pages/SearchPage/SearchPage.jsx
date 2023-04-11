@@ -14,8 +14,10 @@ import { searchService } from 'services/search.service';
 import { processingError } from 'helpers';
 import useAppPagination from 'hooks/useAppPagination';
 import { useMediaQuery } from 'react-responsive';
+import { useScrollToTop } from 'hooks/useScrollToTop';
 
 export default function SearchPage() {
+  useScrollToTop();
   const [params] = useSearchParams();
   const searchParams = Object.fromEntries(params);
   const [recipes, setRecipes] = useState(null);

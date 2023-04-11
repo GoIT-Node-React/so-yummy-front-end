@@ -17,8 +17,10 @@ import { routes } from 'constants/routes';
 import { useMediaQuery } from 'react-responsive';
 import MainPageHero from 'components/MainPageHero/MainPageHero';
 import MainLoader from 'components/MainLoader/MainLoader';
+import { useScrollToTop } from 'hooks/useScrollToTop';
 
 export default function MainPage() {
+  useScrollToTop();
   const [recipesByCategories, setRecipesByCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const isMobile = useMediaQuery({ minWidth: 375 });
