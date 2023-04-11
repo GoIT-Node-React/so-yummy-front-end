@@ -22,6 +22,8 @@ export const CardContainer = styled.div`
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
+
+  transition: ${({ theme }) => theme.transitions.create(['box-shadow'])}; ;
 `;
 
 export const Image = styled.img`
