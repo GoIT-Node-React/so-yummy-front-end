@@ -81,7 +81,7 @@ export default function AddRecipeForm() {
       title,
       description,
       category: 'Breakfast',
-      time: '5 min',
+      time: '5',
       ingredients: [{ id: '', measure: '' }],
       instructions,
     },
