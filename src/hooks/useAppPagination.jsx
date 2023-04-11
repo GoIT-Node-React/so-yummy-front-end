@@ -1,5 +1,6 @@
 import usePagination from '@mui/material/usePagination/usePagination';
 import Pagination from 'components/common/Pagination';
+import { scrollToTop } from 'helpers';
 
 export default function useAppPagination({ totalPages, page, onFetch }) {
   const { items } = usePagination({
@@ -29,11 +30,7 @@ export default function useAppPagination({ totalPages, page, onFetch }) {
       }
 
       onFetch(newPage);
-
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
+      scrollToTop(true);
     },
   });
 

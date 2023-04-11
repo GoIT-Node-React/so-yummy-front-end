@@ -124,7 +124,7 @@ export const LogoutButton = ({ onClick }) => {
     </>
   );
 };
-export const CancelButton = () => {
+export const CancelButton = ({ onClose }) => {
   const mobileMaxWidth = theme.breakpoints[1].slice(0, -2) - 1;
 
   const isMobile = useMediaQuery({
@@ -134,11 +134,23 @@ export const CancelButton = () => {
   return (
     <>
       {isMobile ? (
-        <RectButton variant="gray" w="137px" h="59px" fs="14px">
+        <RectButton
+          variant="gray"
+          w="137px"
+          h="59px"
+          fs="14px"
+          onClick={onClose}
+        >
           Cancel
         </RectButton>
       ) : (
-        <RectButton variant="gray" w="192px" h="59px" fs="16px">
+        <RectButton
+          variant="gray"
+          w="192px"
+          h="59px"
+          fs="16px"
+          onClick={onClose}
+        >
           Cancel
         </RectButton>
       )}

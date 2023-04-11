@@ -3,7 +3,9 @@ import Card from 'components/common/Card/Card';
 import {
   SearchedRecipes,
   SearchedRecipesListItem,
+  LoaderSearchRecipeWrapper,
 } from './SearchedRecipesList.styled';
+
 import { useSearchContext } from 'contexts/Search.context';
 
 export default function SearchedRecipesList() {
@@ -11,24 +13,27 @@ export default function SearchedRecipesList() {
 
   return (
     <>
-      {isLoading && <Loader />}
-      {recipes.length > 0 && !isLoading && (
-        <>
-          <SearchedRecipes>
-            {recipes.map(({ _id, title, thumb }) => {
-              return (
-                <SearchedRecipesListItem key={_id}>
+      {recipes.length > 0 && (
+        <SearchedRecipes>
+          {recipes.map(({ _id, title, thumb }) => {
+            return (
+              <SearchedRecipesListItem key={_id}>
+                {isLoading ? (
+                  <LoaderSearchRecipeWrapper>
+                    <Loader />
+                  </LoaderSearchRecipeWrapper>
+                ) : (
                   <Card
                     src={thumb}
                     title={title}
                     to={`/recipe/${_id}`}
                     id={_id}
                   />
-                </SearchedRecipesListItem>
-              );
-            })}
-          </SearchedRecipes>
-        </>
+                )}
+              </SearchedRecipesListItem>
+            );
+          })}
+        </SearchedRecipes>
       )}
     </>
   );

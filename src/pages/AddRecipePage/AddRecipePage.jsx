@@ -5,7 +5,10 @@ import { FlexContainer, MainTitle, Section } from './AddRecipePage.styled';
 import SocialMedia from 'components/SocialMedia/SocialMedia';
 import { useMediaQuery } from 'react-responsive';
 import { Subtitle } from 'components/AddRecipeForm/AddRecipeForm.styled';
+import { useScrollToTop } from 'hooks/useScrollToTop';
+
 export default function AddRecipePage() {
+  useScrollToTop();
   const isDesctop = useMediaQuery({
     query: '(min-width: 1440px)',
   });

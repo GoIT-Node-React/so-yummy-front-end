@@ -9,7 +9,7 @@ import {
   ArrowIcon,
 } from './PromptPopup.styled';
 import { theme } from '../../../theme/theme';
-import { FigureButton } from '../../common/FigureButton.styled';
+import { MainButton } from '../../common/FigureButton.styled';
 import { useEffect, useRef } from 'react';
 
 export default function PromptPopup({
@@ -63,19 +63,18 @@ export default function PromptPopup({
             />
           </InnerWrapper>
 
-          <FigureButton
+          <MainButton
             onClick={handleLogoutButton}
             w="125px"
-            h="43px"
             variant="green"
-            p="44px 24px"
-            m="-40px 0 0"
+            p="12px 24px 12px 27px"
+            fs="14px"
           >
             <FigureButtonInnerWrapper>
               <FigureButtonText>Log out</FigureButtonText>
               <ArrowIcon />
             </FigureButtonInnerWrapper>
-          </FigureButton>
+          </MainButton>
         </Wrapper>
       ) : (
         <Wrapper ref={wrapperRef}>
@@ -87,19 +86,18 @@ export default function PromptPopup({
             />
           </InnerWrapper>
 
-          <FigureButton
+          <MainButton
             onClick={handleLogoutButton}
             w="141px"
-            h="43px"
+            fs="14px"
             variant="green"
-            p="46px 32px"
-            m="-42px 0 0"
+            p="12px 30px 12px 35px"
           >
             <FigureButtonInnerWrapper>
               <FigureButtonText>Log out</FigureButtonText>
               <ArrowIcon />
             </FigureButtonInnerWrapper>
-          </FigureButton>
+          </MainButton>
         </Wrapper>
       )}
     </>
