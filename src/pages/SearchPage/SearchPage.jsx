@@ -106,7 +106,7 @@ export default function SearchPage() {
             recipes.length ? (
               <SearchedRecipesListWrapper>
                 <SearchedRecipesList />
-                {!isLoading && <Pagination />}
+                <Pagination />
               </SearchedRecipesListWrapper>
             ) : (
               <>
