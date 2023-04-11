@@ -58,6 +58,10 @@ export default function CategoryRecipes() {
 
   useEffect(() => {
     getRecipesByCategory();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }, [getRecipesByCategory]);
 
   useEffect(() => {

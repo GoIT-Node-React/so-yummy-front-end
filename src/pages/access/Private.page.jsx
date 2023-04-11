@@ -6,6 +6,7 @@ import {
 } from 'redux/auth/auth.selectors';
 import { AccessPropTypes } from './Access.props';
 import { routes } from 'constants/routes';
+import { scrollToTop } from 'helpers';
 
 export default function PrivatePage({
   component: Component,
@@ -15,6 +16,8 @@ export default function PrivatePage({
   const token = useSelector(selectAccessToken);
   const isRefreshing = useSelector(selectIsRefreshing);
   const shouldRedirect = !isRefreshing && !token;
+
+  scrollToTop();
 
   return shouldRedirect ? (
     <Navigate to={redirect} state={{ from: location }} replace />
