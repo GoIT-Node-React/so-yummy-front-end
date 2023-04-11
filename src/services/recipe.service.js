@@ -34,4 +34,8 @@ export const removeOwnRecipesService = async recipeId => {
   return data;
 };
 
-// export const getCategoriesSe
+export const getCategoriesService = async () => {
+  const { data } = await privateApi.get(`/recipes/categories`);
+
+  return data;
+};

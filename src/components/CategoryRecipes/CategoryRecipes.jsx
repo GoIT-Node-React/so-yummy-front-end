@@ -1,3 +1,7 @@
+import { useParams } from 'react-router-dom';
+
 export default function CategoryRecipes() {
-  return <h1>HEllo</h1>;
+  const { categoryName } = useParams();
+
+  return <h1>{categoryName}</h1>;
 }
