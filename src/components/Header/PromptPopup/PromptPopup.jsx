@@ -57,7 +57,10 @@ export default function PromptPopup({
         <Wrapper ref={wrapperRef}>
           <InnerWrapper>
             <Text>Edit profile</Text>
-            <EditButton HandleEditPopupShow={HandleEditPopupShow} />
+            <EditButton
+              HandleEditPopupShow={HandleEditPopupShow}
+              onClose={onClose}
+            />
           </InnerWrapper>
 
           <FigureButton
