@@ -326,6 +326,7 @@ export const StyledTextarea = styled.textarea`
   height: 154px;
   padding: 10px 16px;
   margin-top: 24px;
+  margin-bottom: 18px;
 
   background-color: ${({ theme }) => theme.colors.white[400]};
 
@@ -359,6 +360,10 @@ export const StyledTextarea = styled.textarea`
     &::placeholder {
       font-size: ${({ theme }) => theme.fontSizes[4]};
     }
+  }
+  @media screen and (min-width: calc(${({ theme }) =>
+      theme.breakpoints[1]} - 1px)) {
+    margin-bottom: 32px;
   }
 `;
 
