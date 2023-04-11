@@ -1,274 +1,310 @@
 import styled from '@emotion/styled';
+
 import { NavLink, Link } from 'react-router-dom';
+
 import { theme } from '../../theme/theme';
 
-import RigthMobile1x from '../../images/footer/footer-pasta-rigth-1xmob.png';
-import RigthMobile2x from '../../images/footer/footer-pasta-rigth-2xmob.png';
-import RigthTablet1x from '../../images/footer/footer-pasta-rigth-1xtab.png';
-import RigthTablet2x from '../../images/footer/footer-pasta-rigth-2xtab.png';
-import RigthDesk1x from '../../images/footer/footer-pasta-rigth-1xdesc.png';
-import RigthDesk2x from '../../images/footer/footer-pasta-rigth-2xdesc.png';
+import SpinachMobile1x from '../../images/spinach-main-bg/spinach-footer-mobile-1x.webp';
+import SpinachMobile2x from '../../images/spinach-main-bg/spinach-footer-mobile-2x.webp';
+import SpinachTablet1x from '../../images/spinach-main-bg/spinach-footer-tablet-1x.webp';
+import SpinachTablet2x from '../../images/spinach-main-bg/spinach-footer-tablet-2x.webp';
+import SpinachDesk1x from '../../images/spinach-main-bg/spinach-footer-desctop-1x.webp';
+import SpinachDesk2x from '../../images/spinach-main-bg/spinach-footer-desctop-2x.webp';
+
+export const FooterContainer = styled.footer`
+  width: 375px;
+  margin: auto auto 0;
+
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    width: 768px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    width: 1440px;
+  }
+`;
 
 export const Main = styled.div`
-    margin-top: auto;
+  margin-top: auto;
 
-    background-image: url('${RigthMobile1x}');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: right bottom;
-    background-size: 172px 160px;
+  background-image: url('${SpinachMobile1x}');
+  background-repeat: no-repeat;
+
+  background-position: right -40px bottom -90px;
+  background-size: 210px 250px;
+  @media screen and (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: url('${SpinachMobile2x}');
+  }
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    background-image: url('${SpinachTablet1x}');
+    background-position: right -80px bottom -140px;
+    background-size: 410px 380px;
     @media screen and (min-device-pixel-ratio: 2),
-        (min-resolution: 192dpi),
-        (min-resolution: 2dppx) {
-        background-image: url('${RigthMobile2x}');
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url('${SpinachTablet2x}');
     }
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        background-image: url('${RigthTablet1x}');
-        background-size: 313px 290px;
-        @media screen and (min-device-pixel-ratio: 2),
-            (min-resolution: 192dpi),
-            (min-resolution: 2dppx) {
-            background-image: url('${RigthTablet2x}');
-        }
+  }
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    background-image: url('${SpinachDesk1x}');
+    background-position: right -70px bottom -200px;
+    background-size: 570px 530px;
+    @media screen and (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url('${SpinachDesk2x}');
     }
-    @media screen and (min-width: ${theme.breakpoints[2]}) {
-        background-image: url('${RigthDesk1x}');
-        background-size: 474px 438px;
-        @media screen and (min-device-pixel-ratio: 2),
-            (min-resolution: 192dpi),
-            (min-resolution: 2dppx) {
-            background-image: url('${RigthDesk2x}');
-        }
-    }
+  }
 `;
 
 export const FooterWrapper = styled.div`
-    position: relative;
+  position: relative;
 
-    margin: 0;
-    padding: 0 20px;
-    display: flex;
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 28px;
+  padding-bottom: 18px;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.black[400]};
+
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    padding: 0 32px;
     flex-direction: column;
-    padding-top: 28px;
-    padding-bottom: 18px;
-    align-items: center;
-    background-color: ${({ theme }) => theme.colors.black[400]};
-
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        padding: 0 32px;
-        flex-direction: column;
-        padding-right: 94px;
-        padding-top: 50px;
-        padding-bottom: 24px;
-    }
-    @media screen and (min-width: ${theme.breakpoints[2]}) {
-        padding-left: 100px;
-        padding-right: 100px;
-        padding-top: 64px;
-        padding-bottom: 50px;
-    }
+    padding-right: 94px;
+    padding-top: 50px;
+    padding-bottom: 24px;
+  }
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 64px;
+    padding-bottom: 50px;
+  }
 `;
 
 export const FooterMain = styled.div`
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    @media screen and (min-width: ${theme.breakpoints[2]}) {
-        flex-direction: row;
-        justify-content: space-between;
-    }
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
 
 export const FooterMainBlock = styled.div`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        align-items: flex-start;
-        margin-bottom: 72px;
-    }
-    @media screen and (min-width: ${theme.breakpoints[2]}) {
-        width: 650px;
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-start;
+    margin-bottom: 72px;
+  }
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    width: 650px;
 
-        align-items: flex-start;
-        margin-bottom: 41px;
-        margin-right: 235px;
-    }
+    align-items: flex-start;
+    margin-bottom: 41px;
+    margin-right: 235px;
+  }
 `;
 
 export const FirstBlock = styled.div``;
 
 export const FeaturesList = styled.ul`
-    @media screen and (max-width: ${theme.breakpoints[1]}) {
-        display: none;
-    }
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        width: 450px;
-        gap: 10px;
-        display: flex;
-        flex-direction: column;
-        margin: 0;
-        padding: 0;
-        padding-left: 5px;
-        list-style: inside;
-    }
-    @media screen and (min-width: ${theme.breakpoints[2]}) {
-        width: 418px;
-        margin-left: 8px;
-        gap: 12px;
-    }
+  @media screen and (max-width: ${theme.breakpoints[1]}) {
+    display: none;
+  }
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    width: 450px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    padding-left: 5px;
+  }
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    width: 418px;
+    margin-left: 8px;
+    gap: 12px;
+  }
 `;
 
 export const Feature = styled.li`
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        width: 100%;
-        font-weight: ${({ theme }) => theme.fontWeights.regular};
-        font-size: ${({ theme }) => theme.fontSizes[2]};
-        line-height: ${({ theme }) => theme.fontSizes[4]};
-        letter-spacing: -0.02em;
-        color: ${({ theme }) => theme.colors.white[200]};
-    }
+  display: flex;
 
-    @media screen and (min-width: ${theme.breakpoints[2]}) {
-        font-size: ${({ theme }) => theme.fontSizes[4]};
-        line-height: 1.33;
-        letter-spacing: -0.02em;
-    }
-`;
-
-export const TitleBlock = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 0px;
-    margin-bottom: 32px;
-    justify-content: center;
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        justify-content: flex-start;
-        margin-bottom: 24px;
-    }
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        justify-content: flex-start;
-        margin-bottom: 40px;
-    }
-`;
-
-export const Title = styled.h2`
-    margin: 0px;
-    margin-left: 8px;
-    color: ${({ theme }) => theme.colors.white[200]};
-
-    font-weight: ${({ theme }) => theme.fontWeights.bold};
-    font-size: ${({ theme }) => theme.fontSizes[4]};
-    line-height: 1;
-    letter-spacing: 0.015em;
-
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        font-size: ${({ theme }) => theme.fontSizes[6]};
-        margin-left: 12px;
-    }
-    @media screen and (min-width: ${theme.breakpoints[2]}) {
-        font-size: ${({ theme }) => theme.fontSizes[6]};
-    }
-`;
-
-export const SvgWrapper = styled(Link)`
-    display: flex;
-    justify-content: center;
-    margin-left: 8px;
-    svg {
-        width: 32px;
-        height: 32px;
-        @media screen and (min-width: ${theme.breakpoints[1]}) {
-            width: 44px;
-            height: 44px;
-        }
-    }
-
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        margin-left: 0;
-    }
-`;
-
-export const FooterNav = styled.nav`
-    display: flex;
-    justify-content: center;
-`;
-
-export const FooterNavList = styled.ul`
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-    margin: 0px;
-    margin-bottom: 32px;
-    width: 89px;
-    align-items: center;
-    gap: 14px;
-    @media screen and (min-width: ${theme.breakpoints[1]}) {
-        margin-bottom: 0px;
-        align-items: start;
-        gap: 20px;
-    }
-    @media screen and (min-width: ${theme.breakpoints[2]}) {
-        gap: 24px;
-    }
-`;
-
-export const LinkFooter = styled(NavLink)`
-    color: ${({ theme }) => theme.colors.white[200]};
-    font-weight: ${({ theme }) => theme.fontWeights.medium};
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    width: 100%;
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
     font-size: ${({ theme }) => theme.fontSizes[2]};
     line-height: ${({ theme }) => theme.fontSizes[4]};
     letter-spacing: -0.02em;
-    text-decoration: none;
+    color: ${({ theme }) => theme.colors.white[200]};
+
+    &::before {
+      margin-right: 12px;
+      margin-top: 6px;
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+
+      background-color: ${({ theme }) => theme.colors.white[200]};
+    }
+  }
+
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    font-size: ${({ theme }) => theme.fontSizes[4]};
+    line-height: 1.33;
+    letter-spacing: -0.02em;
+
+    &::before {
+      margin-top: 8px;
+      width: 6px;
+      height: 6px;
+    }
+  }
+`;
+
+export const TitleBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px;
+  margin-bottom: 32px;
+  justify-content: center;
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    justify-content: flex-start;
+    margin-bottom: 24px;
+  }
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    justify-content: flex-start;
+    margin-bottom: 40px;
+  }
+`;
+
+export const Title = styled.h2`
+  margin: 0px;
+  margin-left: 8px;
+  color: ${({ theme }) => theme.colors.white[200]};
+
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  font-size: ${({ theme }) => theme.fontSizes[4]};
+  line-height: 1;
+  letter-spacing: 0.015em;
+
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    font-size: ${({ theme }) => theme.fontSizes[6]};
+    margin-left: 12px;
+  }
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    font-size: ${({ theme }) => theme.fontSizes[6]};
+  }
+`;
+
+export const SvgWrapper = styled(Link)`
+  display: flex;
+  justify-content: center;
+  margin-left: 8px;
+  svg {
+    width: 32px;
+    height: 32px;
+    @media screen and (min-width: ${theme.breakpoints[1]}) {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    margin-left: 0;
+  }
+`;
+
+export const FooterNav = styled.nav`
+  display: flex;
+  justify-content: center;
+`;
+
+export const FooterNavList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 32px;
+  width: 89px;
+  align-items: center;
+  gap: 14px;
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    margin-bottom: 0px;
+    align-items: start;
+    gap: 20px;
+  }
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    gap: 24px;
+  }
+`;
+
+export const LinkFooter = styled(NavLink)`
+  color: ${({ theme }) => theme.colors.white[200]};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-size: ${({ theme }) => theme.fontSizes[2]};
+  line-height: ${({ theme }) => theme.fontSizes[4]};
+  letter-spacing: -0.02em;
+  text-decoration: none;
 `;
 
 export const DownContainer = styled.div`
-    position: relative;
-    display: flex;
-    max-width: 100%;
-    justify-content: center;
-    align-items: center;
-    padding: 28px 73px;
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 28px 73px;
 
+  & > :first-of-type {
+    margin-right: 14px;
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
+  }
+  & span {
+    font-family: inherit;
+    font-weight: ${({ theme }) => theme.fontWeights.regular};
+    font-size: ${({ theme }) => theme.fontSizes[0]};
+    line-height: ${({ theme }) => theme.fontSizes[0]};
+    letter-spacing: -0.01em;
+    text-align: left;
+    opacity: 0.5;
+  }
+  @media only screen and (min-width: ${theme
+      .breakpoints[1]}) and (max-width: ${theme.breakpoints[2]}) {
+    height: 78px;
     & > :first-of-type {
-        margin-right: 14px;
-        font-weight: ${({ theme }) => theme.fontWeights.medium};
+      margin-right: 28px;
     }
     & span {
-        font-family: inherit;
-        font-weight: ${({ theme }) => theme.fontWeights.regular};
-        font-size: ${({ theme }) => theme.fontSizes[0]};
-        line-height: ${({ theme }) => theme.fontSizes[0]};
-        letter-spacing: -0.01em;
-        text-align: left;
-        opacity: 0.5;
+      font-size: 14px;
+      line-height: 14px;
     }
-    @media only screen and (min-width: ${theme
-            .breakpoints[1]}) and (max-width: ${theme.breakpoints[2]}) {
-        height: 78px;
-        & > :first-of-type {
-            margin-right: 28px;
-        }
-        & span {
-            font-size: 14px;
-            line-height: 14px;
-        }
+  }
+  @media only screen and (min-width: ${theme.breakpoints[2]}) {
+    height: 114px;
+    & span {
+      font-size: 14px;
+      line-height: 14px;
     }
-    @media only screen and (min-width: ${theme.breakpoints[2]}) {
-        height: 114px;
-        & span {
-            font-size: 14px;
-            line-height: 14px;
-        }
-        & > :first-of-type {
-            margin-right: 40px;
-        }
+    & > :first-of-type {
+      margin-right: 40px;
     }
+  }
 `;

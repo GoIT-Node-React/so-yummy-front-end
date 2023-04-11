@@ -7,19 +7,18 @@ export const PaginationList = styled.ul`
   gap: 10px;
 
   width: fit-content;
-  margin: 18px auto 0;
+  margin: 0 auto 0;
+  margin-top: 50px;
   padding: 14px 24px;
 
   background: ${({ theme }) => theme.colors.white[100]};
   border-radius: 26px;
 
   box-shadow: 0px 4px 4px rgba(135, 135, 135, 0.2);
-  @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
-    margin-top: 40px;
-  }
 
-  @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
-    margin-top: 50px;
+  @media screen and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.tablet} - 0.2px)) {
+    padding: 14px 14px;
   }
 `;
 
@@ -47,6 +46,14 @@ export const PaginationItem = styled.button`
 `;
 
 export const PaginationItemPrev = styled(PaginationItem)`
+  padding-left: 0;
+  padding-right: 0;
+
+  @media screen and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.tablet} - 0.2px)) {
+    margin-right: 5px;
+  }
+
   margin-right: 10px;
   font-size: 24px;
 
@@ -56,6 +63,14 @@ export const PaginationItemPrev = styled(PaginationItem)`
 `;
 
 export const PaginationItemNext = styled(PaginationItem)`
+  padding-left: 0;
+  padding-right: 0;
+
+  @media screen and (max-width: calc(${({ theme }) =>
+      theme.breakpoints.tablet} - 0.2px)) {
+    margin-left: 5px;
+  }
+
   margin-left: 10px;
   font-size: 24px;
 

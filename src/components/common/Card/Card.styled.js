@@ -22,11 +22,14 @@ export const CardContainer = styled.div`
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
+
+  transition: ${({ theme }) => theme.transitions.create(['box-shadow'])}; ;
 `;
 
 export const Image = styled.img`
   width: 100%;
   height: 100%;
+
   object-fit: cover;
 
   border-radius: ${({ theme }) => theme.radii.lg};
@@ -37,7 +40,6 @@ export const TitleContainer = styled.div`
   bottom: 26px;
   left: 18px;
   width: 307px;
-  height: 52px;
   padding: 16px;
 
   background-color: ${({ theme }) => theme.colors.white[100]};

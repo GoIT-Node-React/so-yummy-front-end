@@ -89,14 +89,32 @@ export const MesureSelect = React.forwardRef(({ onChange, name }, ref) => {
             height: isTablet ? '128px' : '112px',
             borderRadius: '6px',
             boxShadow: '0px 6.51852px 7.82222px rgba(0, 0, 0, 0.0314074)',
-            paddingLeft: isTablet ? '37px' : '28px',
-            paddingTop: isTablet ? '20px' : '16px',
 
             marginLeft: '-16px',
           }),
-          menuList: () => ({
+          menuList: baseStyles => ({
+            ...baseStyles,
             width: isTablet ? '117px' : '104px',
             height: isTablet ? '128px' : '112px',
+            paddingLeft: isTablet ? '37px' : '28px',
+            paddingTop: '8px',
+            overflowY: 'scroll',
+            '::-webkit-scrollbar-thumb': {
+              backgroundColor: '#E7E5E5',
+              height: '93px',
+              width: '4px',
+              borderRadius: '12px',
+            },
+            '::-webkit-scrollbar-track': {
+              background: '#FFFFFF',
+
+              borderRadius: '12px',
+              width: '4px',
+            },
+            '::-webkit-scrollbar': {
+              borderRadius: '12px',
+              width: '4px',
+            },
           }),
         }}
       />
