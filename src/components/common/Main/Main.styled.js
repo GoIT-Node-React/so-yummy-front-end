@@ -13,7 +13,7 @@ import DesctopPoints from '../../../images/spinach-main-bg/desctop-points.svg';
 export const MainContainer = styled.main`
   margin: 0 auto;
   width: 375px;
-
+  height: 100%;
   background-image: url(${MobileSpinach1x}), url(${MobilePoints});
   background-size: 440px auto, 230px 74px;
   background-repeat: no-repeat;

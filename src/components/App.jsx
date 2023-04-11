@@ -9,6 +9,7 @@ import { routes } from 'constants/routes';
 import { PrivatePage, RestrictedPage } from 'pages/access';
 import AuthLayout from './layouts/auth';
 import CategoryRecipes from 'components/CategoryRecipes';
+import MainLoader from './MainLoader/MainLoader';
 
 const WelcomePage = lazy(() => import('pages/WelcomePage'));
 const RegisterPage = lazy(() => import('pages/Auth/RegisterPage'));
@@ -37,7 +38,7 @@ export const App = () => {
     }
   }, [dispatch, accessToken]);
 
-  if (isLoading) return <>Loading...</>;
+  if (isLoading) return <MainLoader />;
 
   return (
     <>

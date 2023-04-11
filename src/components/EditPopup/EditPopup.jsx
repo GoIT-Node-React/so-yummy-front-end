@@ -27,7 +27,7 @@ import {
 import { useState } from 'react';
 
 const schema = yup.object({
-  name: yup.string().min(3).max(30),
+  name: yup.string().min(3).max(16),
 });
 
 export default function EditPopup({ onClose }) {
