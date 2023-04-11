@@ -1,54 +1,44 @@
-import { Tab, Tabs, styled } from '@mui/material';
+import { Tab, Tabs, styled as mstyled } from '@mui/material';
+import styled from '@emotion/styled';
 
-export const CategoriesPageSection = styled('section')(({ theme }) => ({
-  height: '100%',
-  paddingTop: '50px',
-  paddingBottom: '100px',
+export const CategoriesPageSection = styled.section`
+  height: 100%;
+  padding-top: 50px;
+  padding-bottom: 100px;
 
-  [theme.breakpoints.up('md')]: {
-    paddingTop: '72px',
-    paddingBottom: '200px',
-  },
-  [theme.breakpoints.up('lg')]: {
-    paddingTop: '100px',
-  },
-}));
+  @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    padding-top: 72px;
+    padding-bottom: 200px;
+  }
 
-export const CategoriesPageTitle = styled('h2')(({ theme }) => ({
-  fontSeight: 600,
-  fontSize: '28px',
-  lineHeight: 1,
+  @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
+    padding-top: 100px;
+  }
+`;
 
-  letterSpacing: '-0.02em',
-  fontFeatureSettings: "'liga' off",
+export const CategoriesPageTitle = styled.h2`
+  margin-bottom: 50px;
 
-  color: '#001833',
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1;
 
-  [theme.breakpoints.up('md')]: {
-    fontSize: '32px',
-  },
-  [theme.breakpoints.up('lg')]: {
-    fontSize: '44px',
-  },
-}));
+  letter-spacing: -0.02em;
+  font-feature-settings: 'liga' off;
 
-export const StyledTabs = styled(Tabs)(({ theme }) => ({
-  position: 'relative',
+  color: #001833;
+  @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    font-size: 32px;
+  }
 
-  '& ::before': {
-    content: '""',
+  @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
+    margin-bottom: 100px;
 
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
+    font-size: 44px;
+  }
+`;
 
-    display: 'block',
-    width: '100vw',
-    height: '2px',
-
-    backgroundColor: '#E0E0E0',
-  },
-
+export const StyledTabs = mstyled(Tabs)(({ theme }) => ({
   '& .MuiTabs-root': {},
 
   '& .MuiTabs-scroller': {
@@ -57,30 +47,38 @@ export const StyledTabs = styled(Tabs)(({ theme }) => ({
     },
   },
   '& .MuiTabs-flexContainer': {
-    gap: '28px',
+    // gap: '28px',
 
     '& :hover': {
       color: '#8BAA36',
     },
 
     [theme.breakpoints.up('md')]: {
-      gap: '55px',
+      // gap: '55px',
     },
     [theme.breakpoints.up('lg')]: {},
   },
 
   '& .MuiTab-root': {
     textTransform: 'capitalize',
-    // minWidth: 'unset',
-    fontSize: '18px',
     fontFamily: 'Poppins',
     fontWeight: '400',
-    lineHeight: '18px',
-    // borderColor: '#8BAA36',
+    fontSize: '14px',
+    lineHeight: 1,
+    color: '#E0E0E0',
+
+    [theme.breakpoints.up('md')]: {
+      fontSize: '18px',
+    },
   },
 
   '& .MuiTabScrollButton-root': {
+    display: 'none',
     width: '20px',
+
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+    },
   },
 
   '& svg': {
@@ -90,11 +88,22 @@ export const StyledTabs = styled(Tabs)(({ theme }) => ({
   },
 }));
 
-export const StyledTab = styled(Tab)(({ theme }) => ({
-  padding: '0',
+export const StyledTab = mstyled(Tab)(({ theme }) => ({
+  padding: '0 14px',
   paddingBottom: '28px',
-  color: '#BDBDBD',
+
+  fontSize: '14px',
+  lineHeight: 1,
+  color: '#E0E0E0',
+
   '&.Mui-selected': {
     color: '#8BAA36',
+  },
+
+  [theme.breakpoints.up('md')]: {
+    padding: '0 27px',
+    paddingBottom: '28px',
+
+    fontSize: '18px',
   },
 }));

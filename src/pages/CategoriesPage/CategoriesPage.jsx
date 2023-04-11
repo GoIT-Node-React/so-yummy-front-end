@@ -1,4 +1,4 @@
-import { Container, ThemeProvider, createTheme } from '@mui/material';
+import { Box, ThemeProvider, createTheme } from '@mui/material';
 import { Suspense, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ import {
   CategoriesPageSection,
   CategoriesPageTitle,
 } from './CategoriesPage.styled';
+import { Container } from 'components/common/Container.styled';
 
 const localTheme = createTheme({
   breakpoints: {
@@ -43,33 +44,28 @@ export default function CategoriesPage() {
   }, [categories, navigate, selectedCategory]);
 
   return (
-    <ThemeProvider theme={localTheme}>
-      <CategoriesPageSection>
-        <Container
-          sx={{
-            px: [null, '16px', '32px', '100px'],
-            mx: 'auto',
-            width: ['100%', '375px', '768px', '1440px'],
-            minHeight: '100%',
-          }}
-        >
-          <CategoriesPageTitle>Categories</CategoriesPageTitle>
-          <StyledTabs
-            onChange={changeCategoryHandler}
-            value={selectedCategory}
-            variant="scrollable"
-            scrollButtons="auto"
-            aria-label="Tabs categories list"
-          >
-            {categories.map(c => (
-              <StyledTab key={c} label={c} />
-            ))}
-          </StyledTabs>
-          <Suspense fallback={<>Loading...</>}>
-            <Outlet />
-          </Suspense>
-        </Container>
-      </CategoriesPageSection>
-    </ThemeProvider>
+    <CategoriesPageSection>
+      <Container>
+        <CategoriesPageTitle>Categories</CategoriesPageTitle>
+        <ThemeProvider theme={localTheme}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <StyledTabs
+              onChange={changeCategoryHandler}
+              value={selectedCategory}
+              variant="scrollable"
+              scrollButtons="auto"
+              aria-label="Tabs categories list"
+            >
+              {categories.map(c => (
+                <StyledTab key={c} label={c} />
+              ))}
+            </StyledTabs>
+          </Box>
+        </ThemeProvider>
+        <Suspense fallback={<>Loading...</>}>
+          <Outlet />
+        </Suspense>
+      </Container>
+    </CategoriesPageSection>
   );
 }

@@ -39,3 +39,15 @@ export const getCategoriesService = async () => {
 
   return data;
 };
+
+export const getRecipesByCategoryService = async (
+  category,
+  page = 1,
+  limit = 12
+) => {
+  const { data } = await privateApi.get(
+    `/recipes/categories/${category}?page=${page}&limit=${limit}`
+  );
+
+  return data;
+};
