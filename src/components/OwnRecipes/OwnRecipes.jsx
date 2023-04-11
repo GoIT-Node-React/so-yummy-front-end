@@ -31,7 +31,8 @@ export default function OwnRecipes() {
       const { data } = await getOwnRecipesService(p, l);
       const { recipes, limit, total, page } = data;
 
-      pagination.current = { totalPages: Math.ceil(total / limit), page };
+      pagination.current.totalPages = Math.ceil(total / limit);
+      pagination.current.page = page;
 
       setRecipesList(recipes);
     } catch (error) {

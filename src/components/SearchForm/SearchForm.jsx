@@ -13,7 +13,7 @@ export default function SearchForm() {
 
   const handleChange = event => {
     const { value } = event.target;
-    updateQuery(value.trim());
+    updateQuery(value);
   };
 
   const handleSubmit = event => {

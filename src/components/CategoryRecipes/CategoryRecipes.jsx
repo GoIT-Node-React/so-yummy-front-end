@@ -35,13 +35,10 @@ export default function CategoryRecipes() {
 
       try {
         const { data } = await getRecipesByCategoryService(capitalized, p, l);
-
         const { recipes, limit, page, total } = data;
 
-        pagination.current = {
-          totalPages: Math.ceil(total / limit),
-          page,
-        };
+        pagination.current.totalPages = Math.ceil(total / limit);
+        pagination.current.page = page;
 
         setRecipes(recipes);
       } catch (error) {
