@@ -11,6 +11,7 @@ import {
   CategoriesPageTitle,
 } from './CategoriesPage.styled';
 import { Container } from 'components/common/Container.styled';
+import MainLoader from 'components/MainLoader/MainLoader';
 
 const localTheme = createTheme({
   breakpoints: {
@@ -74,7 +75,7 @@ export default function CategoriesPage() {
             )}
           </Box>
         </ThemeProvider>
-        <Suspense fallback={<>Loading...</>}>
+        <Suspense fallback={<MainLoader />}>
           <Outlet />
         </Suspense>
       </Container>

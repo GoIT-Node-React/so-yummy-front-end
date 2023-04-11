@@ -8,7 +8,7 @@ import SharedLayout from './SharedLayout/SharedLayout';
 import { routes } from 'constants/routes';
 import { PrivatePage, RestrictedPage } from 'pages/access';
 import AuthLayout from './layouts/auth';
-import CategoryRecipes from 'components/CategoryRecipes';
+// import CategoryRecipes from 'components/CategoryRecipes';
 import MainLoader from './MainLoader/MainLoader';
 
 const WelcomePage = lazy(() => import('pages/WelcomePage'));
@@ -16,7 +16,7 @@ const RegisterPage = lazy(() => import('pages/Auth/RegisterPage'));
 const SigninPage = lazy(() => import('pages/Auth/SigninPage'));
 const MainPage = lazy(() => import('pages/MainPage'));
 const CategoriesPage = lazy(() => import('pages/CategoriesPage'));
-// const CategoryRecipes = lazy(() => import('co/CategoryRecipes'));
+const CategoryRecipes = lazy(() => import('components/CategoryRecipes'));
 const FavoritePage = lazy(() => import('pages/FavoritePage'));
 const OwnRecipesPage = lazy(() => import('pages/OwnRecipesPage'));
 const AddRecipePage = lazy(() => import('pages/AddRecipePage'));

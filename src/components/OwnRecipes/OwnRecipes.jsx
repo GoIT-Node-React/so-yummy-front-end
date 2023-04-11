@@ -14,7 +14,7 @@ import useAppPagination from 'hooks/useAppPagination';
 import { processingError } from 'helpers';
 import { searchRecipesMessage } from 'constants/message';
 import NotFoundRecipe from 'components/NotFoundRecipe';
-import Loader from 'components/common/Loader';
+import MainLoader from 'components/MainLoader/MainLoader';
 
 export default function OwnRecipes() {
   const pagination = useRef({
@@ -72,7 +72,7 @@ export default function OwnRecipes() {
         <OwnRecipesTitle>My recipes</OwnRecipesTitle>
         <OwnRecipesContextProvider value={{ removeOwnRecipe }}>
           {isLoading ? (
-            <Loader />
+            <MainLoader />
           ) : recipesList.length > 0 ? (
             <OwnRecipesList recipes={recipesList} />
           ) : (

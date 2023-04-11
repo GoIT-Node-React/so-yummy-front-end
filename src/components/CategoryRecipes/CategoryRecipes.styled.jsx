@@ -1,11 +1,29 @@
 import styled from '@emotion/styled';
 
+export const CategoryRecipesWrapper = styled.div`
+  position: relative;
+`;
+export const CategoryRecipesLoader = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+`;
+
 export const CategoryRecipesList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 28px;
 
   margin-top: 32px;
+
+  opacity: ${({ isLoading }) => (isLoading ? 0.1 : 1)};
 
   @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
     flex-direction: row;
