@@ -8,8 +8,10 @@ export const userInitialState = {
   avatarURL: null,
   statuses: {
     subscription: Status.IDLE,
+    changeInfo: Status.IDLE,
   },
   errors: {
     subscription: null,
+    changeInfo: null,
   },
 };

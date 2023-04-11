@@ -2,13 +2,27 @@ import { createSlice } from '@reduxjs/toolkit';
 import { currentThunk, loginThunk, logoutThunk } from 'redux/auth/auth.thunk';
 import { userInitialState } from './user.initial';
 import { Status } from 'constants';
-import { subscribeThunk } from './user.thunk';
+import { changeInfoThunk, subscribeThunk } from './user.thunk';
 
 const userSlice = createSlice({
   name: 'user',
   initialState: userInitialState,
   extraReducers: builder => {
     builder
+      //changeInfo
+      .addCase(changeInfoThunk.pending, state => {
+        state.statuses.changeInfo = Status.PENDING;
+        state.errors.changeInfo = null;
+      })
+      .addCase(changeInfoThunk.fulfilled, (state, { payload }) => {
+        state.statuses.changeInfo = Status.FULFILLED;
+        state.avatarURL = payload.user.avatarURL;
+        state.name = payload.user.name;
+      })
+      .addCase(changeInfoThunk.rejected, (state, { payload }) => {
+        state.statuses.changeInfo = Status.REJECTED;
+        state.errors.changeInfo = payload?.message;
+      })
       //Subscription
       .addCase(subscribeThunk.pending, state => {
         state.statuses.subscription = Status.PENDING;
@@ -16,7 +30,7 @@ const userSlice = createSlice({
       })
       .addCase(subscribeThunk.fulfilled, (state, { payload }) => {
         state.statuses.subscription = Status.FULFILLED;
-        state.subscription = payload.subscription;
+        state.subscription = payload.user.subscription;
       })
       .addCase(subscribeThunk.rejected, (state, { payload }) => {
         state.statuses.subscription = Status.REJECTED;

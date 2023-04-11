@@ -9,3 +9,8 @@ export const selectSubscription = state => ({
   isLoading: selectStatuses(state)?.subscription === Status.PENDING,
   error: selectErrors(state)?.subscription,
 });
+
+export const selectUserChanging = state => ({
+  isLoading: selectStatuses(state)?.changeInfo === Status.PENDING,
+  error: selectErrors(state)?.changeInfo,
+});
