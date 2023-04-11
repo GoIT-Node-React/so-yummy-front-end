@@ -28,9 +28,11 @@ export default function CategoryRecipes() {
   const getRecipesByCategory = useCallback(
     async (p = 1, l = pagination.current.limit) => {
       setIsLoading(true);
+      const capitalized =
+        categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
 
       try {
-        const { data } = await getRecipesByCategoryService(categoryName, p, l);
+        const { data } = await getRecipesByCategoryService(capitalized, p, l);
 
         const { recipes, limit, page, total } = data;
 
@@ -81,7 +83,7 @@ export default function CategoryRecipes() {
           </CategoryRecipesItem>
         ))}
       </CategoryRecipesList>
-      <Pagination />
+      {pagination.current.totalPages > 1 && <Pagination />}
     </>
   );
 }
