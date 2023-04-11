@@ -51,3 +51,8 @@ export const getRecipesByCategoryService = async (
 
   return data;
 };
+
+export const getMainPageRecipesService = async () => {
+  const { data } = await privateApi.get(`recipes/main-page`);
+  return data;
+};
