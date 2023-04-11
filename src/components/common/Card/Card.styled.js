@@ -33,6 +33,8 @@ export const Image = styled.img`
   object-fit: cover;
 
   border-radius: ${({ theme }) => theme.radii.lg};
+
+  background-color: rgba(235, 243, 212, 0.2);
 `;
 
 export const TitleContainer = styled.div`

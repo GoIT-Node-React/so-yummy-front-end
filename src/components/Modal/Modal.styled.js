@@ -15,7 +15,7 @@ export const Overlay = styled.div`
 
 export const ModalWindow = styled.div`
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: ${({ isMenu }) => (isMenu ? 0 : '24px')};
   background-color: ${props => props.theme.colors.white[100]};
   box-shadow: 0px 4px 48px rgba(0, 0, 0, 0.1);
 `;

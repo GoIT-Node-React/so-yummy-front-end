@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Overlay, ModalWindow } from './Modal.styled';
 import PropTypes from 'prop-types';
 
-export default function Modal({ onClose, children }) {
+export default function Modal({ onClose, children, isMenu }) {
   useEffect(() => {
     const escapeListener = evt => {
       if (evt.code === 'Escape') {
@@ -27,7 +27,7 @@ export default function Modal({ onClose, children }) {
 
   return ReactDOM.createPortal(
     <Overlay onClick={handleOverlayClick}>
-      <ModalWindow>{children}</ModalWindow>
+      <ModalWindow isMenu={isMenu}>{children}</ModalWindow>
     </Overlay>,
     document.querySelector('#modal-root')
   );

@@ -4,6 +4,7 @@ import { selectAccessToken } from 'redux/auth/auth.selectors';
 import { AccessPropTypes } from './Access.props';
 import { routes } from 'constants/routes';
 import { Suspense } from 'react';
+import MainLoader from 'components/MainLoader/MainLoader';
 
 export default function RestrictedPage({
   component: Component,
@@ -16,7 +17,7 @@ export default function RestrictedPage({
   return isAuthenticated ? (
     <Navigate to={to} state={{ from: location }} replace />
   ) : (
-    <Suspense fallback={<h2>Loading...</h2>}>{Component}</Suspense>
+    <Suspense fallback={<MainLoader />}>{Component}</Suspense>
   );
 }
 

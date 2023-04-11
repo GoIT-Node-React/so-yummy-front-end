@@ -29,6 +29,11 @@ export default function useAppPagination({ totalPages, page, onFetch }) {
       }
 
       onFetch(newPage);
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     },
   });
 

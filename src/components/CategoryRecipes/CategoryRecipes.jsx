@@ -5,12 +5,14 @@ import { getRecipesByCategoryService } from 'services/recipe.service';
 import {
   CategoryRecipesItem,
   CategoryRecipesList,
+  CategoryRecipesLoader,
+  CategoryRecipesWrapper,
 } from './CategoryRecipes.styled';
 import { routes } from 'constants/routes';
-import Loader from 'components/common/Loader/Loader';
 import { useMediaQuery } from 'react-responsive';
 import { processingError } from 'helpers';
 import useAppPagination from 'hooks/useAppPagination';
+import MainLoader from 'components/MainLoader/MainLoader';
 
 export default function CategoryRecipes() {
   const { categoryName } = useParams();
@@ -71,18 +73,25 @@ export default function CategoryRecipes() {
 
   return (
     <>
-      <CategoryRecipesList>
-        {isLoading && <Loader />}
-        {recipes.map(({ _id, title, thumb }) => (
-          <CategoryRecipesItem key={_id}>
-            <Card
-              src={thumb}
-              title={title}
-              to={`${routes.RECIPE_PAGE}/${_id}`}
-            />
-          </CategoryRecipesItem>
-        ))}
-      </CategoryRecipesList>
+      <CategoryRecipesWrapper>
+        <CategoryRecipesList isLoading={isLoading}>
+          {recipes.map(({ _id, title, thumb }) => (
+            <CategoryRecipesItem key={_id}>
+              <Card
+                src={thumb}
+                title={title}
+                to={`${routes.RECIPE_PAGE}/${_id}`}
+              />
+            </CategoryRecipesItem>
+          ))}
+        </CategoryRecipesList>
+        {isLoading && (
+          <CategoryRecipesLoader>
+            <MainLoader />
+          </CategoryRecipesLoader>
+        )}
+      </CategoryRecipesWrapper>
+
       {pagination.current.totalPages > 1 && <Pagination />}
     </>
   );
