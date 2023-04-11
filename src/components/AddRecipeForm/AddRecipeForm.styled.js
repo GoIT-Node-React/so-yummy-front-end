@@ -160,21 +160,21 @@ export const CameraContainer = styled.div`
 
   border: 1px solid ${({ theme }) => theme.colors.white[200]};
   border-radius: ${({ theme }) => theme.radii.lg};
+  color: ${({ theme }) => theme.colors.white[200]};
+
+  transition: ${({ theme }) =>
+    theme.transitions.create(['color', 'border-color'])};
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.green[200]};
+    border-color: ${({ theme }) => theme.colors.gray[500]};
+    color: ${({ theme }) => theme.colors.gray[500]};
   }
 `;
 
 export const StyledCamera = styled(MdPhotoCamera)`
   width: 20px;
   height: 18px;
-
-  color: ${({ theme }) => theme.colors.white[200]};
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.green[200]};
-  }
+  color: currentColor;
 `;
 
 export const FlexContainer = styled.div`
@@ -337,6 +337,21 @@ export const StyledTextarea = styled.textarea`
 
   resize: none;
 
+  &::-webkit-scrollbar {
+    border-radius: 12px,
+    width: 4px,
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #FFFFFF,
+    border-radius: 12px,
+    width: 4px,
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #E7E5E5,
+    height: 93px,
+    width: 4px,
+    border-radius: 12px,
+    }
   &::placeholder {
     color: rgba(0, 0, 0, 0.5);
 
@@ -350,7 +365,7 @@ export const StyledTextarea = styled.textarea`
   }
 
   @media screen and (min-width: calc(${({ theme }) =>
-      theme.breakpoints[1]} - 1px)) {
+    theme.breakpoints[1]} - 1px)) {
     width: 505px;
     height: 224px;
     margin-top: 32px;
@@ -362,11 +377,17 @@ export const StyledTextarea = styled.textarea`
     }
   }
   @media screen and (min-width: calc(${({ theme }) =>
-      theme.breakpoints[1]} - 1px)) {
+    theme.breakpoints[1]} - 1px)) {
     margin-bottom: 32px;
   }
 `;
-
+export const TextAreaError = styled.span`
+  position: absolute;
+  display: block;
+  bottom: 18px;
+  color: #e74a3b;
+  font-size: ${({ theme }) => theme.fontSizes[1]};
+`;
 export const ErrorMessage = styled.span`
   position: absolute;
   bottom: -20px;
@@ -378,7 +399,7 @@ export const ErrorMessage = styled.span`
 `;
 
 export const IngredientsError = styled.p`
-  margin-top: -14px;
+  margin-top: -18px;
   color: #e74a3b;
 
   font-size: ${({ theme }) => theme.fontSizes[1]};
