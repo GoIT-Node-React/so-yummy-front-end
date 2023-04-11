@@ -32,7 +32,8 @@ export default function FavoriteRecipes() {
       const { data } = await getFavoritesService(p, l);
       const { recipes, limit, total, page } = data;
 
-      pagination.current = { totalPages: Math.ceil(total / limit), page };
+      pagination.current.totalPages = Math.ceil(total / limit);
+      pagination.current.page = page;
 
       setRecipesList(recipes);
     } catch (error) {

@@ -37,7 +37,7 @@ export default function SearchPage() {
   const pagination = useRef({
     page: 1,
     totalPages: 1,
-    limit: 12,
+    limit: isTabletOrMobile ? 6 : 12,
   });
 
   const { Component: Pagination } = useAppPagination({
@@ -56,17 +56,16 @@ export default function SearchPage() {
 
   const fetchData = useCallback(
     async (p = 1, l = pagination.current.limit) => {
-      if (query.length === 0 || !type) return;
+      const searchQuery = query.trim();
+      if (searchQuery.length === 0 || !type) return;
 
       setIsLoading(true);
       try {
-        const { data } = await searchService(type, query, p, l);
+        const { data } = await searchService(type, searchQuery, p, l);
         const { recipes, limit, page, total } = data;
 
-        pagination.current = {
-          totalPages: Math.ceil(total / limit),
-          page,
-        };
+        pagination.current.totalPages = Math.ceil(total / limit);
+        pagination.current.page = page;
 
         setRecipes(recipes);
       } catch (error) {
@@ -106,7 +105,7 @@ export default function SearchPage() {
             recipes.length ? (
               <SearchedRecipesListWrapper>
                 <SearchedRecipesList />
-                <Pagination />
+                {pagination.current.totalPages > 1 && <Pagination />}
               </SearchedRecipesListWrapper>
             ) : (
               <>
