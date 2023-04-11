@@ -12,6 +12,7 @@ import {
 } from './CategoriesPage.styled';
 import { Container } from 'components/common/Container.styled';
 import MainLoader from 'components/MainLoader/MainLoader';
+import { useScrollToTop } from 'hooks/useScrollToTop';
 
 const localTheme = createTheme({
   breakpoints: {
@@ -25,6 +26,7 @@ const localTheme = createTheme({
 });
 
 export default function CategoriesPage() {
+  useScrollToTop();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { categoryName } = useParams();
