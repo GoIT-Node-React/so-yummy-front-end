@@ -2,13 +2,13 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 export const MainPageSection = styled.section`
-  height: 100%;
+  height: fit-content;
   padding-top: 50px;
   padding-bottom: 100px;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
     padding-top: 72px;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
