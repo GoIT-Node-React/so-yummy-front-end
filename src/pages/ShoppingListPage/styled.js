@@ -1,10 +1,21 @@
 import styled from '@emotion/styled';
 
-export const ShoppingListSection = styled.section``;
+export const ShoppingListSection = styled.section`
+  padding-top: 50px;
+  padding-bottom: 100px;
 
-export const ShoppingListTitle = styled.p`
-  margin-top: 50px;
-  margin-bottom: 50px;
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    padding-top: 72px;
+    padding-bottom: 200px;
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    padding-top: 100px;
+  }
+`;
+
+export const ShoppingListTitle = styled.h2`
+  //margin-bottom: 50px;
 
   font-family: 'Poppins';
   font-style: normal;
@@ -17,14 +28,12 @@ export const ShoppingListTitle = styled.p`
   color: #001833;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-    margin-top: 72px;
     margin-bottom: 72px;
 
     font-size: 32px;
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
-    margin-top: 100px;
     font-size: 44px;
   }
 `;
