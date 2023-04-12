@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const SearchedRecipes = styled.ul`
   display: flex;
   gap: 28px;
-
+  justify-content: flex-start;
   padding: 0;
 
   @media (max-width: calc(${({ theme }) => theme.breakpoints.tablet} - 0.2px)) {

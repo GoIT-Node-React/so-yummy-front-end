@@ -6,7 +6,6 @@ import { routes } from 'constants/routes';
 
 export default function MainSection() {
   const { pathname } = useLocation();
-  console.log(pathname);
 
   return (
     <MainContainer isMainPage={pathname === routes.MAIN_PAGE}>
