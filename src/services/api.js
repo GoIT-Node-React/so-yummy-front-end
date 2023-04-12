@@ -51,6 +51,12 @@ privateApi.interceptors.response.use(
 
         return privateApi(error.config);
       } catch (error) {
+        store.dispatch(
+          addToken({
+            accessToken: null,
+            refreshToken: null,
+          })
+        );
         return Promise.reject(error);
       }
     }
