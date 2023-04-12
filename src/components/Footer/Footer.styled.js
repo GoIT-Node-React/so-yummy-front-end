@@ -354,6 +354,7 @@ export const LinkFooter = styled(NavLink)`
 
   transition: ${({ theme }) => theme.transitions.create(['color'])};
 
+  &.active,
   &:hover,
   &:focus {
     color: ${({ theme }) => theme.colors.green[200]};
