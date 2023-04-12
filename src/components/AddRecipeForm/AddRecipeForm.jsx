@@ -43,6 +43,7 @@ import {
   StyledLabel,
   StyledTextarea,
   Subtitle,
+  TextAreaMessage,
   TextInput,
   TextLabel,
   TitleContainer,
@@ -554,7 +555,7 @@ export default function AddRecipeForm() {
           })}
         />
         {errors.instructions && (
-          <ErrorMessage>{errors.instructions?.message}</ErrorMessage>
+          <TextAreaMessage>{errors.instructions?.message}</TextAreaMessage>
         )}
       </RelativeContainer>
       {isLoading ? (

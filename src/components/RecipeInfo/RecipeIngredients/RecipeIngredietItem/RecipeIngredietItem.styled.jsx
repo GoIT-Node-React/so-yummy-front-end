@@ -69,6 +69,7 @@ export const RecipeIngredietMeasure = styled.div`
 `;
 
 export const RecipeIngredietMeasureText = styled.p`
+  min-width: 40px;
   width: fit-content;
   padding: 4px;
 
@@ -83,6 +84,7 @@ export const RecipeIngredietMeasureText = styled.p`
   border-radius: 4px;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    min-width: 60px;
     padding: 4px 8px;
 
     font-size: 18px;

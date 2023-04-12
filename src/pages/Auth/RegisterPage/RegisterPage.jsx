@@ -15,6 +15,7 @@ import {
 } from 'components/form';
 import { routes } from 'constants/routes';
 import Loader from 'components/common/Loader/Loader';
+import { useState } from 'react';
 
 const schema = Joi.object({
   name: Joi.string().min(1).max(16).required(),
@@ -36,6 +37,7 @@ const schema = Joi.object({
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -60,12 +62,16 @@ export default function RegisterPage() {
 
   const signinHandler = async data => {
     try {
-      await dispatch(registrationThunk(data));
+      await dispatch(registrationThunk(data)).unwrap();
       await dispatch(
         loginThunk({ email: data.email, password: data.password })
       );
     } catch (error) {}
     //reset();
+  };
+
+  const googleButtonClickHandler = () => {
+    setIsLoading(true);
   };
 
   return (
@@ -110,7 +116,7 @@ export default function RegisterPage() {
         />
 
         <FormButtonGroup>
-          {isSubmitting ? (
+          {isSubmitting || isLoading ? (
             <Loader />
           ) : (
             <>
@@ -128,6 +134,7 @@ export default function RegisterPage() {
                 variant="dark"
                 w="100%"
                 h="45px"
+                onClick={googleButtonClickHandler}
               >
                 Sign up with Google
               </FormGoogleButton>
@@ -135,7 +142,7 @@ export default function RegisterPage() {
           )}
         </FormButtonGroup>
       </AuthForm>
-      {!isSubmitting && (
+      {!isSubmitting && !isLoading && (
         <FormNavLinkButton to={routes.SIGNIN_PAGE}>Sign in</FormNavLinkButton>
       )}
     </>

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
 
 export const NavBar = styled.ul`
@@ -20,17 +20,34 @@ export const NavBar = styled.ul`
 
 export const NavItem = styled.li`
   font-weight: ${props => props.theme.fontWeights.medium};
-  font-size: ${props => props.theme.fontSizes[2]};
-  line-height: 1.6;
+  font-size: ${props => props.theme.fontSizes[4]};
+  line-height: 1;
+  letter-spacing: -0.02em;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    font-size: ${props => props.theme.fontSizes[5]};
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    font-size: ${props => props.theme.fontSizes[2]};
+    line-height: 1.6;
+  }
 `;
 
-export const NavLink = styled(Link)`
+export const NavLinkStyled = styled(NavLink)`
   text-decoration: none;
-  color: ${props => props.theme.colors.black[200]};
+  color: ${props => props.theme.colors.black[400]};
 
+  transition: ${({ theme }) => theme.transitions.create(['color'])};
+
+  &.active,
   &:hover,
   &:focus {
     color: ${props => props.theme.colors.green[200]};
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    color: ${props => props.theme.colors.black[200]};
   }
 `;
 
@@ -38,4 +55,9 @@ export const SearchIcon = styled(FiSearch)`
   display: block;
   width: 24px;
   height: 24px;
+  margin-right: 12px;
+`;
+export const Flex = styled.div`
+  display: flex;
+  align-items: center;
 `;
