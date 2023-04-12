@@ -5,45 +5,30 @@ import DesctopPoints from 'images/spinach-main-bg/desctop-points.svg';
 
 export const MainContainer = styled.main`
   margin: 0 auto;
-  width: 375px;
+  /* width: 375px; */
+  width: 100%;
   flex-grow: 1;
 
-  background-image: url(${MobilePoints});
-  background-size: 230px 74px;
-  background-repeat: no-repeat;
-  background-position: top 12px right 16px;
+  background-image: ${({ isMainPage }) =>
+    isMainPage ? 'none' : `url(${MobilePoints})`};
 
-  @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-    background-image: url(${MobilePoints});
-  }
+  background-size: auto 74px;
+  background-repeat: no-repeat;
+  background-position: calc(50% + 53px) 16px;
 
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[1]} - 1px)) {
-    width: 768px;
-    background-image: url(${TabletPoints});
-    background-size: 525px 86px;
-    background-position: top 21px right 20px;
-
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: url(${TabletPoints});
-    }
+    background-image: ${({ isMainPage }) =>
+      isMainPage ? 'none' : `url(${TabletPoints})`};
+    background-size: auto 86px;
+    background-position: calc(50% + 98px) 21px;
   }
 
   @media screen and (min-width: calc(${({ theme }) =>
       theme.breakpoints[2]} - 1px)) {
-    width: 1440px;
-    background-image: url(${DesctopPoints});
-    background-size: 930px 100px;
-    background-position: top 53px right 165px;
-
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: url(${DesctopPoints});
-    }
+    background-image: ${({ isMainPage }) =>
+      isMainPage ? 'none' : `url(${DesctopPoints})`};
+    background-size: auto 100px;
+    background-position: calc(50% + 78px) 52px;
   }
 `;
