@@ -11,7 +11,6 @@ export const ShoppingListHeader = styled.div`
 
   background: #8baa36;
   color: #fafafa;
-  
 
   padding: 10px;
   margin-bottom: 32px;
@@ -70,7 +69,6 @@ export const ShoppingListItem = styled.li`
   }
 
   border-bottom: 1px solid #e0e0e0;
-  
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     padding-left: 0;
@@ -118,10 +116,9 @@ export const NumberAndDelWrap = styled.div`
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
-    gap:140px;
+    gap: 140px;
   }
 `;
-
 
 export const Img = styled.img`
   border-radius: 6px;
@@ -145,15 +142,25 @@ export const Btn = styled.button`
   display: flex;
   justify-content: center;
 
-    width: 23px;
-    height: 23px;
+  width: 23px;
+  height: 23px;
 
   cursor: pointer;
   background: inherit;
 
+  & svg {
+    width: 23px;
+    height: 23px;
+  }
+
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     width: 25px;
     height: 25px;
+
+    & svg {
+      width: 25px;
+      height: 25px;
+    }
   }
 `;
 
@@ -165,7 +172,7 @@ export const NumberWrap = styled.div`
   // background: inherit;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-     width: 84px;
+    width: 84px;
   }
 `;
 
