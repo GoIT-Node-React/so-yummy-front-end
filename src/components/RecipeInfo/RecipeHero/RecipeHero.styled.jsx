@@ -54,6 +54,14 @@ export const RecipeHeroContainer = styled.div`
 export const RecipeTitle = styled.h1`
   margin-bottom: 18px;
 
+  display: -webkit-box;
+
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
   font-weight: 600;
   font-size: 24px;
   line-height: 1;

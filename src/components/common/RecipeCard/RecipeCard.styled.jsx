@@ -8,8 +8,11 @@ export const ReipeCardStyle = styled.section`
 
   --remove-button-background-color: ${({ owner, theme }) =>
     owner ? theme.colors.green[200] : theme.colors.green[100]};
+  --remove-button-background-color-hover: ${({ owner, theme }) =>
+    owner ? theme.colors.black[400] : theme.colors.green[200]};
   --remove-button-icon-color: ${({ owner, theme }) =>
     owner ? theme.colors.white[100] : theme.colors.black[400]};
+  --remove-button-icon-color-hover: ${({ theme }) => theme.colors.white[100]};
 
   --opacity: ${({ isDeleting }) => (isDeleting ? 0.1 : 1)};
 
@@ -53,7 +56,7 @@ export const RecipeCardThumb = styled.div`
   height: 124px;
 
   border-radius: 8px;
-
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
     width: 228px;
     height: 232px;
@@ -87,23 +90,33 @@ export const RecipeCardContainer = styled.div`
 `;
 
 export const RecipeCardTitle = styled.h3`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
   margin-bottom: 14px;
+
+  padding-right: 34px;
 
   font-weight: 500;
   font-size: 14px;
-  line-height: 1;
+  line-height: 1.2;
   letter-spacing: -0.24px;
 
   color: ${({ theme }) => theme.colors.gray[500]};
 
   @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
     margin-bottom: 28px;
-
+    padding-right: 48px;
     font-size: 24px;
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
     margin-bottom: 40px;
+    padding-right: 0;
   }
 `;
 
@@ -173,11 +186,17 @@ export const RecipeCardRemoveButton = styled.button`
   background-color: var(--remove-button-background-color);
   border-radius: 4px;
 
+  transition: ${({ theme }) =>
+    theme.transitions.create(['background-color', 'color'])};
+
   & svg {
     width: var(--button-icon-size);
     height: var(--button-icon-size);
   }
-
+  &:hover {
+    background-color: var(--remove-button-background-color-hover);
+    color: var(--remove-button-icon-color-hover);
+  }
   @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
     --button-size: 38px;
     --button-padding: 8px;

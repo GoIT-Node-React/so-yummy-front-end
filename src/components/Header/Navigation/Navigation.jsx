@@ -1,5 +1,8 @@
 import { routes } from 'constants/routes';
+import { useMediaQuery } from 'react-responsive';
+import { theme } from 'theme';
 import {
+  Flex,
   NavBar,
   NavItem,
   NavLinkStyled,
@@ -7,6 +10,12 @@ import {
 } from './Navigation.styled';
 
 function Navigation(props) {
+  const tabletMaxWidth = theme.breakpoints[2].slice(0, -2) - 1;
+
+  const isMobileOrTablet = useMediaQuery({
+    query: `(max-width: ${tabletMaxWidth}px)`,
+  });
+
   const { onClick } = props;
   return (
     <NavBar mr={props.mr} fd={props.fd}>
@@ -37,7 +46,14 @@ function Navigation(props) {
       </NavItem>
       <NavItem>
         <NavLinkStyled to="/search" onClick={onClick}>
-          <SearchIcon />
+          {isMobileOrTablet ? (
+            <Flex>
+              {' '}
+              <SearchIcon /> Search{' '}
+            </Flex>
+          ) : (
+            <SearchIcon />
+          )}
         </NavLinkStyled>
       </NavItem>
     </NavBar>

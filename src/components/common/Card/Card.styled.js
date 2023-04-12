@@ -6,7 +6,7 @@ export const CardContainer = styled.div`
   height: 323px;
 
   border-radius: ${({ theme }) => theme.radii.lg};
-
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   cursor: pointer;
 
   @media screen and (min-width: calc(${({ theme }) =>

@@ -160,9 +160,14 @@ export const CameraContainer = styled.div`
 
   border: 1px solid ${({ theme }) => theme.colors.white[200]};
   border-radius: ${({ theme }) => theme.radii.lg};
+  color: ${({ theme }) => theme.colors.white[200]};
+
+  transition: ${({ theme }) =>
+    theme.transitions.create(['color', 'border-color'])};
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.green[200]};
+    color: ${({ theme }) => theme.colors.gray[500]};
+    border-color: ${({ theme }) => theme.colors.gray[500]};
   }
 `;
 
@@ -170,11 +175,7 @@ export const StyledCamera = styled(MdPhotoCamera)`
   width: 20px;
   height: 18px;
 
-  color: ${({ theme }) => theme.colors.white[200]};
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.green[200]};
-  }
+  color: currentColor;
 `;
 
 export const FlexContainer = styled.div`
@@ -372,7 +373,7 @@ export const ErrorMessage = styled.span`
   bottom: -20px;
   display: block;
 
-  color: #e74a3b;
+  color: ${({ theme }) => theme.colors.red[100]};
 
   font-size: ${({ theme }) => theme.fontSizes[1]};
 `;
@@ -395,4 +396,13 @@ export const LoaderContainer = styled.div`
 `;
 export const RelativeContainer = styled.div`
   position: relative;
+`;
+export const TextAreaMessage = styled.span`
+  position: absolute;
+  bottom: 12px;
+  display: block;
+
+  color: ${({ theme }) => theme.colors.red[100]};
+
+  font-size: ${({ theme }) => theme.fontSizes[1]};
 `;

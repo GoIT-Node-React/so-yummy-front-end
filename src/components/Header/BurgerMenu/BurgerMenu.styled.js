@@ -16,7 +16,7 @@ export function CloseBtn({ onClose }) {
 
 export const Wrapper = styled.div`
   position: relative;
-  width: 375px;
+  width: 100vw;
   height: 100vh;
   padding: 18px 16px;
   display: flex;
@@ -36,7 +36,6 @@ export const Wrapper = styled.div`
     background-image: url('${SpinachMobile2x}');
   }
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-    width: 765px;
     padding: 18px 32px;
     background-image: url('${SpinachTablet1x}');
     background-position: right -380px bottom -310px;

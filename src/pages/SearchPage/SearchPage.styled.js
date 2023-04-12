@@ -16,7 +16,8 @@ export const Section = styled.section`
 
 export const SearchedRecipesListWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: center;
 `;
