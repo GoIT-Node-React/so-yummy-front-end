@@ -15,7 +15,7 @@ export const ShoppingListSection = styled.section`
 `;
 
 export const ShoppingListTitle = styled.h2`
-  //margin-bottom: 50px;
+  margin-bottom: 50px;
 
   font-family: 'Poppins';
   font-style: normal;
