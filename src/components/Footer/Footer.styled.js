@@ -70,13 +70,13 @@ export const FooterContainer = styled.footer`
 
     display: block;
 
-    width: 600px;
-    height: 600px;
+    width: 300px;
+    height: 300px;
 
     background-image: url(${MobileSpinach1x});
     background-size: 440px auto;
     background-repeat: no-repeat;
-    background-position: -120px calc(100% - 65px);
+    background-position: -120px calc(100% + 235px);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -88,7 +88,7 @@ export const FooterContainer = styled.footer`
         theme.breakpoints[1]} - 1px)) {
       background-image: url(${TabletSpinach1x});
       background-size: 690px auto;
-      background-position: -200px calc(100% + 70px);
+      background-position: -200px calc(100% + 370px);
 
       @media (min-device-pixel-ratio: 2),
         (min-resolution: 192dpi),

@@ -53,7 +53,7 @@ export default function CategoriesPage() {
   useEffect(() => {
     const category = categories[selectedCategory];
 
-    if (category) navigate(`${category}`);
+    if (category) navigate(`${category}`, { replace: true });
   }, [categories, navigate, selectedCategory]);
 
   return (
