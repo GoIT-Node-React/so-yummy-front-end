@@ -1,31 +1,34 @@
 import styled from '@emotion/styled';
-
 import { NavLink, Link } from 'react-router-dom';
-
 import { theme } from '../../theme/theme';
 
-import SpinachMobile1x from '../../images/spinach-main-bg/spinach-footer-mobile-1x.webp';
-import SpinachMobile2x from '../../images/spinach-main-bg/spinach-footer-mobile-2x.webp';
-import SpinachTablet1x from '../../images/spinach-main-bg/spinach-footer-tablet-1x.webp';
-import SpinachTablet2x from '../../images/spinach-main-bg/spinach-footer-tablet-2x.webp';
-import SpinachDesk1x from '../../images/spinach-main-bg/spinach-footer-desctop-1x.webp';
-import SpinachDesk2x from '../../images/spinach-main-bg/spinach-footer-desctop-2x.webp';
+import SpinachMobile1x from 'images/spinach-main-bg/spinach-footer-mobile-1x.webp';
+import SpinachMobile2x from 'images/spinach-main-bg/spinach-footer-mobile-2x.webp';
+import SpinachTablet1x from 'images/spinach-main-bg/spinach-footer-tablet-1x.webp';
+import SpinachTablet2x from 'images/spinach-main-bg/spinach-footer-tablet-2x.webp';
+import SpinachDesk1x from 'images/spinach-main-bg/spinach-footer-desctop-1x.webp';
+import SpinachDesk2x from 'images/spinach-main-bg/spinach-footer-desctop-2x.webp';
+
+import MobileSpinach1x from 'images/spinach-main-bg/spinach-mobile-1x.webp';
+import MobileSpinach2x from 'images/spinach-main-bg/spinach-mobile-2x.webp';
+import TabletSpinach1x from 'images/spinach-main-bg/spinach-tablet-1x.webp';
+import TabletSpinach2x from 'images/spinach-main-bg/spinach-tablet-2x.webp';
+import DesctopSpinach1x from 'images/spinach-main-bg/spinach-desctop-1x.webp';
+import DesctopSpinach2x from 'images/spinach-main-bg/spinach-desctop-2x.webp';
 
 export const FooterContainer = styled.footer`
-  width: 375px;
+  position: relative;
+  /* width: 375px; */
+  width: 100%;
   margin: auto auto 0;
 
-  @media screen and (min-width: ${theme.breakpoints[1]}) {
+  /* @media screen and (min-width: ${theme.breakpoints[1]}) {
     width: 768px;
   }
 
   @media screen and (min-width: ${theme.breakpoints[2]}) {
     width: 1440px;
-  }
-`;
-
-export const Main = styled.div`
-  margin-top: auto;
+  } */
 
   background-image: url('${SpinachMobile1x}');
   background-repeat: no-repeat;
@@ -57,6 +60,91 @@ export const Main = styled.div`
       background-image: url('${SpinachDesk2x}');
     }
   }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -300px;
+    left: 0;
+    z-index: -1;
+
+    display: block;
+
+    width: 600px;
+    height: 600px;
+
+    background-image: url(${MobileSpinach1x});
+    background-size: 440px auto;
+    background-repeat: no-repeat;
+    background-position: -120px calc(100% - 65px);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(${MobileSpinach2x});
+    }
+
+    @media screen and (min-width: calc(${({ theme }) =>
+        theme.breakpoints[1]} - 1px)) {
+      background-image: url(${TabletSpinach1x});
+      background-size: 690px auto;
+      background-position: -200px calc(100% + 70px);
+
+      @media (min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+        background-image: url(${TabletSpinach2x});
+      }
+    }
+
+    @media screen and (min-width: calc(${({ theme }) =>
+        theme.breakpoints[2]} - 1px)) {
+      background-image: url(${DesctopSpinach1x});
+      background-size: 820px auto;
+      background-position: -200px -155px;
+
+      @media (min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+        background-image: url(${DesctopSpinach2x});
+      }
+    }
+  }
+`;
+
+export const Main = styled.div`
+  margin-top: auto;
+
+  /* background-image: url('${SpinachMobile1x}');
+  background-repeat: no-repeat;
+
+  background-position: right -40px bottom -90px;
+  background-size: 210px 250px;
+  @media screen and (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: url('${SpinachMobile2x}');
+  }
+  @media screen and (min-width: ${theme.breakpoints[1]}) {
+    background-image: url('${SpinachTablet1x}');
+    background-position: right -80px bottom -140px;
+    background-size: 410px 380px;
+    @media screen and (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url('${SpinachTablet2x}');
+    }
+  }
+  @media screen and (min-width: ${theme.breakpoints[2]}) {
+    background-image: url('${SpinachDesk1x}');
+    background-position: right -70px bottom -200px;
+    background-size: 570px 530px;
+    @media screen and (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url('${SpinachDesk2x}');
+    }
+  } */
 `;
 
 export const FooterWrapper = styled.div`
@@ -263,6 +351,13 @@ export const LinkFooter = styled(NavLink)`
   line-height: ${({ theme }) => theme.fontSizes[4]};
   letter-spacing: -0.02em;
   text-decoration: none;
+
+  transition: ${({ theme }) => theme.transitions.create(['color'])};
+
+  &:hover,
+  &:focus {
+    color: ${({ theme }) => theme.colors.green[200]};
+  }
 `;
 
 export const DownContainer = styled.div`

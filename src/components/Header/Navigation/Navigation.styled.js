@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
 
 export const NavBar = styled.ul`
@@ -24,10 +24,13 @@ export const NavItem = styled.li`
   line-height: 1.6;
 `;
 
-export const NavLink = styled(Link)`
+export const NavLinkStyled = styled(NavLink)`
   text-decoration: none;
   color: ${props => props.theme.colors.black[200]};
 
+  transition: ${({ theme }) => theme.transitions.create(['color'])};
+
+  &.active,
   &:hover,
   &:focus {
     color: ${props => props.theme.colors.green[200]};
