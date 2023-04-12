@@ -34,6 +34,7 @@ export const SubscribeForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     mode: 'all',
@@ -44,7 +45,10 @@ export const SubscribeForm = () => {
   });
 
   const onSubmitHandler = async data => {
-    dispatch(subscribeThunk(data));
+    try {
+      await dispatch(subscribeThunk(data)).unwrap();
+      reset();
+    } catch (error) {}
   };
 
   const handleChange = event => {
