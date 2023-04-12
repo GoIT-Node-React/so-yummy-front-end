@@ -9,7 +9,6 @@ import {
   CategoryRecipesWrapper,
 } from './CategoryRecipes.styled';
 import { routes } from 'constants/routes';
-import { useMediaQuery } from 'react-responsive';
 import { processingError } from 'helpers';
 import useAppPagination from 'hooks/useAppPagination';
 import MainLoader from 'components/MainLoader/MainLoader';
@@ -18,13 +17,10 @@ export default function CategoryRecipes() {
   const { categoryName } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [recipes, setRecipes] = useState([]);
-  const isTabletOrMobile = useMediaQuery({
-    maxWidth: 1439,
-  });
   const pagination = useRef({
     page: 1,
     totalPages: 1,
-    limit: isTabletOrMobile ? 6 : 12,
+    limit: 8,
   });
 
   const getRecipesByCategory = useCallback(
@@ -58,19 +54,7 @@ export default function CategoryRecipes() {
 
   useEffect(() => {
     getRecipesByCategory();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
   }, [getRecipesByCategory]);
-
-  useEffect(() => {
-    pagination.current.limit = isTabletOrMobile ? 6 : 12;
-
-    getRecipesByCategory(1, pagination.current.limit);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isTabletOrMobile]);
 
   return (
     <>
