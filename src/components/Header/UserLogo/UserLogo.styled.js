@@ -29,6 +29,8 @@ export const UserAvatarWrapper = styled.div`
 export const Avatar = styled.img`
   max-width: 100%;
   height: 100%;
+
+  object-fit: cover;
 `;
 
 export const UserName = styled.p`
