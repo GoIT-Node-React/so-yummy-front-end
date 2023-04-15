@@ -13,7 +13,7 @@ import FavoriteRecipesContextProvider from './FavoriteRecipes.context';
 import {
   deleteRecipeFromFavoriteService,
   getFavoritesService,
-} from 'services/favorite.service';
+} from 'services/recipe.service';
 import FavoriteRecipesList from './FavoriteRecipesList';
 import MainLoader from 'components/MainLoader/MainLoader';
 
