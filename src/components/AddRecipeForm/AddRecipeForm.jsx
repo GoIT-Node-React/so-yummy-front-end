@@ -2,49 +2,37 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
-import Select from 'react-select';
-import AsyncSelect from 'react-select/async';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import debounce from 'lodash.debounce';
 
-import { getIngredientsByTitleService } from './../../services/ingredients.service';
 import { addRecipeService } from 'services/recipe.service';
-import useLocalStorage from 'hooks/localStorageHook';
+import useLocalStorage from 'hooks/useLocalStorage';
 import { storage } from 'constants/storageKeys';
 import { theme } from 'theme';
 import { routes } from '../../constants/routes';
 import { schema } from './schema';
-import { categories, cookingTime } from './data';
-import { MesureSelect } from './MesureSelect';
+
+import { Measure } from './Selects/Measure/Mesure';
+import { Category } from './Selects/Category/Category';
+import { Time } from './Selects/Time/Time';
+import { Ingredient } from './Selects/Ingredient/Ingredient';
+import File from './Inputs/File';
+import Text from './Inputs/Text';
+import Textarea from './Textarea/Textarea';
+import Counter from './Counter/Counter';
 import { MainButton } from 'components/common/FigureButton.styled';
 import Loader from 'components/common/Loader';
 import {
   Border,
-  CameraContainer,
   Close,
   CloseButton,
-  Counter,
-  CounterButton,
-  CounterContainer,
   ErrorMessage,
-  FileUploader,
   FlexContainer,
-  Image,
-  ImageContainer,
   IngredientsError,
   LoaderContainer,
   MediaContainer,
-  Minus,
-  Plus,
-  RelativeContainer,
   SelectContainer,
-  StyledCamera,
-  StyledLabel,
-  StyledTextarea,
   Subtitle,
-  TextAreaMessage,
-  TextInput,
   TextLabel,
   TitleContainer,
   UtilContainer,
@@ -93,22 +81,6 @@ export default function AddRecipeForm() {
     name: 'ingredients',
   });
 
-  const convertData = async value => {
-    const { data } = await getIngredientsByTitleService(value);
-
-    return data.ingredients.map(ingredient => {
-      return {
-        value: ingredient._id,
-        label: ingredient.ttl,
-      };
-    });
-  };
-
-  const promiseOptions = (inputValue, callback) => {
-    convertData(inputValue).then(results => callback(results));
-    return;
-  };
-
   const onSubmitHandler = async data => {
     try {
       setIsLoading(true);
@@ -131,7 +103,7 @@ export default function AddRecipeForm() {
 
       navigate(routes.MY_RECIPES_PAGE);
     } catch (error) {
-      toast.error('Something went wrong... Please, try again in few minutes');
+      toast.error(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -140,52 +112,28 @@ export default function AddRecipeForm() {
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <MediaContainer>
-        <StyledLabel>
-          <FileUploader
-            type="file"
-            accept="image/*,.png,.jpg,.web"
-            {...register('thumb', {
-              onChange: e => setFile(URL.createObjectURL(e.target.files[0])),
-            })}
-          />
-          {errors.thumb && <ErrorMessage>{errors.thumb?.message}</ErrorMessage>}
-          {thumb && !errors.thumb && (
-            <ImageContainer>
-              <Image src={thumb} alt="Recipe" />
-            </ImageContainer>
-          )}
-          <CameraContainer>
-            <StyledCamera />
-          </CameraContainer>
-        </StyledLabel>
+        <File
+          register={register}
+          setFile={setFile}
+          errors={errors}
+          thumb={thumb}
+        />
 
         <div>
-          <TextLabel>
-            <TextInput
-              placeholder="Enter item title"
-              type="text"
-              {...register('title', {
-                onChange: e => setTitle(e.target.value),
-              })}
-            />
-            {errors.title && (
-              <ErrorMessage>{errors.title?.message}</ErrorMessage>
-            )}
-          </TextLabel>
-
-          <TextLabel>
-            <TextInput
-              placeholder="Enter about recipe"
-              type="text"
-              {...register('description', {
-                onChange: e => setDescription(e.target.value),
-              })}
-            />
-            {errors.description && (
-              <ErrorMessage>{errors.description?.message}</ErrorMessage>
-            )}
-          </TextLabel>
-
+          <Text
+            errors={errors}
+            register={register}
+            setValue={setTitle}
+            field="title"
+            placeholder="Enter item title"
+          />
+          <Text
+            errors={errors}
+            register={register}
+            setValue={setDescription}
+            field="description"
+            placeholder="Enter about recipe"
+          />
           <TextLabel>
             Category
             <SelectContainer>
@@ -193,92 +141,11 @@ export default function AddRecipeForm() {
                 name="category"
                 control={control}
                 render={({ field: { onChange, value, name } }, ref) => (
-                  <Select
-                    placeholder="Breakfast"
-                    ref={ref}
-                    value={value.value}
+                  <Category
+                    onChange={onChange}
+                    value={value}
                     name={name}
-                    options={categories}
-                    isSearchable={false}
-                    onChange={selectedOption => {
-                      onChange(selectedOption.value);
-                    }}
-                    styles={{
-                      dropdownIndicator: () => ({
-                        color: '#8BAA36',
-                        width: '10px',
-                        height: '5px',
-                        cursor: 'pointer',
-                        marginLeft: '12px',
-                        marginBottom: '12px',
-                      }),
-                      indicatorSeparator: () => ({
-                        display: 'none',
-                      }),
-                      control: () => ({
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        marginLeft: 'auto',
-                        border: 'none',
-                        fontSize: isTablet ? '14px' : '12px',
-                        lineHeight: '1',
-                        marginBottom: '6px',
-                      }),
-                      valueContainer: () => ({
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        alignItems: 'flex-end',
-                      }),
-                      placeholder: () => ({
-                        fontSize: isTablet ? '14px' : '12px',
-                        lineHeight: '1.5',
-                        color: '#000000',
-                      }),
-                      option: () => ({
-                        fontSize: isTablet ? '14px' : '12px',
-                        lineHeight: '1.5',
-                        color: 'rgba(0, 0, 0, 0.5)',
-                        marginBottom: '4px',
-                      }),
-                      menu: baseStyles => ({
-                        ...baseStyles,
-                        width: isTablet ? '132px' : '123px',
-                        height: isTablet ? '162px' : '144px',
-                        borderRadius: '6px',
-
-                        boxShadow:
-                          '0px 6.51852px 7.82222px rgba(0, 0, 0, 0.0314074)',
-                      }),
-                      menuList: baseStyles => ({
-                        ...baseStyles,
-
-                        width: isTablet ? '132px' : '123px',
-                        height: isTablet ? '162px' : '144px',
-                        padding: isTablet ? '8px 18px' : '8px 14px',
-                        borderColor: 'transparent',
-                        backgroundColor: '#ffffff',
-                        borderRadius: '6px',
-                        marginLeft: isTablet ? '-3px' : '3px',
-                        overflowY: 'scroll',
-                        cursor: 'pointer',
-                        '::-webkit-scrollbar-thumb': {
-                          backgroundColor: '#E7E5E5',
-                          height: '93px',
-                          width: '4px',
-                          borderRadius: '12px',
-                        },
-                        '::-webkit-scrollbar-track': {
-                          background: '#FFFFFF',
-
-                          borderRadius: '12px',
-                          width: '4px',
-                        },
-                        '::-webkit-scrollbar': {
-                          borderRadius: '12px',
-                          width: '4px',
-                        },
-                      }),
-                    }}
+                    ref={ref}
                   />
                 )}
               />
@@ -296,92 +163,11 @@ export default function AddRecipeForm() {
                 name="time"
                 control={control}
                 render={({ field: { onChange, value, name } }, ref) => (
-                  <Select
-                    placeholder="5 min"
+                  <Time
                     ref={ref}
-                    value={value.value}
+                    onChange={onChange}
                     name={name}
-                    onChange={selectedOption => {
-                      onChange(selectedOption.value);
-                    }}
-                    options={cookingTime}
-                    isSearchable={false}
-                    styles={{
-                      dropdownIndicator: () => ({
-                        color: '#8BAA36',
-                        width: '10px',
-                        height: '5px',
-                        cursor: 'pointer',
-                        marginLeft: '12px',
-                        marginBottom: '12px',
-                      }),
-                      indicatorSeparator: () => ({
-                        display: 'none',
-                      }),
-                      placeholder: () => ({
-                        fontSize: isTablet ? '14px' : '12px',
-                        lineHeight: '1.5',
-                        color: '#000000',
-                      }),
-                      control: () => ({
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        marginLeft: 'auto',
-                        border: 'none',
-                        fontSize: isTablet ? '14px' : '12px',
-                        lineHeight: '1',
-                        marginBottom: '6px',
-                      }),
-                      valueContainer: () => ({
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        alignItems: 'flex-end',
-                      }),
-                      option: () => ({
-                        fontSize: isTablet ? '14px' : '12px',
-                        lineHeight: '1.5',
-                        color: 'rgba(0, 0, 0, 0.5)',
-                        marginBottom: '4px',
-                      }),
-                      menu: baseStyles => ({
-                        ...baseStyles,
-                        width: isTablet ? '132px' : '123px',
-                        height: isTablet ? '162px' : '144px',
-                        borderRadius: '6px',
-
-                        boxShadow:
-                          '0px 6.51852px 7.82222px rgba(0, 0, 0, 0.0314074)',
-                      }),
-                      menuList: baseStyles => ({
-                        ...baseStyles,
-
-                        width: isTablet ? '132px' : '123px',
-                        height: isTablet ? '162px' : '144px',
-                        padding: isTablet ? '8px 18px' : '8px 14px',
-                        borderColor: 'transparent',
-                        backgroundColor: '#ffffff',
-                        borderRadius: '6px',
-                        marginLeft: isTablet ? '-3px' : '3px',
-                        overflowY: 'scroll',
-                        cursor: 'pointer',
-                        '::-webkit-scrollbar-thumb': {
-                          backgroundColor: '#E7E5E5',
-                          height: '93px',
-                          width: '4px',
-                          borderRadius: '12px',
-                        },
-                        '::-webkit-scrollbar-track': {
-                          background: '#FFFFFF',
-
-                          borderRadius: '12px',
-                          width: '4px',
-                        },
-                        '::-webkit-scrollbar': {
-                          borderRadius: '12px',
-                          width: '4px',
-                        },
-                      }),
-                    }}
+                    value={value}
                   />
                 )}
               />
@@ -394,23 +180,7 @@ export default function AddRecipeForm() {
 
       <TitleContainer>
         <Subtitle>Ingredients</Subtitle>
-        <CounterContainer>
-          <CounterButton
-            type="button"
-            onClick={() => remove(-1)}
-            disabled={fields.length <= 1}
-          >
-            <Minus />
-          </CounterButton>
-          <Counter>{fields.length}</Counter>
-          <CounterButton
-            type="button"
-            onClick={() => append({ id: '', measure: '' })}
-            disabled={fields.length >= 30}
-          >
-            <Plus />
-          </CounterButton>
-        </CounterContainer>
+        <Counter fields={fields} remove={remove} append={append} />
       </TitleContainer>
 
       {fields.map((field, index) => (
@@ -419,98 +189,11 @@ export default function AddRecipeForm() {
             name={`ingredients.${index}.id`}
             control={control}
             render={({ field: { onChange, value, name } }, ref) => (
-              <AsyncSelect
-                loadOptions={debounce(promiseOptions, 500)}
-                placeholder="Ingredient"
-                onChange={selectedOption => {
-                  onChange(selectedOption.value);
-                }}
+              <Ingredient
                 ref={ref}
-                value={value?.value}
+                onChange={onChange}
+                value={value}
                 name={name}
-                noOptionsMessage={({ inputValue }) =>
-                  !inputValue ? 'Start typing...' : 'Ingredients not found'
-                }
-                styles={{
-                  control: () => ({
-                    width: isTablet ? '398px' : '194px',
-                    height: isTablet ? '59px' : '53px',
-                    borderRadius: '6px',
-                    backgroundColor: '#F5F5F5',
-                    padding: isTablet ? '16px 18px' : '16px',
-                    cursor: 'pointer',
-                  }),
-                  indicatorSeparator: () => ({
-                    display: 'none',
-                  }),
-                  dropdownIndicator: () => ({
-                    display: 'none',
-                  }),
-                  valueContainer: baseStyles => ({
-                    ...baseStyles,
-                    padding: '0',
-                    margin: '0',
-                    height: isTablet ? '27px' : '20px',
-                  }),
-                  input: baseStyles => ({
-                    ...baseStyles,
-                    caretColor: '#BDBDBD',
-                    padding: '0',
-                    margin: '0',
-                    height: isTablet ? '27px' : '20px',
-                    fontSize: isTablet ? '18px' : '14px',
-                    lineHeight: '1.5',
-                    letterSpacing: '-2%',
-                    color: '#23262A',
-                  }),
-                  placeholder: baseStyles => ({
-                    ...baseStyles,
-                    fontSize: isTablet ? '18px' : '14px',
-                    lineHeight: '1.5',
-                    letterSpacing: '-2%',
-                    color: 'rgba(0, 0, 0, 0.5)',
-                  }),
-                  option: () => ({
-                    fontSize: isTablet ? '14px' : '12px',
-                    lineHeight: '1.5',
-                    color: 'rgba(0, 0, 0, 0.5)',
-                    letterSpacing: '-2%',
-                    marginBottom: '6px',
-                  }),
-                  menu: baseStyles => ({
-                    ...baseStyles,
-                    width: isTablet ? '398px' : '194px',
-                    height: isTablet ? '172px' : '154px',
-                    borderRadius: '6px',
-                    boxShadow:
-                      '0px 6.51852px 7.82222px rgba(0, 0, 0, 0.0314074)',
-                  }),
-                  menuList: baseStyles => ({
-                    ...baseStyles,
-                    width: isTablet ? '398px' : '194px',
-                    height: isTablet ? '172px' : '154px',
-                    padding: '8px 4px 8px 18px',
-                    fontSize: isTablet ? '14px' : '12px',
-                    overflowY: 'scroll',
-                    cursor: 'pointer',
-                    '::-webkit-scrollbar-thumb': {
-                      backgroundColor: '#E7E5E5',
-                      height: '93px',
-                      width: isTablet ? '6px' : '4px',
-                      borderRadius: '12px',
-                    },
-                    '::-webkit-scrollbar-track': {
-                      background: '#FFFFFF',
-
-                      borderRadius: '12px',
-                      width: isTablet ? '6px' : '4px',
-                    },
-                    '::-webkit-scrollbar': {
-                      borderRadius: '12px',
-                      width: isTablet ? '6px' : '4px',
-                    },
-                  }),
-                }}
               />
             )}
           />
@@ -518,7 +201,7 @@ export default function AddRecipeForm() {
             name={`ingredients.${index}.measure`}
             control={control}
             render={({ field: { onChange, value, name } }, ref) => (
-              <MesureSelect
+              <Measure
                 name={name}
                 ref={ref}
                 onChange={selectedOption => {
@@ -546,18 +229,11 @@ export default function AddRecipeForm() {
       <UtilContainer>
         <Subtitle>Recipe preparation</Subtitle>
       </UtilContainer>
-
-      <RelativeContainer>
-        <StyledTextarea
-          placeholder="Enter recipe"
-          {...register('instructions', {
-            onChange: event => setInstructions(event.target.value),
-          })}
-        />
-        {errors.instructions && (
-          <TextAreaMessage>{errors.instructions?.message}</TextAreaMessage>
-        )}
-      </RelativeContainer>
+      <Textarea
+        errors={errors}
+        register={register}
+        setInstructions={setInstructions}
+      />
       {isLoading ? (
         <LoaderContainer>
           <Loader />
