@@ -30,7 +30,12 @@ export default function MainPage() {
   const getMaitPageRecipes = useCallback(async () => {
     setIsLoading(true);
     try {
-      const { data } = await getMainPageRecipesService();
+      const { data } = await getMainPageRecipesService([
+        'Breakfast',
+        'Miscellaneous',
+        'Chicken',
+        'Dessert',
+      ]);
 
       setRecipesByCategories(Object.entries(data.categories));
     } catch (error) {

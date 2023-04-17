@@ -1,7 +1,7 @@
 import { privateApi } from './api';
 
 export const addRecipeService = async recipeData => {
-  const { data } = await privateApi.post('/recipes/own-recipes', recipeData, {
+  const { data } = await privateApi.post('/recipes/own', recipeData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
@@ -16,22 +16,20 @@ export const getRecipeInfoById = async recipeId => {
 
 export const getOwnRecipesService = async (page = 1, limit = 4) => {
   const { data } = await privateApi.get(
-    `/recipes/own-recipes?page=${page}&limit=${limit}`
+    `/recipes/own?page=${page}&limit=${limit}`
   );
 
   return data;
 };
 
 export const getPopularRecipesService = async limit => {
-  const { data } = await privateApi.get(
-    `/recipes/popular-recipes?limit=${limit}`
-  );
+  const { data } = await privateApi.get(`/recipes/popular?limit=${limit}`);
 
   return data;
 };
 
 export const removeOwnRecipesService = async recipeId => {
-  const { data } = await privateApi.delete(`/recipes/own-recipes/${recipeId}`);
+  const { data } = await privateApi.delete(`/recipes/own/${recipeId}`);
 
   return data;
 };
@@ -54,8 +52,10 @@ export const getRecipesByCategoryService = async (
   return data;
 };
 
-export const getMainPageRecipesService = async () => {
-  const { data } = await privateApi.get(`recipes/main-page`);
+export const getMainPageRecipesService = async categories => {
+  const { data } = await privateApi.get(
+    `recipes/newest?categories=${categories}`
+  );
   return data;
 };
 
