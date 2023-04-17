@@ -10,7 +10,7 @@ import { Section, SearchedRecipesListWrapper } from './SearchPage.styled';
 import { searchRecipesMessage } from 'constants/message';
 import SearchContextProvider from 'contexts/Search.context';
 import { useSearchParams } from 'react-router-dom';
-import { searchService } from 'services/search.service';
+import { searchService } from 'services/recipe.service';
 import { processingError } from 'helpers';
 import useAppPagination from 'hooks/useAppPagination';
 import { useMediaQuery } from 'react-responsive';

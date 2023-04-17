@@ -1,12 +1,12 @@
 import RecipeInfo from 'components/RecipeInfo/RecipeInfo';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getRecipeInfoById } from 'services/recipe.service';
-import RecipeInfoContextProvider from './RecipeInfo.context';
 import {
+  getRecipeInfoById,
   addRecipeToFavoriteService,
   deleteRecipeFromFavoriteService,
-} from 'services/favorite.service';
+} from 'services/recipe.service';
+import RecipeInfoContextProvider from './RecipeInfo.context';
 import { useScrollToTop } from 'hooks/useScrollToTop';
 
 export default function RecipeInfoPage() {
